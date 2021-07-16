@@ -30,7 +30,7 @@ public class AuthServiceImpl implements AuthService {
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userLoginDTO.getEmail(), userLoginDTO.getPassword());
         try {
             subject.login(usernamePasswordToken);
-        }
+        }catch ()
         return null;
     }
 }
