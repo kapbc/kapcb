@@ -18,6 +18,7 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <shiro-spring.version>1.7.1</shiro-spring.version>
         <main.class>com.kapcb.ccc.KapcbApplication</main.class>
     </properties>
 
@@ -53,6 +54,11 @@
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.shiro</groupId>
+            <artifactId>shiro-spring</artifactId>
+            <version>${shiro-spring.version}</version>
         </dependency>
     </dependencies>
 
