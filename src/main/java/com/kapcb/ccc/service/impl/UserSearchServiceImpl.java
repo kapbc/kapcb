@@ -5,8 +5,11 @@ import com.kapcb.ccc.model.index.UserIndex;
 import com.kapcb.ccc.model.po.UserPO;
 import com.kapcb.ccc.service.IUserService;
 import com.kapcb.ccc.service.UserSearchService;
+import kapcb.framework.web.util.OrikaUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
@@ -21,6 +24,8 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * <a>Title: UserSearchServiceImpl </a>
@@ -42,8 +47,7 @@ public class UserSearchServiceImpl implements UserSearchService {
     @Override
     public Boolean syncUserInfoToElasticsearch(Long storeId) {
         List<UserPO> storeUserInfoList = userService.getStoreUserInfoList(storeId);
-        List<UserIndex> userIndices = new ArrayList<>();
-        BeanUtils.copyProperties(storeUserInfoList, userIndices);
+        List<UserIndex> userIndices = OrikaUtil.mapList(storeUserInfoList, UserIndex.class);
         elasticsearchOperations.save(userIndices);
         return true;
     }
@@ -62,9 +66,11 @@ public class UserSearchServiceImpl implements UserSearchService {
 
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
         boolQueryBuilder.must(QueryBuilders.matchQuery("store_id", requestDTO.getStoreId()).minimumShouldMatch("80%"));
-        boolQueryBuilder.should(QueryBuilders.fuzzyQuery("first_name", requestDTO.getQuery()))
-                .should(QueryBuilders.fuzzyQuery("last_name", requestDTO.getQuery()))
-                .should(QueryBuilders.fuzzyQuery("nick_name", requestDTO.getQuery())).minimumShouldMatch(1);
+        if (StringUtils.isNoneBlank(requestDTO.getQuery())) {
+            boolQueryBuilder.should(QueryBuilders.fuzzyQuery("first_name", requestDTO.getQuery()))
+                    .should(QueryBuilders.fuzzyQuery("last_name", requestDTO.getQuery()))
+                    .should(QueryBuilders.fuzzyQuery("nick_name", requestDTO.getQuery())).minimumShouldMatch(1);
+        }
         queryBuilder.withQuery(boolQueryBuilder);
         Pageable pageRequest = PageRequest.of(requestDTO.getPageNum().intValue() - 1, requestDTO.getPageSize().intValue());
         queryBuilder.withPageable(pageRequest);
@@ -72,8 +78,24 @@ public class UserSearchServiceImpl implements UserSearchService {
         highlightBuilder.preTags("<strong>").postTags("</strong>").field("first_name").field("last_name").field("nick_name");
         queryBuilder.withHighlightBuilder(highlightBuilder);
         NativeSearchQuery build = queryBuilder.build();
+        build.setTrackTotalHits(true);
         SearchHits<UserIndex> search = elasticsearchOperations.search(build, UserIndex.class);
         System.out.println("search = " + search);
-        return null;
+        return search.stream().map(index -> {
+            UserIndex content = index.getContent();
+            Map<String, List<String>> highlightFields = index.getHighlightFields();
+            if (MapUtils.isNotEmpty(highlightFields)) {
+                if (highlightFields.containsKey("firstName")) {
+                    content.setFirstName(highlightFields.get("firstName").get(0));
+                }
+                if (highlightFields.containsKey("lastName")) {
+                    content.setLastName(highlightFields.get("lastName").get(0));
+                }
+                if (highlightFields.containsKey("nickName")) {
+                    content.setNickName(highlightFields.get("nickName").get(0));
+                }
+            }
+            return content;
+        }).collect(Collectors.toList());
     }
 }
