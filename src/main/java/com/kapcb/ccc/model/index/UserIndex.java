@@ -52,19 +52,19 @@ public class UserIndex implements Serializable {
     /**
      * first name
      */
-    @Field(name = "first_name", type = FieldType.Text, analyzer = "ik_max_word")
+    @Field(name = "first_name", type = FieldType.Text, analyzer = "ik_smart", searchAnalyzer = "ik_max_word")
     private String firstName;
 
     /**
      * last name
      */
-    @Field(name = "last_name", type = FieldType.Text, analyzer = "ik_max_word")
+    @Field(name = "last_name", type = FieldType.Text, analyzer = "ik_smart", searchAnalyzer = "ik_max_word")
     private String lastName;
 
     /**
      * nick name
      */
-    @Field(name = "nick_name", type = FieldType.Text, analyzer = "ik_max_word")
+    @Field(name = "nick_name", type = FieldType.Text, analyzer = "ik_smart", searchAnalyzer = "ik_max_word")
     private String nickName;
 
     /**

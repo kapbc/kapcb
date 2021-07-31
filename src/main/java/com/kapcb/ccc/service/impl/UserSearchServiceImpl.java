@@ -13,7 +13,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
-import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
@@ -22,7 +21,6 @@ import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Component;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -62,14 +60,19 @@ public class UserSearchServiceImpl implements UserSearchService {
          * mustNot(QueryBuilder queryBuilder)  //返回的文档必须不满足定义的条件
          * should(QueryBuilder queryBuilder))  //返回的文档可能满足should子句的条件.在一个bool查询中,如果没有must或者filter,有一个或者多个should子句,那么只要满足一个就可以返回.minimum_should_match参数定义了至少满足几个子句
          * filter(QueryBuilder queryBuilder))  //返回的文档必须满足filter子句的条件,但是不会像must一样,参与计算分值
+         * QueryBuilders.matchQuery()表示模糊查询
+         * QueryBuilders.termQuery()表示精确查询
          */
 
         BoolQueryBuilder boolQueryBuilder = new BoolQueryBuilder();
         boolQueryBuilder.must(QueryBuilders.matchQuery("store_id", requestDTO.getStoreId()).minimumShouldMatch("80%"));
         if (StringUtils.isNoneBlank(requestDTO.getQuery())) {
-            boolQueryBuilder.should(QueryBuilders.fuzzyQuery("first_name", requestDTO.getQuery()))
-                    .should(QueryBuilders.fuzzyQuery("last_name", requestDTO.getQuery()))
-                    .should(QueryBuilders.fuzzyQuery("nick_name", requestDTO.getQuery())).minimumShouldMatch(1);
+            // 根据一个值查询多个字段  并高亮显示  这里的查询是取并集，即多个字段只需要有一个字段满足即可
+            // 需要查询的字段
+//            boolQueryBuilder.should(QueryBuilders.matchQuery("first_name", requestDTO.getQuery()))
+//                    .should(QueryBuilders.matchQuery("last_name", requestDTO.getQuery()))
+//                    .should(QueryBuilders.matchQuery("nick_name", requestDTO.getQuery())).minimumShouldMatch(1);
+            boolQueryBuilder.should(QueryBuilders.multiMatchQuery(requestDTO.getQuery(), "first_name", "last_name", "nick_name")).minimumShouldMatch(1);
         }
         queryBuilder.withQuery(boolQueryBuilder);
         Pageable pageRequest = PageRequest.of(requestDTO.getPageNum().intValue() - 1, requestDTO.getPageSize().intValue());
