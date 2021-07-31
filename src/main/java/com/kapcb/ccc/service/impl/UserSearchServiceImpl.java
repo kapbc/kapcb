@@ -13,6 +13,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
+import org.elasticsearch.search.sort.SortBuilders;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
@@ -69,12 +70,13 @@ public class UserSearchServiceImpl implements UserSearchService {
         if (StringUtils.isNoneBlank(requestDTO.getQuery())) {
             // 根据一个值查询多个字段  并高亮显示  这里的查询是取并集，即多个字段只需要有一个字段满足即可
             // 需要查询的字段
-//            boolQueryBuilder.should(QueryBuilders.matchQuery("first_name", requestDTO.getQuery()))
-//                    .should(QueryBuilders.matchQuery("last_name", requestDTO.getQuery()))
-//                    .should(QueryBuilders.matchQuery("nick_name", requestDTO.getQuery())).minimumShouldMatch(1);
-            boolQueryBuilder.should(QueryBuilders.multiMatchQuery(requestDTO.getQuery(), "first_name", "last_name", "nick_name")).minimumShouldMatch(1);
+            boolQueryBuilder.should(QueryBuilders.matchQuery("first_name", requestDTO.getQuery()))
+                    .should(QueryBuilders.matchQuery("last_name", requestDTO.getQuery()))
+                    .should(QueryBuilders.matchQuery("nick_name", requestDTO.getQuery())).minimumShouldMatch(1);
+//            boolQueryBuilder.should(QueryBuilders.multiMatchQuery(requestDTO.getQuery(), "first_name", "last_name", "nick_name")).minimumShouldMatch(1);
         }
         queryBuilder.withQuery(boolQueryBuilder);
+        queryBuilder.withSort(SortBuilders.scoreSort());
         Pageable pageRequest = PageRequest.of(requestDTO.getPageNum().intValue() - 1, requestDTO.getPageSize().intValue());
         queryBuilder.withPageable(pageRequest);
         HighlightBuilder highlightBuilder = new HighlightBuilder();
