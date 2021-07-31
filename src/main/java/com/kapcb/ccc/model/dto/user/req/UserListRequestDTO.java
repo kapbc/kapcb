@@ -27,10 +27,10 @@ public class UserListRequestDTO implements Serializable {
     private static final long serialVersionUID = 3916261054984288616L;
 
     @ApiModelProperty(value = "页数(默认值为1)", required = true)
-    private long pageNum;
+    private Long pageNum;
 
     @ApiModelProperty(value = "每页显示条数(默认值为10)", required = true)
-    private long pageSize;
+    private Long pageSize;
 
     @JsonIgnore
     private Long storeId;
