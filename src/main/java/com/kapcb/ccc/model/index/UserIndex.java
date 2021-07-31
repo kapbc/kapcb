@@ -9,7 +9,6 @@ import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
 import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
-import org.springframework.data.elasticsearch.annotations.Setting;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -26,7 +25,6 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Setting(settingPath = "_setting.json")
 @Document(indexName = "kapcb_user_index", refreshInterval = "-1")
 public class UserIndex implements Serializable {
 
@@ -196,7 +194,7 @@ public class UserIndex implements Serializable {
      * 是否在线 online:在线, hiding:隐身, leave:离开
      */
     @Field(name = "online_status", type = FieldType.Keyword)
-    private Boolean onlineStatus;
+    private String onlineStatus;
 
     /**
      * 备注

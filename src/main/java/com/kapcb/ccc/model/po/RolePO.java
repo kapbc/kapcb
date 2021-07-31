@@ -21,4 +21,8 @@ import java.io.Serializable;
 //@AllArgsConstructor
 //@Builder(toBuilder = true)
 public class RolePO implements Serializable {
+
+    private static final long serialVersionUID = -2064339372703488229L;
+
+
 }

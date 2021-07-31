@@ -8,6 +8,7 @@ spring:
     time-zone: GMT+8
   elasticsearch:
     rest:
-      uris:
+      uris: 192.168.80.135
       read-timeout: 30s
       connection-timeout: 5s
+      username:

@@ -25,7 +25,7 @@ import java.util.Date;
 public class UserPO implements Serializable {
 
     private static final long serialVersionUID = -3821173666664111882L;
-    
+
     private Long userId;
 
     private Long storeId;
@@ -78,7 +78,7 @@ public class UserPO implements Serializable {
 
     private String telephoneNumber;
 
-    private Boolean onlineStatus;
+    private String onlineStatus;
 
     private String remark;
 
