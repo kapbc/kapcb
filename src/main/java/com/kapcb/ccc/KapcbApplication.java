@@ -1,9 +1,11 @@
 package com.kapcb.ccc;
 
+import com.kapcb.ccc.configure.IndexConfiguration;
 import org.springframework.boot.Banner;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
  * <a>Title: KapcbApplication </a>
@@ -15,6 +17,9 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  * @date 2021/7/16 22:19
  */
 @SpringBootApplication
+@EnableConfigurationProperties(value = {
+        IndexConfiguration.class
+})
 public class KapcbApplication {
 
     public static void main(String[] args) {

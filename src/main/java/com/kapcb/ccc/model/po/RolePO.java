@@ -17,8 +17,8 @@ import java.io.Serializable;
  * @date 2021/7/16 22:35
  */
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder(toBuilder = true)
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Builder(toBuilder = true)
 public class RolePO implements Serializable {
 }

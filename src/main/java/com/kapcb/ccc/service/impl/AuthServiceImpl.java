@@ -25,12 +25,14 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public String login(UserLoginDTO userLoginDTO) {
-        String message = ""
+        String message = "";
         Subject subject = SecurityUtils.getSubject();
         UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userLoginDTO.getEmail(), userLoginDTO.getPassword());
         try {
             subject.login(usernamePasswordToken);
-        }catch ()
+        } catch (Exception e) {
+
+        }
         return null;
     }
 }
