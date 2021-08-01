@@ -109,7 +109,7 @@ public class UserSearchServiceImpl implements UserSearchService {
         pageResult.setTotal(search.getTotalHits());
         pageResult.setPageSize(requestDTO.getPageSize());
         pageResult.setPageNum(requestDTO.getPageNum());
-        pageResult.setTotalPage(PageUtil.totalPage((int) pageResult.getTotal(), requestDTO.getPageSize().intValue()));
+        pageResult.setTotalPage(PageUtil.totalPage((int) pageResult.getTotal(), (int) pageResult.getPageSize()));
         return pageResult;
     }
 }
