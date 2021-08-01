@@ -9,26 +9,23 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <a>Title: ProductDraftReviewRecordPO </a>
+ * <a>Title: StoreReviewRecordPO </a>
  * <a>Author: Kapcb <a>
  * <a>Description:  <a>
  *
  * @author Kapcb
  * @version 1.0.0
- * @date 2021/8/1 22:43
+ * @date 2021/8/1 23:29
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class ProductDraftReviewRecordPO implements Serializable {
+public class ReviewRecordPO implements Serializable {
 
-    private static final long serialVersionUID = 8702168273270919826L;
+    private static final long serialVersionUID = 6858483530341073845L;
 
-    /**
-     * 产品id
-     */
-    private Long productId;
+    private Long storeReviewRecordId;
 
     /**
      * 店铺id
@@ -36,9 +33,21 @@ public class ProductDraftReviewRecordPO implements Serializable {
     private Long storeId;
 
     /**
+     * 产品id
+     */
+    private Long productId;
+
+    /**
+     * product / store
+     */
+    private String reviewType;
+
+    /**
      * 审核人
      */
     private Long reviewBy;
+
+    private String reviewResult;
 
     /**
      * 审核备注
@@ -69,4 +78,5 @@ public class ProductDraftReviewRecordPO implements Serializable {
      * 创建时间
      */
     private Date createDate;
+
 }
