@@ -26,6 +26,11 @@ public class ProductDraftPO implements Serializable {
     private static final long serialVersionUID = 3810902000332372280L;
 
     /**
+     * 产品草稿版本id
+     */
+    private Long productDraftId;
+
+    /**
      * 产品id
      */
     private Long productId;
