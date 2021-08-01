@@ -9,41 +9,36 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <a>Title: RolePO </a>
+ * <a>Title: PermissionPO </a>
  * <a>Author: Kapcb <a>
  * <a>Description:  <a>
  *
  * @author Kapcb
  * @version 1.0.0
- * @date 2021/8/1 14:52
+ * @date 2021/8/1 14:59
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class RolePO implements Serializable {
+public class PermissionPO implements Serializable {
 
-    private static final long serialVersionUID = 1284732956591701003L;
-
-    /**
-     * 角色id 自增
-     */
-    private Long roleId;
+    private static final long serialVersionUID = -5227962994068651933L;
 
     /**
-     * 角色名称 不允许重复
+     * 权限id
      */
-    private String roleName;
+    private Long permissionId;
 
     /**
-     * 角色标识
+     * 权限名称
      */
-    private String roleIdentify;
+    private String permissionName;
 
     /**
-     * 否逻删除
+     * 权限标识
      */
-    private Boolean deleteFlag;
+    private String permissionIdentify;
 
     /**
      * 乐观锁
@@ -51,14 +46,14 @@ public class RolePO implements Serializable {
     private Integer version;
 
     /**
-     * 角色是否可用
+     * 逻辑删除
      */
-    private Boolean availableStatus;
+    private Boolean deleteFlag;
 
     /**
-     * 备注
+     * 权限是否可用
      */
-    private String remark;
+    private Boolean availableStatus;
 
     /**
      * 创建人
