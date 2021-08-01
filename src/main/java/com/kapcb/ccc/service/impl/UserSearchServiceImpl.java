@@ -1,10 +1,12 @@
 package com.kapcb.ccc.service.impl;
 
+import cn.hutool.core.util.PageUtil;
 import com.kapcb.ccc.model.dto.user.req.UserListRequestDTO;
 import com.kapcb.ccc.model.index.UserIndex;
 import com.kapcb.ccc.model.po.UserPO;
 import com.kapcb.ccc.service.IUserService;
 import com.kapcb.ccc.service.UserSearchService;
+import kapcb.framework.web.model.base.BasePageResult;
 import kapcb.framework.web.util.OrikaUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -52,7 +54,7 @@ public class UserSearchServiceImpl implements UserSearchService {
     }
 
     @Override
-    public List<UserIndex> getUserList(UserListRequestDTO requestDTO) {
+    public BasePageResult<UserIndex> getUserList(UserListRequestDTO requestDTO) {
 
         NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
 
@@ -86,7 +88,7 @@ public class UserSearchServiceImpl implements UserSearchService {
         build.setTrackTotalHits(true);
         SearchHits<UserIndex> search = elasticsearchOperations.search(build, UserIndex.class);
         System.out.println("search = " + search);
-        return search.stream().map(index -> {
+        List<UserIndex> userIndexList = search.stream().map(index -> {
             UserIndex content = index.getContent();
             Map<String, List<String>> highlightFields = index.getHighlightFields();
             if (MapUtils.isNotEmpty(highlightFields)) {
@@ -102,5 +104,12 @@ public class UserSearchServiceImpl implements UserSearchService {
             }
             return content;
         }).collect(Collectors.toList());
+        BasePageResult<UserIndex> pageResult = new BasePageResult<>();
+        pageResult.setRecords(userIndexList);
+        pageResult.setTotal(search.getTotalHits());
+        pageResult.setPageSize(requestDTO.getPageSize());
+        pageResult.setPageNum(requestDTO.getPageNum());
+        pageResult.setTotalPage(PageUtil.totalPage((int) pageResult.getTotal(), requestDTO.getPageSize().intValue()));
+        return pageResult;
     }
 }

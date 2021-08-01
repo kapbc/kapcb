@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @PostMapping("search")
-    public List<UserIndex> searchUser(@RequestBody UserListRequestDTO requestDTO) {
+    public BasePageResult<UserIndex> searchUser(@RequestBody UserListRequestDTO requestDTO) {
         return userSearchService.getUserList(requestDTO);
     }
 }
