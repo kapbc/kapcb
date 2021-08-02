@@ -5,37 +5,39 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <a>Title: ProductPO </a>
+ * <a>Title: LifeCyclePO </a>
  * <a>Author: Kapcb <a>
  * <a>Description:  <a>
  *
  * @author Kapcb
  * @version 1.0.0
- * @date 2021/8/1 22:25
+ * @date 2021/8/2 22:50
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-public class ProductOnlinePO {
+public class LifeCyclePO implements Serializable {
 
-    private Long productId;
+    private static final long serialVersionUID = 8186866661991326649L;
+
+    private Long lifeCycleId;
+
+    private String lifeCycleType;
 
     private Long storeId;
 
-    private String productName;
+    private Long productId;
 
-    private Long categoryL4;
+    private String remark;
 
-    private String productDescription;
+    private Boolean deleteFlag;
 
-    private String modelNumber;
-
-    private BigDecimal productPrice;
+    private Integer version;
 
     private Date createDate;
 
@@ -44,8 +46,4 @@ public class ProductOnlinePO {
     private Date lastUpdateDate;
 
     private Long lastUpdateBy;
-
-    private Integer version;
-
-    private Boolean deleteFlag;
 }

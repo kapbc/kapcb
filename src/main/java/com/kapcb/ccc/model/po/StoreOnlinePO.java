@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 /**
  * <a>Title: StoreOnlinePO </a>
@@ -37,11 +36,6 @@ public class StoreOnlinePO implements Serializable {
     private Long storeId;
 
     /**
-     * 合同id集合
-     */
-    private List<Long> contractIds;
-
-    /**
      * 店铺等级
      */
     private Integer storeLevel;
@@ -60,6 +54,8 @@ public class StoreOnlinePO implements Serializable {
      * 店铺是否有人在线
      */
     private String storeOnlineStatus;
+
+    private Boolean storeAvailableStatus;
 
     private String responseTimeRate;
 
