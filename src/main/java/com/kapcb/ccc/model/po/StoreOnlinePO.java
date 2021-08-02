@@ -61,6 +61,7 @@ public class StoreOnlinePO implements Serializable {
      */
     private String storeOnlineStatus;
 
+    private String responseTimeRate;
 
     private Boolean deleteFlag;
 

@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <a>Title: ProductCateogryPO </a>
+ * <a>Title: ProductCategoryPO </a>
  * <a>Author: Kapcb <a>
  * <a>Description:  <a>
  *
@@ -28,6 +28,8 @@ public class ProductCategoryPO implements Serializable {
     private Integer categoryId;
 
     private Integer parentCategoryId;
+
+    private Integer categoryLevel;
 
     private String categoryNameEn;
 
