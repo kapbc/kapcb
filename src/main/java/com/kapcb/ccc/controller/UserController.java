@@ -41,4 +41,5 @@ public class UserController {
     public BasePageResult<UserIndex> searchUser(@RequestBody UserListRequestDTO requestDTO) {
         return userSearchService.getUserList(requestDTO);
     }
+
 }
