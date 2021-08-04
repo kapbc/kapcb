@@ -38,6 +38,8 @@ public class UserPO implements Serializable {
 
     private String nickName;
 
+    private String password;
+
     private String email;
 
     private Integer age;

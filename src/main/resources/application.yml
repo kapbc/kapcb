@@ -11,3 +11,16 @@ spring:
       uris: 192.168.80.135:9200
       read-timeout: 30s
       connection-timeout: 5s
+
+mybatis-plus:
+  configuration:
+    map-underscore-to-camel-case: true
+    use-generated-keys: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.kapcb.ccc.model.po
+  global-config:
+    db-config:
+      logic-delete-value: true
+      logic-not-delete-value: false
+      logic-delete-field: deleteFlag
