@@ -1,12 +1,9 @@
 package com.kapcb.ccc;
 
-import com.kapcb.ccc.configure.IndexConfiguration;
+import com.kapcb.ccc.annotation.web.KapcbWebApplication;
 import org.springframework.boot.Banner;
 import org.springframework.boot.WebApplicationType;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
 /**
  * <a>Title: KapcbApplication </a>
@@ -17,10 +14,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @version 1.0.0
  * @date 2021/7/16 22:19
  */
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-@EnableConfigurationProperties(value = {
-        IndexConfiguration.class
-})
+@KapcbWebApplication
 public class KapcbApplication {
 
     public static void main(String[] args) {
