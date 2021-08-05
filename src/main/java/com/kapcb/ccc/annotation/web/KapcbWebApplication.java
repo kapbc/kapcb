@@ -1,6 +1,7 @@
 package com.kapcb.ccc.annotation.web;
 
 import com.kapcb.ccc.configure.IndexConfiguration;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -27,5 +28,6 @@ import java.lang.annotation.Target;
 @EnableConfigurationProperties(value = {
         IndexConfiguration.class
 })
+@MapperScan(basePackages = {"com.kapcb.ccc.mapper"})
 public @interface KapcbWebApplication {
 }

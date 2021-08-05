@@ -2,7 +2,7 @@ package com.kapcb.ccc.controller;
 
 import com.kapcb.ccc.model.dto.user.req.UserListRequestDTO;
 import com.kapcb.ccc.model.index.UserIndex;
-import com.kapcb.ccc.service.UserSearchService;
+import com.kapcb.ccc.service.IUserSearchService;
 import kapcb.framework.web.model.base.BasePageResult;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("user")
 public class UserController {
 
-    private final UserSearchService userSearchService;
+    private final IUserSearchService userSearchService;
 
     @GetMapping("sync/{storeId}")
     public Boolean sync(@PathVariable("storeId") Long storeId) {

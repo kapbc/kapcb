@@ -15,7 +15,7 @@ import java.util.List;
  * @version 1.0.0
  * @date 2021/7/31 13:19
  */
-public interface UserSearchService {
+public interface IUserSearchService {
 
     Boolean syncUserInfoToElasticsearch(Long storeId);
 

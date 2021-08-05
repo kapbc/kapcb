@@ -11,7 +11,7 @@ import com.kapcb.ccc.model.dto.user.UserLoginDTO;
  * @version 1.0.0
  * @date 2021/7/16 22:46
  */
-public interface AuthService {
+public interface IAuthService {
 
     String login(UserLoginDTO userLoginDTO);
 }

@@ -5,7 +5,7 @@ import com.kapcb.ccc.model.dto.user.req.UserListRequestDTO;
 import com.kapcb.ccc.model.index.UserIndex;
 import com.kapcb.ccc.model.po.UserPO;
 import com.kapcb.ccc.service.IUserService;
-import com.kapcb.ccc.service.UserSearchService;
+import com.kapcb.ccc.service.IUserSearchService;
 import kapcb.framework.web.model.base.BasePageResult;
 import kapcb.framework.web.util.OrikaUtil;
 import lombok.RequiredArgsConstructor;
@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class UserSearchServiceImpl implements UserSearchService {
+public class UserSearchServiceImpl implements IUserSearchService {
 
     private final IUserService userService;
     private final ElasticsearchOperations elasticsearchOperations;

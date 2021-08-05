@@ -1,7 +1,7 @@
 package com.kapcb.ccc.service.impl;
 
 import com.kapcb.ccc.model.dto.user.UserLoginDTO;
-import com.kapcb.ccc.service.AuthService;
+import com.kapcb.ccc.service.IAuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.SecurityUtils;
@@ -21,7 +21,7 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class AuthServiceImpl implements AuthService {
+public class AuthServiceImpl implements IAuthService {
 
     @Override
     public String login(UserLoginDTO userLoginDTO) {
