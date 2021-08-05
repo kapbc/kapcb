@@ -1,9 +1,13 @@
 package com.kapcb.ccc.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.kapcb.ccc.mapper.UserMapper;
 import com.kapcb.ccc.model.po.UserPO;
 import com.kapcb.ccc.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -21,7 +25,7 @@ import java.util.List;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements IUserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements IUserService {
 
     @SuppressWarnings("serial")
     private static final List<UserPO> USER_LIST = new ArrayList<UserPO>() {{
@@ -51,5 +55,10 @@ public class UserServiceImpl implements IUserService {
     @Override
     public List<UserPO> getStoreUserInfoList(Long storeId) {
         return USER_LIST;
+    }
+
+    @Override
+    public UserPO getUserByUsername(@NonNull String email) {
+        return this.baseMapper.selectOne(new LambdaQueryWrapper<UserPO>().eq(UserPO::getEmail, email));
     }
 }

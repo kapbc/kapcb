@@ -1,5 +1,6 @@
 package com.kapcb.ccc.service;
 
+import com.baomidou.mybatisplus.extension.service.IService;
 import com.kapcb.ccc.model.po.UserPO;
 
 import java.util.List;
@@ -13,7 +14,9 @@ import java.util.List;
  * @version 1.0.0
  * @date 2021/7/31 13:46
  */
-public interface IUserService {
+public interface IUserService extends IService<UserPO> {
 
     List<UserPO> getStoreUserInfoList(Long storeId);
+
+    UserPO getUserByUsername(String email);
 }
