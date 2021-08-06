@@ -1,5 +1,6 @@
 package com.kapcb.ccc.authentication;
 
+import com.kapcb.ccc.model.po.PermissionPO;
 import com.kapcb.ccc.model.po.RolePO;
 import com.kapcb.ccc.model.po.UserPO;
 import com.kapcb.ccc.service.IPermissionService;
@@ -7,6 +8,7 @@ import com.kapcb.ccc.service.IRoleService;
 import com.kapcb.ccc.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -64,11 +66,22 @@ public class KapcbRealm extends AuthorizingRealm {
 
         //如果身份认证的时候没有传入User对象，这里只能取到userName
         //也就是SimpleAuthenticationInfo构造的时候第一个参数传递需要User对象
-        UserPO primaryPrincipal = (UserPO)principalCollection.getPrimaryPrincipal();
+        UserPO primaryPrincipal = (UserPO) principalCollection.getPrimaryPrincipal();
         Set<RolePO> userRoles = roleService.getUserRoles(primaryPrincipal.getUserId());
 
-        List<String> roleIdentify = userRoles.parallelStream().filter(Objects::nonNull).map(RolePO::getRoleIdentify).collect(Collectors.toList());
-        simpleAuthorizationInfo.addRoles(roleIdentify);
+        if (CollectionUtils.isNotEmpty(userRoles)) {
+
+            List<String> roleIdentify = userRoles.parallelStream().filter(Objects::nonNull).map(RolePO::getRoleIdentify).collect(Collectors.toList());
+            simpleAuthorizationInfo.addRoles(roleIdentify);
+
+            List<Long> roleIdList = userRoles.parallelStream().filter(Objects::nonNull).map(RolePO::getRoleId).collect(Collectors.toList());
+            Set<PermissionPO> rolePermissions = permissionService.getRolePermissions(roleIdList);
+
+            if (CollectionUtils.isNotEmpty(rolePermissions)) {
+                List<String> permissionIdentify = rolePermissions.parallelStream().filter(Objects::nonNull).map(PermissionPO::getPermissionIdentify).collect(Collectors.toList());
+                simpleAuthorizationInfo.addStringPermissions(permissionIdentify);
+            }
+        }
 
         return simpleAuthorizationInfo;
     }
