@@ -1,5 +1,6 @@
 package com.kapcb.ccc.authentication;
 
+import com.kapcb.ccc.model.po.RolePO;
 import com.kapcb.ccc.model.po.UserPO;
 import com.kapcb.ccc.service.IPermissionService;
 import com.kapcb.ccc.service.IRoleService;
@@ -14,13 +15,16 @@ import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authz.AuthorizationInfo;
+import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
-import org.apache.shiro.util.ByteSource;
 import org.apache.shiro.util.SimpleByteSource;
 
 import javax.annotation.PostConstruct;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * <a>Title: KapcbRealm </a>
@@ -41,7 +45,7 @@ public class KapcbRealm extends AuthorizingRealm {
     private final IPermissionService permissionService;
 
     @PostConstruct
-    public void initConfigure(){
+    public void initConfigure() {
         setAuthenticationCachingEnabled(false);
         setAuthorizationCachingEnabled(true);
         setCachingEnabled(true);
@@ -55,7 +59,18 @@ public class KapcbRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        return null;
+        log.info(":::begin to authorization ::: {}", principalCollection);
+        SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
+
+        //如果身份认证的时候没有传入User对象，这里只能取到userName
+        //也就是SimpleAuthenticationInfo构造的时候第一个参数传递需要User对象
+        UserPO primaryPrincipal = (UserPO)principalCollection.getPrimaryPrincipal();
+        Set<RolePO> userRoles = roleService.getUserRoles(primaryPrincipal.getUserId());
+
+        List<String> roleIdentify = userRoles.parallelStream().filter(Objects::nonNull).map(RolePO::getRoleIdentify).collect(Collectors.toList());
+        simpleAuthorizationInfo.addRoles(roleIdentify);
+
+        return simpleAuthorizationInfo;
     }
 
     /**
@@ -69,7 +84,7 @@ public class KapcbRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         log.info(":::begin to authentication::: {}", authenticationToken);
 
-        // 获取登录的用户名
+        // 获取登录的邮箱
         String email = (String) authenticationToken.getPrincipal();
         if (StringUtils.isNoneBlank(email)) {
             // 可以根据实际情况做缓存，如果不做，Shiro自己也是有时间间隔机制，2分钟内不会重复执行该方法
