@@ -70,7 +70,6 @@ public class KapcbRealm extends AuthorizingRealm {
         Set<RolePO> userRoles = roleService.getUserRoles(primaryPrincipal.getUserId());
 
         if (CollectionUtils.isNotEmpty(userRoles)) {
-
             List<String> roleIdentify = userRoles.parallelStream().filter(Objects::nonNull).map(RolePO::getRoleIdentify).collect(Collectors.toList());
             simpleAuthorizationInfo.addRoles(roleIdentify);
 

@@ -40,10 +40,7 @@ public class RolePO implements Serializable {
      */
     private String roleIdentify;
 
-    /**
-     * 否逻删除
-     */
-    private Boolean deleteFlag;
+    private Long userId;
 
     /**
      * 乐观锁
