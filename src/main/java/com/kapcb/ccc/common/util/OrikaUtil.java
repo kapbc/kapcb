@@ -1,6 +1,7 @@
 package com.kapcb.ccc.common.util;
 
 import lombok.SneakyThrows;
+import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
@@ -20,6 +21,7 @@ import java.util.List;
  * @date 2021/7/3 13:56
  */
 @Slf4j
+@UtilityClass
 public class OrikaUtil {
 
     private static final MapperFacade MAPPER_FACADE;

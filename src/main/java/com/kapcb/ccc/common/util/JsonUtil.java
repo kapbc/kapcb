@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kapcb.ccc.enums.ResultStatus;
 import com.kapcb.ccc.model.base.BaseResult;
+import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
@@ -26,10 +27,8 @@ import java.util.Objects;
  * @date 2021/7/16 22:43
  */
 @Slf4j
+@UtilityClass
 public class JsonUtil {
-
-    private JsonUtil() {
-    }
 
     private static final int INITIAL_CAPACITY = 16;
     private static final String DEFAULT_JSON_VALUE = "{}";

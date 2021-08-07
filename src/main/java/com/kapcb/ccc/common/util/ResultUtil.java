@@ -1,11 +1,10 @@
 package com.kapcb.ccc.common.util;
 
+import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.poi.ss.formula.functions.T;
 import org.springframework.lang.NonNull;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -21,10 +20,8 @@ import java.util.Set;
  * @date 2021/8/7 0:02
  */
 @Slf4j
+@UtilityClass
 public class ResultUtil {
-
-    private ResultUtil() {
-    }
 
     @NonNull
     public static <T> List<T> conditionList(List<T> data) {

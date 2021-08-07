@@ -1,6 +1,7 @@
 package com.kapcb.ccc.common.util;
 
 import com.kapcb.ccc.enums.StringPool;
+import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.joda.time.LocalDateTime;
 import org.springframework.core.env.Environment;
@@ -16,10 +17,8 @@ import org.springframework.core.env.Environment;
  * @date 2021/8/7 13:28
  */
 @Slf4j
+@UtilityClass
 public class KapcbUtil {
-
-    private KapcbUtil() {
-    }
 
     public static void serverStartUpBanner(Environment environment) {
         String banner = "\n----------------------------------------------------------------------------------\n" +
