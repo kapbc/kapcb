@@ -27,7 +27,7 @@ import java.lang.annotation.Target;
 @Documented
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@SpringBootApplication(exclude = {RedisAutoConfiguration.class, ElasticsearchDataAutoConfiguration.class})
+@SpringBootApplication(exclude = {RedisAutoConfiguration.class})
 @EnableConfigurationProperties(value = {
         IndexConfiguration.class,
         ShiroRedisProperties.class

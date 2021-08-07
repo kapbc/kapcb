@@ -2,9 +2,9 @@ package com.kapcb.ccc.common.util;
 
 import com.kapcb.ccc.enums.StringPool;
 import lombok.extern.slf4j.Slf4j;
+import org.joda.time.LocalDateTime;
 import org.springframework.core.env.Environment;
 
-import java.time.LocalDateTime;
 
 /**
  * <a>Title: KapcbUtil </a>
@@ -22,7 +22,7 @@ public class KapcbUtil {
     }
 
     public static void serverStartUpBanner(Environment environment) {
-        String banner = "----------------------------------------------------------------------------------\n" +
+        String banner = "\n----------------------------------------------------------------------------------\n" +
                 "server start success, current time is : " + LocalDateTime.now() + "\n" +
                 "server name : " + environment.getProperty(StringPool.SERVER_APPLICATION_NAME.value()) + "\n" +
                 "server port : " + environment.getProperty(StringPool.SERVER_PORT.value()) + "\n" +

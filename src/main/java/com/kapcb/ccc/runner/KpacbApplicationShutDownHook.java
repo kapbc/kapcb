@@ -7,6 +7,7 @@ import org.springframework.context.event.EventListener;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
+
 /**
  * <a>Title: KpacbWebShutDownHook </a>
  * <a>Author: Kapcb <a>
@@ -22,10 +23,11 @@ public class KpacbApplicationShutDownHook {
 
     @EventListener(classes = {ContextClosedEvent.class})
     public void onKapcbApplicationShutDown(@NonNull ApplicationEvent applicationEvent) {
-        log.info("-------------------------------------------------------------------------------");
-        log.info("--------------------------Kapcb Application Shut Down--------------------------");
-        log.info("-----No Matter How High The Mountain Is, One Can Always Ascend To It‘s Top-----");
-        log.info("----------------------------------Kapcb----------------------------------------");
-        log.info("-------------------------------------------------------------------------------");
+        String banner = "\n----------------------------------------------------------------------------------\n" +
+                "----------------------------Kapcb Application Shut Down---------------------------\n" +
+                "-------No Matter How High The Mountain Is, One Can Always Ascend To It‘s Top------\n" +
+                "------------------------------------Kapcb-----------------------------------------\n" +
+                "----------------------------------------------------------------------------------";
+        log.info(banner);
     }
 }
