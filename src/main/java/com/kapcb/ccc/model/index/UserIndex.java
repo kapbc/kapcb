@@ -25,7 +25,7 @@ import java.util.Date;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Document(indexName = "kapcb_user_index", refreshInterval = "-1")
+@Document(indexName = "#{@indexConfiguration.userIndexName}", refreshInterval = "30s")
 public class UserIndex implements Serializable {
 
     private static final long serialVersionUID = -5478947622230364428L;

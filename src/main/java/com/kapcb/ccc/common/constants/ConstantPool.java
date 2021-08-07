@@ -10,4 +10,8 @@ package com.kapcb.ccc.common.constants;
  * @date 2021/7/16 22:43
  */
 public class ConstantPool {
+
+    private ConstantPool(){}
+
+
 }

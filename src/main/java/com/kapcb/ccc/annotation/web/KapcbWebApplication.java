@@ -1,6 +1,7 @@
 package com.kapcb.ccc.annotation.web;
 
 import com.kapcb.ccc.configure.IndexConfiguration;
+import com.kapcb.ccc.properties.ShiroRedisProperties;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -24,9 +25,10 @@ import java.lang.annotation.Target;
 @Documented
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
+@SpringBootApplication
 @EnableConfigurationProperties(value = {
-        IndexConfiguration.class
+        IndexConfiguration.class,
+        ShiroRedisProperties.class
 })
 @MapperScan(basePackages = {"com.kapcb.ccc.mapper"})
 public @interface KapcbWebApplication {

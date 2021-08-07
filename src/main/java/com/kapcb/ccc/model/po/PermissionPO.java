@@ -48,7 +48,7 @@ public class PermissionPO implements Serializable {
     /**
      * 逻辑删除
      */
-    private Boolean deleteFlag;
+    private Long roleId;
 
     /**
      * 权限是否可用
