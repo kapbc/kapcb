@@ -12,6 +12,20 @@ spring:
       read-timeout: 30s
       connection-timeout: 5s
 
+  datasource:
+    hikari:
+      idle-timeout: 30000 # 空闲等待时间
+      minimum-idle: 5 # 最小连接数
+      maximum-pool-size: 10 # 连接池中最大连接数
+      connection-timeout: 20000 # 连接超时时间
+      auto-commit: true
+      max-lifetime: 1800000
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.80.131:3306/study?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
+    username: root
+    password: 123456
+
+
 mybatis-plus:
   configuration:
     map-underscore-to-camel-case: true
@@ -26,4 +40,6 @@ mybatis-plus:
       logic-delete-value: true
       logic-not-delete-value: false
       logic-delete-field: deleteFlag
-
+logging:
+  config: classpath:logback.xml
+  level: info
