@@ -4,6 +4,7 @@ import com.kapcb.ccc.annotation.web.KapcbWebApplication;
 import org.springframework.boot.Banner;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * <a>Title: KapcbApplication </a>
@@ -14,6 +15,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  * @version 1.0.0
  * @date 2021/7/16 22:19
  */
+@EnableAsync
 @KapcbWebApplication
 public class KapcbApplication {
 

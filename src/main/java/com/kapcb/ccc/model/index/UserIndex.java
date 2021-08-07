@@ -173,7 +173,7 @@ public class UserIndex implements Serializable {
     private String telephonePrefix;
 
     /**
-     * 接受国家代码
+     * 接收国家代码
      */
     @Field(name = "telephone_accept_country_code", type = FieldType.Keyword)
     private String telephoneAcceptCountryCode;
