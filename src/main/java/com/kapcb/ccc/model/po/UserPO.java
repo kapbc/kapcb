@@ -1,6 +1,7 @@
 package com.kapcb.ccc.model.po;
 
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,28 +23,59 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@TableName(value = "kapcb.user")
 public class UserPO implements Serializable {
 
     private static final long serialVersionUID = -3821173666664111882L;
 
+    /**
+     * 用户id
+     */
     private Long userId;
 
+    /**
+     * 店铺id
+     */
     private Long storeId;
 
-    private Long emergencyContactUserId;
+    /**
+     * 紧急联系人id
+     */
+    private Long emergencyContactId;
 
+    /**
+     * first name
+     */
     private String firstName;
 
+    /**
+     * last name
+     */
     private String lastName;
 
+    /**
+     * 昵称
+     */
     private String nickName;
 
+    /**
+     * 密码
+     */
     private String password;
 
+    /**
+     * 邮箱
+     */
     private String email;
 
+    /**
+     * 年龄
+     */
     private Integer age;
 
+    /**
+     * 性别
+     */
     private Integer gender;
 
     private String countryCode;
@@ -70,6 +102,8 @@ public class UserPO implements Serializable {
 
     private Date lastUpdateDate;
 
+    private Date orderByDate;
+
     private String userJobTitle;
 
     private String telephonePrefix;
@@ -87,4 +121,6 @@ public class UserPO implements Serializable {
     private String headSculpture;
 
     private String userSource;
+
+    private Integer version;
 }
