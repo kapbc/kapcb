@@ -1,5 +1,6 @@
 package com.kapcb.ccc.model.po;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +22,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
+@TableName(value = "kapcb.permission")
 public class PermissionPO implements Serializable {
 
     private static final long serialVersionUID = -5227962994068651933L;
@@ -41,14 +43,14 @@ public class PermissionPO implements Serializable {
     private String permissionIdentify;
 
     /**
+     * 权限描述
+     */
+    private String permissionDescription;
+
+    /**
      * 乐观锁
      */
     private Integer version;
-
-    /**
-     * 逻辑删除
-     */
-    private Long roleId;
 
     /**
      * 权限是否可用
@@ -74,4 +76,9 @@ public class PermissionPO implements Serializable {
      * 最后更新时间
      */
     private Date lastUpdateDate;
+
+    /**
+     * 排序时间
+     */
+    private Date orderByDate;
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kapcb.ccc.mapper.PermissionMapper">
+
+    <sql id="permissionCommonColumn">
+        p.permission_id,
+        p.permission_name,
+        p.permission_identify,
+        p.permission_description,
+        p.version,
+        p.available_status,
+        p.create_date,
+        p.last_update_by,
+        p.last_update_date,
+        p.create_by,
+        p.order_by_date
+    </sql>
+
+    <resultMap id="permissionResultMap" type="com.kapcb.ccc.model.po.PermissionPO">
+        <id column="permission_id" property="permissionId"/>
+        <result column="permission_name" property="permissionName"/>
+        <result column="permission_identify" property="permissionIdentify"/>
+        <result column="permission_description" property="permissionDescription"/>
+        <result column="version" property="version"/>
+        <result column="available_status" property="availableStatus"/>
+        <result column="create_date" property="createDate"/>
+        <result column="last_update_by" property="lastUpdateBy"/>
+        <result column="last_update_date" property="lastUpdateDate"/>
+        <result column="create_by" property="createBy"/>
+        <result column="order_by_date" property="orderByDate"/>
+    </resultMap>
+</mapper>

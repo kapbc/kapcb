@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kapcb.ccc.mapper.RoleMapper">
+
+    <sql id="roleCommonColumn">
+        r.role_id,
+        r.role_name,
+        r.role_identify,
+        r.version,
+        r.available_status,
+        r.role_description,
+        r.order_by_date,
+        r.create_date,
+        r.last_update_by,
+        r.last_update_date,
+        r.create_by,
+        r.role_type,
+        r.basic_role
+    </sql>
+
+    <resultMap id="roleResultMap" type="com.kapcb.ccc.model.po.RolePO">
+        <id column="role_id" property="roleId"/>
+        <result column="role_name" property="roleName"/>
+        <result column="role_identify" property="roleIdentify"/>
+        <result column="version" property="version"/>
+        <result column="available_status" property="availableStatus"/>
+        <result column="role_description" property="roleDescription"/>
+        <result column="order_by_date" property="orderByDate"/>
+        <result column="create_date" property="createDate"/>
+        <result column="last_update_by" property="lastUpdateBy"/>
+        <result column="last_update_date" property="lastUpdateDate"/>
+        <result column="create_by" property="createBy"/>
+        <result column="role_type" property="roleType"/>
+        <result column="basic_role" property="basicRole"/>
+    </resultMap>
+</mapper>

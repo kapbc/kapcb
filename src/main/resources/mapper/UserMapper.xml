@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kapcb.ccc.mapper.UserMapper">
+
+    <sql id="userCommonColumn">
+        u.user_id
+        u.store_id,
+        u.emergency_contact_id,
+        u.first_name,
+        u.last_name,
+        u.nick_name,
+        u.email,
+        u.password,
+        u.user_credit_score,
+        u.gender,
+        u.country_code,
+        u.area_code,
+        u.city_code,
+        u.user_star_level,
+        u.available_status,
+        u.user_info_score,
+        u.age,
+        u.birthday,
+        u.create_by,
+        u.create_date,
+        u.last_update_by,
+        u.last_update_date,
+        u.order_by_date,
+        u.user_job_title,
+        u.telephone_prefix,
+        u.telephone_accept_country_code,
+        u.telephone_area_code,
+        u.telephone_number,
+        u.online_status,
+        u.remark,
+        u.head_sculpture,
+        u.user_source,
+        u.version
+    </sql>
+
+    <resultMap id="userResultMap" type="com.kapcb.ccc.model.po.UserPO">
+        <id column="user_id" property="userId"/>
+        <result column="store_id" property="storeId"/>
+        <result column="emergency_contact_id" property="emergencyContactId"/>
+        <result column="first_name" property="firstName"/>
+        <result column="last_name" property="lastName"/>
+        <result column="nick_name" property="nickName"/>
+        <result column="email" property="email"/>
+        <result column="password" property="password"/>
+        <result column="user_credit_score" property="userCreditScore"/>
+        <result column="gender" property="gender"/>
+        <result column="country_code" property="countryCode"/>
+        <result column="area_code" property="areaCode"/>
+        <result column="city_code" property="cityCode"/>
+        <result column="user_star_level" property="userStarLevel"/>
+        <result column="available_status" property="availableStatus"/>
+        <result column="user_info_score" property="userInfoScore"/>
+        <result column="age" property="age"/>
+        <result column="birthday" property="birthday"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_date" property="createDate"/>
+        <result column="last_update_by" property="lastUpdateBy"/>
+        <result column="last_update_date" property="lastUpdateDate"/>
+        <result column="order_by_date" property="orderByDate"/>
+        <result column="user_job_title" property="userJobTitle"/>
+        <result column="telephone_prefix" property="telephonePrefix"/>
+        <result column="telephone_accept_country_code" property="telephoneAcceptCountryCode"/>
+        <result column="telephone_area_code" property="telephoneAreaCode"/>
+        <result column="telephone_number" property="telephoneNumber"/>
+        <result column="online_status" property="onlineStatus"/>
+        <result column="remark" property="remark"/>
+        <result column="head_sculpture" property="headSculpture"/>
+        <result column="user_source" property="userSource"/>
+        <result column="version" property="version"/>
+    </resultMap>
+</mapper>

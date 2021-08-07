@@ -1,5 +1,6 @@
 package com.kapcb.ccc.model.po;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +22,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
+@TableName(value = "kapcb.user_role")
 public class UserRolePO implements Serializable {
 
     private static final long serialVersionUID = -2064339372703488229L;
@@ -32,8 +34,4 @@ public class UserRolePO implements Serializable {
     private Date createDate;
 
     private Long createBy;
-
-    private Date lastUpdateDate;
-
-    private Long lastUpdateBy;
 }

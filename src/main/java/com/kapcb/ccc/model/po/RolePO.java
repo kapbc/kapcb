@@ -1,5 +1,6 @@
 package com.kapcb.ccc.model.po;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,6 +22,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
+@TableName(value = "kapcb.role")
 public class RolePO implements Serializable {
 
     private static final long serialVersionUID = 1284732956591701003L;
@@ -40,8 +42,6 @@ public class RolePO implements Serializable {
      */
     private String roleIdentify;
 
-    private Long userId;
-
     /**
      * 乐观锁
      */
@@ -55,7 +55,12 @@ public class RolePO implements Serializable {
     /**
      * 备注
      */
-    private String remark;
+    private String roleDescription;
+
+    /**
+     * 排序时间
+     */
+    private Date orderByDate;
 
     /**
      * 创建人
@@ -76,4 +81,14 @@ public class RolePO implements Serializable {
      * 最后更新时间
      */
     private Date lastUpdateDate;
+
+    /**
+     * 角色类型
+     */
+    private String roleType;
+
+    /**
+     * 是否是兜底角色
+     */
+    private Boolean basicRole;
 }

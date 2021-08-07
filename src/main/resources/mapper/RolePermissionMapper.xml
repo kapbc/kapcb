@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kapcb.ccc.mapper.RolePermissionMapper">
+
+    <sql id="rolePermissionCommonColumn">
+        rp.user_id,
+        rp.role_id,
+        rp.create_by,
+        rp.create_date
+    </sql>
+
+    <resultMap id="rolePermissionResultMap" type="com.kapcb.ccc.model.po.RolePermissionPO">
+        <id column="role_id" property="roleId"/>
+        <result column="permission_id" property="permissionId"/>
+        <result column="create_by" property="createBy"/>
+        <result column="create_date" property="createDate"/>
+    </resultMap>
+</mapper>
