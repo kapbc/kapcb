@@ -26,3 +26,4 @@ mybatis-plus:
       logic-delete-value: true
       logic-not-delete-value: false
       logic-delete-field: deleteFlag
+

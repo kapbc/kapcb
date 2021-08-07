@@ -18,7 +18,6 @@ import java.io.Serializable;
  * @date 2021/8/1 23:02
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class StoreContractPO implements Serializable {

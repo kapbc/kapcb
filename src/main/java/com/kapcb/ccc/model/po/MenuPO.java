@@ -17,7 +17,6 @@ import java.io.Serializable;
  * @date 2021/8/1 15:08
  */
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
 public class MenuPO implements Serializable {

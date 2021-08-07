@@ -1,8 +1,8 @@
 package com.kapcb.ccc.service;
 
+import com.kapcb.ccc.model.base.BasePageResult;
 import com.kapcb.ccc.model.dto.user.req.UserListRequestDTO;
 import com.kapcb.ccc.model.index.UserIndex;
-import kapcb.framework.web.model.base.BasePageResult;
 
 import java.util.List;
 

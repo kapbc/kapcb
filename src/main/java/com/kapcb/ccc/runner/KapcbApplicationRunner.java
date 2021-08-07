@@ -8,6 +8,7 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.env.Environment;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 /**
@@ -32,6 +33,7 @@ public class KapcbApplicationRunner implements ApplicationRunner {
         this.applicationContext = configurableApplicationContext;
     }
 
+    @Async
     @Override
     public void run(ApplicationArguments args) throws Exception {
         if (applicationContext.isActive()) {
