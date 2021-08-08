@@ -14,13 +14,45 @@
     <input type="submit" name="Confirm">
 </form>
 
+<div id="demo">
+    <label>username:</label>
+    <input type="text" name="username" placeholder="please enter username" v-model="username"></br>
+    <label>password:</label>
+    <input type="password" name="password" placeholder="please enter password" v-model="password"></br>
+    <button @click="_login">login</button>
+    <button @click="_reset">reset</button>
+</div>
+
 </body>
 <script src="../static/js/vue.js"></script>
 <script>
+
     let login = new Vue({
-        el: '#login-form',
-        data: {},
-        methods: {}
+        el: '#demo',
+        data: {
+            username: null,
+            password: null
+        },
+        methods: {
+            _login() {
+                console.log('input username is : ' + this.username + ' input password is : ' + this.password);
+                const authentication = {
+                    username:this.username,
+                    password:this.password
+                }
+                console.log(authentication);
+                let stringify = JSON.stringify(authentication);
+                console.log(stringify);
+
+                let xmlHttpRequest = new XMLHttpRequest();
+                xmlHttpRequest.setRequestHeader("","");
+                xmlHttpRequest.open("POST","/login");
+            },
+            _reset() {
+                this.username = null;
+                this.password = null;
+            }
+        }
     });
 </script>
 </html>
