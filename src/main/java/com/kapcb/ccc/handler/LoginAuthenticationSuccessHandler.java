@@ -37,5 +37,7 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
         ObjectMapper objectMapper = new ObjectMapper();
         String s = objectMapper.writeValueAsString(resultMap);
         httpServletResponse.getWriter().write(s);
+        httpServletResponse.getWriter().flush();
+        httpServletResponse.getWriter().close();
     }
 }

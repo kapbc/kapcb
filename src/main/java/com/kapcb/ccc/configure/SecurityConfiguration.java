@@ -44,6 +44,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
+                .antMatchers("/static/**")
+                .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -67,11 +69,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     response.setContentType(ContentType.JSON.getValue());
                     Map<String, String> resultMap = HashMap.of("msg", "logout success!", "data", "kapcb logout success!", "code", "200");
                     response.getWriter().write(JSON.toJSONString(resultMap));
+                    response.getWriter().flush();
+                    response.getWriter().close();
                 }, new AntPathRequestMatcher("/logout", "GET"))
                 .defaultLogoutSuccessHandlerFor((request, response, auth) -> {
                     response.setContentType(ContentType.JSON.getValue());
                     Map<String, String> resultMap = HashMap.of("msg", "logout1 success!", "data", "kapcb logout1 success!", "code", "200");
                     response.getWriter().write(JSON.toJSONString(resultMap));
+                    response.getWriter().flush();
+                    response.getWriter().close();
                 }, new AntPathRequestMatcher("/logout1", "POST"))
                 .and().csrf().disable();
 

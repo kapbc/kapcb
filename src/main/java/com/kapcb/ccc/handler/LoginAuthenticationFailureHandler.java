@@ -37,5 +37,7 @@ public class LoginAuthenticationFailureHandler implements AuthenticationFailureH
         ObjectMapper objectMapper = new ObjectMapper();
         String s = objectMapper.writeValueAsString(resultMap);
         httpServletResponse.getWriter().write(s);
+        httpServletResponse.getWriter().flush();
+        httpServletResponse.getWriter().close();
     }
 }
