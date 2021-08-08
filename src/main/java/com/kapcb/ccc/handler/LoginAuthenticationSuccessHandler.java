@@ -1,7 +1,6 @@
 package com.kapcb.ccc.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kapcb.ccc.model.base.BaseResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
@@ -11,6 +10,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <a>Title: LoginAuthenticationSuccessHandler </a>
@@ -27,9 +28,11 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
-        BaseResult<Object> success = BaseResult.success();
+        Map<String, Object> resultMap = new HashMap<>(2);
+        resultMap.put("msg", "login success!");
+        resultMap.put("code", "200");
         ObjectMapper objectMapper = new ObjectMapper();
-        String s = objectMapper.writeValueAsString(success);
+        String s = objectMapper.writeValueAsString(resultMap);
         httpServletResponse.getWriter().write(s);
     }
 }

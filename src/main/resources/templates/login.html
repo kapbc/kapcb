@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>login page</title>
+</head>
+<body>
+
+<form id="login-form" method="post" action="login">
+    <label>username:</label>
+    <input type="text" name="username" placeholder="please enter username"></br>
+    <label>password:</label>
+    <input type="password" name="password" placeholder="please enter password"></br>
+    <input type="submit" name="Confirm">
+</form>
+
+</body>
+<script src="../static/js/vue.js"></script>
+<script>
+    let login = new Vue({
+        el: '#login-form',
+        data: {},
+        methods: {}
+    });
+</script>
+</html>

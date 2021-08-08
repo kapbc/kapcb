@@ -1,13 +1,11 @@
 package com.kapcb.ccc.controller;
 
-import com.kapcb.ccc.model.dto.user.UserLoginDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <a>Title: AuthController </a>
@@ -20,13 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @Validated
-@RequestMapping
-@RestController("auth")
+@Controller
+@RequestMapping("/")
 @RequiredArgsConstructor
 public class AuthController {
 
-    @PostMapping("login")
-    public void login(@Validated @RequestBody UserLoginDTO userLoginDTO){
-
+    @GetMapping("login.html")
+    public String login() {
+        return "login";
     }
 }

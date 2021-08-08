@@ -4,9 +4,6 @@ import com.kapcb.ccc.model.dto.user.UserLoginDTO;
 import com.kapcb.ccc.service.IAuthService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,14 +22,14 @@ public class AuthServiceImpl implements IAuthService {
 
     @Override
     public String login(UserLoginDTO userLoginDTO) {
-        String message = "";
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userLoginDTO.getEmail(), userLoginDTO.getPassword());
-        try {
-            subject.login(usernamePasswordToken);
-        } catch (Exception e) {
-
-        }
+//        String message = "";
+//        Subject subject = SecurityUtils.getSubject();
+//        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userLoginDTO.getEmail(), userLoginDTO.getPassword());
+//        try {
+//            subject.login(usernamePasswordToken);
+//        } catch (Exception e) {
+//
+//        }
         return null;
     }
 }

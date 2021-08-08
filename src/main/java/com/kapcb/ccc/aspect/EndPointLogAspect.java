@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
@@ -20,6 +21,7 @@ import java.time.LocalDateTime;
  */
 @Slf4j
 @Aspect
+@Component
 public class EndPointLogAspect {
 
     @Around("(@within(org.springframework.stereotype.Controller)) || @within(org.springframework.web.bind.annotation.RestController) && execution(public * com.kapcb.ccc..*.controller..*.*(..))")
@@ -37,12 +39,12 @@ public class EndPointLogAspect {
             throw e;
         } finally {
             long costTime = System.currentTimeMillis() - startTime;
-            log.info("----------------------------------------------------------------------");
-            log.info("--------------process cost time : {}-------------", costTime);
-            log.info("--------------process class name : {}-------------", className);
-            log.info("--------------process method name : {}-------------", methodName);
-            log.info("--------------current local date time : {}-------------", DateUtil.format(now, DatePatternPool.NORM_DATETIME_PATTERN));
-            log.info("----------------------------------------------------------------------");
+            log.info("[----------------------------------------------------------------------]");
+            log.info("process cost time : {}", costTime);
+            log.info("process class name : {}", className);
+            log.info("process method name : {}", methodName);
+            log.info("current local date time : {}", DateUtil.format(now, DatePatternPool.NORM_DATETIME_PATTERN));
+            log.info("[----------------------------------------------------------------------]");
         }
     }
 }

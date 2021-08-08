@@ -1,8 +1,6 @@
 package com.kapcb.ccc.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.kapcb.ccc.common.util.ResultUtil;
 import com.kapcb.ccc.mapper.PermissionMapper;
 import com.kapcb.ccc.model.po.PermissionPO;
 import com.kapcb.ccc.service.IPermissionService;
@@ -29,7 +27,8 @@ public class PermissionServiceImpl extends ServiceImpl<PermissionMapper, Permiss
 
     @Override
     public Set<PermissionPO> getRolePermissions(List<Long> roleIdList) {
-        List<PermissionPO> permissionPOList = this.baseMapper.selectList(new LambdaQueryWrapper<PermissionPO>().in(PermissionPO::getRoleId, roleIdList));
-        return ResultUtil.conditionSet(permissionPOList);
+//        List<PermissionPO> permissionPOList = this.baseMapper.selectList(new LambdaQueryWrapper<PermissionPO>().in(PermissionPO::getRoleId, roleIdList));
+//        return ResultUtil.conditionSet(permissionPOList);
+        return null;
     }
 }
