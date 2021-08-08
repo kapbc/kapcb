@@ -12,6 +12,11 @@ spring:
       read-timeout: 30s
       connection-timeout: 5s
 
+  security:
+    user:
+      name: kapcb
+      password: 123456
+
   datasource:
     hikari:
       idle-timeout: 30000 # 空闲等待时间
@@ -43,3 +48,4 @@ logging:
   config: classpath:logback.xml
   level:
     root: info
+

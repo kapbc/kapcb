@@ -1,5 +1,6 @@
 package com.kapcb.ccc.configure;
 
+import com.kapcb.ccc.handler.LoginAuthenticationFailureHandler;
 import com.kapcb.ccc.handler.LoginAuthenticationSuccessHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +23,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final LoginAuthenticationSuccessHandler loginAuthenticationSuccessHandler;
+    private final LoginAuthenticationFailureHandler loginAuthenticationFailureHandler;
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -32,10 +34,18 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginPage("/login.html")
                 .loginProcessingUrl("/login")
                 .successHandler(loginAuthenticationSuccessHandler)
-                .failureUrl("/login.html")
+                .failureHandler(loginAuthenticationFailureHandler)
                 .usernameParameter("username")
                 .passwordParameter("password")
                 .permitAll()
                 .and().csrf().disable();
     }
+
+//    @Bean
+//    public SimpleUrlAuthenticationFailureHandler failureHandler() {
+//        SimpleUrlAuthenticationFailureHandler simpleUrlAuthenticationFailureHandler = new SimpleUrlAuthenticationFailureHandler();
+//        simpleUrlAuthenticationFailureHandler.setDefaultFailureUrl("/login.html");
+//        simpleUrlAuthenticationFailureHandler.setUseForward(true);
+//        return simpleUrlAuthenticationFailureHandler;
+//    }
 }
