@@ -13,6 +13,5 @@ import org.springframework.context.annotation.Configuration;
  * @date 2021/7/16 22:36
  */
 @Slf4j
-@Configuration
 public class Swagger2Configuration {
 }

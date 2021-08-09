@@ -21,11 +21,13 @@
     <label>password:</label>
     <input type="password" name="password" placeholder="please enter password" v-model="password"></br>
     <button @click="_login">login</button>
+    <button @click="_axiosLogin">axiosLogin</button>
     <button @click="_reset">reset</button>
 </div>
 
 </body>
 <script th:src="@{/static/js/vue.js}"></script>
+<script th:src="@{/static/js/axios.js}"></script>
 <!--<script src="../static/js/vue.js}"></script>-->
 <script>
 
@@ -60,6 +62,23 @@
                         alert(data.msg);
                     }
                 }
+            },
+            _axiosLogin() {
+                let username = this.username;
+                let password = this.password;
+                axios.post("http://localhost:9096/login", {
+                    username,
+                    password
+                }).then(function (response) {
+                    console.log(response);
+                    if (response.data?.code) {
+                        console.log(response.data.code);
+                        console.log(response.data.msg);
+                        console.log(response.data.data);
+                    }
+                }).catch(function (error) {
+                    console.log(error);
+                })
             },
             _reset() {
                 this.username = null;
