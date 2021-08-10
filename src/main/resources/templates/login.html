@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<!--<html lang="en" xmlns="http://www.w3.org/1999/html">-->
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<!--<html xmlns:th="http://www.thymeleaf.org">-->
 <head>
     <meta charset="UTF-8">
     <title>login page</title>
+    <!-- 引入样式 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <!-- 引入组件库 -->
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
 </head>
 <body>
-
 <!--<form id="login-form" method="post" action="login">-->
 <!--    <label>username:</label>-->
 <!--    <input type="text" name="username" placeholder="please enter username"></br>-->
@@ -23,19 +26,26 @@
     <button @click="_login">login</button>
     <button @click="_axiosLogin">axiosLogin</button>
     <button @click="_reset">reset</button>
+
+    <el-button @click="visible = true">Button</el-button>
+    <el-diglog :visible.sync="visible" title="Hello World!">
+        <p>Try Element</p>
+    </el-diglog>
 </div>
 
 </body>
-<script th:src="@{/static/js/vue.js}"></script>
-<script th:src="@{/static/js/axios.js}"></script>
-<!--<script src="../static/js/vue.js}"></script>-->
+<!--<script th:src="@{/static/js/vue.js}"></script>-->
+<!--<script th:src="@{/static/js/axios.js}"></script>-->
+<script src="../static/js/vue.js"></script>
+<script src="../static/js/axios.js"></script>
 <script>
 
     let login = new Vue({
         el: '#demo',
         data: {
             username: null,
-            password: null
+            password: null,
+            visible: false
         },
         methods: {
             _login() {
