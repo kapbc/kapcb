@@ -44,8 +44,9 @@
 </head>
 <body>
 <el-container>
-    <el-header>Header</el-header>
+    <el-header width="200px">Header</el-header>
     <el-main>Main</el-main>
+    <el-footer>Footer</el-footer>
 </el-container>
 <!--<form id="login-form" method="post" action="login">-->
 <!--    <label>username:</label>-->
@@ -66,7 +67,7 @@
 
     <el-button @click="visible = true">Button</el-button>
     <el-dialog :visible.sync="visible" title="Hello world">
-        <p>Try Element</p>
+        <el-button @click="visible = false">Confirm</el-button>
     </el-dialog>
 </div>
 
