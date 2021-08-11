@@ -50,111 +50,116 @@
     </style>
 </head>
 <body>
-<el-container id="demo">
+<el-container id="login">
     <el-header width="200px">Header</el-header>
     <el-main>
-        <el-form  status-icon label-width="100px" class="demo-ruleForm">
-            <el-form-item label="用户名" prop="pass">
-                <el-input type="text"  autocomplete="off" v-model="username"></el-input>
+        <el-form :model="loginForm" :rules="rules" ref="loginForm" status-icon label-width="100px"
+                 class="demo-ruleForm">
+            <el-form-item label="用户名" prop="username">
+                <el-input type="text" autocomplete="off" v-model="loginForm.username"></el-input>
             </el-form-item>
-            <el-form-item label="密码" prop="checkPass">
-                <el-input type="password"  autocomplete="off" v-model="password"></el-input>
+            <el-form-item label="密码" prop="password">
+                <el-input type="password" autocomplete="off" v-model="loginForm.password"></el-input>
             </el-form-item>
             <el-form-item>
-                <el-button type="primary" >提交</el-button>
-                <el-button >重置</el-button>
+                <el-button type="primary" @click="_submitForm('loginForm')">提交</el-button>
+                <el-button @click="_reset('loginForm')">重置</el-button>
             </el-form-item>
         </el-form>
     </el-main>
     <el-footer>Footer</el-footer>
 </el-container>
-<!--<form id="login-form" method="post" action="login">-->
-<!--    <label>username:</label>-->
-<!--    <input type="text" name="username" placeholder="please enter username"></br>-->
-<!--    <label>password:</label>-->
-<!--    <input type="password" name="password" placeholder="please enter password"></br>-->
-<!--    <input type="submit" name="Confirm">-->
-<!--</form>-->
-
-<!--<div id="demo">-->
-<!--    <label>username:</label>-->
-<!--    <input type="text" name="username" placeholder="please enter username" v-model="username"></br>-->
-<!--    <label>password:</label>-->
-<!--    <input type="password" name="password" placeholder="please enter password" v-model="password"></br>-->
-<!--    <button @click="_login">login</button>-->
-<!--    <button @click="_axiosLogin">axiosLogin</button>-->
-<!--    <button @click="_reset">reset</button>-->
-
-<!--    <el-button @click="visible = true">Button</el-button>-->
-<!--    <el-dialog :visible.sync="visible" title="Hello world">-->
-<!--        <el-button @click="visible = false">Confirm</el-button>-->
-<!--    </el-dialog>-->
-<!--</div>-->
-
 </body>
-<!--<script th:src="@{/static/js/vue.js}"></script>-->
-<!--<script th:src="@{/static/js/axios.js}"></script>-->
-<!-- import JavaScript -->
-
 <script>
-
     let login = new Vue({
-        el: '#demo',
-        data(){
+        el: '#login',
+        data() {
             return {
-                username: null,
-                password: null,
-                visible: false
+                /**
+                 * 参数
+                 */
+                loginForm: {
+                    username: '',
+                    password: '',
+                    visible: false
+                },
+                /**
+                 * 校验规则
+                 */
+                rules: {
+                    username: [
+                        {required: true, message: '请输入用户名!', trigger: 'blur'},
+                        {min: 4, max: 12, message: '输入字符长度在4~12之间!', trigger: 'blur'}
+                    ],
+                    password: [
+                        {required: true, message: '请输入用户名!', trigger: 'blur'},
+                        {min: 4, max: 12, message: '输入字符长度在4~12之间!', trigger: 'blur'}
+                    ]
+                }
             }
         },
         methods: {
-            _login() {
-                console.log('input username is : ' + this.username + ' input password is : ' + this.password);
-                const authentication = {
-                    username: this.username,
-                    password: this.password
-                }
-                console.log(authentication);
-                let stringify = JSON.stringify(authentication);
-                console.log(stringify);
-
-                let xmlHttpRequest = new XMLHttpRequest();
-                xmlHttpRequest.open("POST", "/login", true);
-                xmlHttpRequest.setRequestHeader("Content-Type", "application/json");
-                xmlHttpRequest.send(stringify);
-                xmlHttpRequest.onreadystatechange = function () {
-                    if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
-                        console.log('async request success');
-                        let responseText = xmlHttpRequest.responseText;
-                        console.log('result data is : ' + responseText);
-                        let data = JSON.parse(responseText);
-                        console.log('data is : ' + data);
-                        alert(data.msg);
+            /**
+             * 登录
+             * @private
+             */
+            _submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        console.log('username is : ' + this.loginForm.username + ' password is : ' + this.loginForm.password);
+                        let username = this.loginForm.username;
+                        let password = this.loginForm.password;
+                        axios.post("http://localhost:9096/login", {
+                            username, password
+                        }).then(function (response) {
+                            console.log(response);
+                            if (response.data?.code) {
+                                console.log(response.data.code);
+                                console.log(response.data.msg);
+                                console.log(response.data.data);
+                                alert(response.data.data);
+                            }
+                        }).catch(function (error) {
+                            console.log(error);
+                        });
+                    } else {
+                        console.log('valid param fail');
                     }
-                }
-            },
-            _axiosLogin() {
-                let username = this.username;
-                let password = this.password;
-                axios.post("http://localhost:9096/login", {
-                    username,
-                    password
-                }).then(function (response) {
-                    console.log(response);
-                    if (response.data?.code) {
-                        console.log(response.data.code);
-                        console.log(response.data.msg);
-                        console.log(response.data.data);
-                        alert(response.data.data);
-                    }
-                }).catch(function (error) {
-                    console.log(error);
                 })
             },
+            /**
+             * 重置参数
+             * @private
+             */
             _reset() {
-                this.username = null;
-                this.password = null;
-            }
+                this.$refs[formName].resetFields();
+            },
+
+            // _login() {
+            //     console.log('input username is : ' + this.username + ' input password is : ' + this.password);
+            //     const authentication = {
+            //         username: this.username,
+            //         password: this.password
+            //     }
+            //     console.log(authentication);
+            //     let stringify = JSON.stringify(authentication);
+            //     console.log(stringify);
+            //
+            //     let xmlHttpRequest = new XMLHttpRequest();
+            //     xmlHttpRequest.open("POST", "/login", true);
+            //     xmlHttpRequest.setRequestHeader("Content-Type", "application/json");
+            //     xmlHttpRequest.send(stringify);
+            //     xmlHttpRequest.onreadystatechange = function () {
+            //         if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
+            //             console.log('async request success');
+            //             let responseText = xmlHttpRequest.responseText;
+            //             console.log('result data is : ' + responseText);
+            //             let data = JSON.parse(responseText);
+            //             console.log('data is : ' + data);
+            //             alert(data.msg);
+            //         }
+            //     }
+            // },
         }
     });
 </script>
