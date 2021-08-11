@@ -71,6 +71,15 @@
 </el-container>
 </body>
 <script>
+
+    /**
+     * 在单独按需引入element组件时，message组件需要挂载到Vue全局对象上，而不是用Vue.use(Message)，
+     * 这是message组件与其他组件不同的地方。其中与之相同、需要挂载到Vue全局对象上的，还有confirm组件。
+     */
+    // import { Message } from 'element-ui'
+    // Vue.use(Message)
+    // Vue.prototype.$message = Message
+
     let login = new Vue({
         el: '#login',
         data() {
@@ -81,7 +90,8 @@
                 loginForm: {
                     username: '',
                     password: '',
-                    visible: false
+                    visible: false,
+                    responseMsg: 'Please Enter Your Username Or Password!'
                 },
                 /**
                  * 校验规则
@@ -117,8 +127,12 @@
                                 console.log(response.data.code);
                                 console.log(response.data.msg);
                                 console.log(response.data.data);
-                                alert(response.data.data);
+                                // alert(response.data.data);
                             }
+                            this.$message({
+                                message: response.data.data,
+                                type: 'success'
+                            });
                         }).catch(function (error) {
                             console.log(error);
                         });
@@ -131,9 +145,13 @@
              * 重置参数
              * @private
              */
-            _reset() {
+            _reset(formName) {
                 this.$refs[formName].resetFields();
             },
+
+            _responseMsg() {
+
+            }
 
             // _login() {
             //     console.log('input username is : ' + this.username + ' input password is : ' + this.password);
