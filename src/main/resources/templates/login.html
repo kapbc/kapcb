@@ -6,6 +6,9 @@
     <title>login page</title>
     <!-- import CSS -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <script src="../static/js/vue.js"></script>
+    <script src="https://unpkg.com/element-ui/lib/index.js"></script>
+    <script src="../static/js/axios.js"></script>
     <style>
         .el-header, .el-footer {
             background-color: #B3C0D1;
@@ -41,9 +44,9 @@
             line-height: 320px;
         }
 
-        .el-input{
-            width: 300px;
-        }
+        /*.el-input{*/
+        /*    width: 300px;*/
+        /*}*/
     </style>
 </head>
 <body>
@@ -91,18 +94,18 @@
 </body>
 <!--<script th:src="@{/static/js/vue.js}"></script>-->
 <!--<script th:src="@{/static/js/axios.js}"></script>-->
-<script src="../static/js/vue.js"></script>
-<script src="../static/js/axios.js"></script>
 <!-- import JavaScript -->
-<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+
 <script>
 
     let login = new Vue({
         el: '#demo',
-        data: {
-            username: null,
-            password: null,
-            visible: false
+        data(){
+            return {
+                username: null,
+                password: null,
+                visible: false
+            }
         },
         methods: {
             _login() {
