@@ -122,7 +122,7 @@
 
                             axios.post("http://localhost:9096/login", {
                                 username, password
-                            }).then(function (response) {
+                            }).then((response) => {
                                 console.log(response);
                                 if (response.data?.code) {
                                     console.log(response.data.code);
@@ -130,9 +130,9 @@
                                     console.log(response.data.data);
                                     // alert(response.data.data);
                                 }
-                                this._responseMsg(response.data.data, 'success');
+                                this.showMsg(response.data.data, 'success');
                             }).catch(function (error) {
-                                console.log(error);
+                                console.log('error message is : ' + error);
                             });
                         } else {
                             console.log('valid param fail');
@@ -147,7 +147,7 @@
                     this.$refs[formName].resetFields();
                 },
 
-                _responseMsg(msg, type) {
+                showMsg(msg, type) {
                     this.$message({
                         message: msg,
                         type: type
