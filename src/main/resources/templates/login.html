@@ -53,8 +53,7 @@
 <el-container id="login">
     <el-header width="200px">Header</el-header>
     <el-main>
-        <el-form :model="loginForm" :rules="rules" ref="loginForm" status-icon label-width="100px"
-                 class="demo-ruleForm">
+        <el-form :model="loginForm" :rules="rules" ref="loginForm" status-icon label-width="100px" size="medium" style="width: 500px;margin:0 auto">
             <el-form-item label="用户名" prop="username">
                 <el-input type="text" autocomplete="off" v-model="loginForm.username"></el-input>
             </el-form-item>
@@ -120,17 +119,14 @@
                             let username = this.loginForm.username;
                             let password = this.loginForm.password;
 
-                            axios.post("http://localhost:9096/login", {
-                                username, password
-                            }).then((response) => {
-                                console.log(response);
-                                if (response.data?.code) {
-                                    console.log(response.data.code);
-                                    console.log(response.data.msg);
-                                    console.log(response.data.data);
-                                    // alert(response.data.data);
+                            let data = JSON.stringify({username, password});
+                            axios.post("http://localhost:9096/login", {data}).then((res) => {
+                                console.log(res);
+                                if (res.data?.code) {
+                                    this.showMsg(res.data.msg, 'success');
+                                    return;
                                 }
-                                this.showMsg(response.data.data, 'success');
+                                this.showMsg(res.data.msg, 'warning')
                             }).catch(function (error) {
                                 console.log('error message is : ' + error);
                             });
