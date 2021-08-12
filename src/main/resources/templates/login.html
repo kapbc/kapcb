@@ -76,109 +76,110 @@
      * 在单独按需引入element组件时，message组件需要挂载到Vue全局对象上，而不是用Vue.use(Message)，
      * 这是message组件与其他组件不同的地方。其中与之相同、需要挂载到Vue全局对象上的，还有confirm组件。
      */
-    // import { Message } from 'element-ui'
-    // Vue.use(Message)
-    // Vue.prototype.$message = Message
+        // import { Message } from 'element-ui'
+        // Vue.use(Message)
+        // Vue.prototype.$message = Message
 
     let login = new Vue({
-        el: '#login',
-        data() {
-            return {
+            el: '#login',
+            data() {
+                return {
+                    /**
+                     * 参数
+                     */
+                    loginForm: {
+                        username: '',
+                        password: '',
+                        visible: false,
+                        responseMsg: 'Please Enter Your Username Or Password!'
+                    },
+                    /**
+                     * 校验规则
+                     */
+                    rules: {
+                        username: [
+                            {required: true, message: '请输入用户名!', trigger: 'blur'},
+                            {min: 4, max: 12, message: '输入字符长度在4~12之间!', trigger: 'blur'}
+                        ],
+                        password: [
+                            {required: true, message: '请输入用户名!', trigger: 'blur'},
+                            {min: 4, max: 12, message: '输入字符长度在4~12之间!', trigger: 'blur'}
+                        ]
+                    }
+                }
+            },
+            methods: {
                 /**
-                 * 参数
+                 * 登录
+                 * @private
                  */
-                loginForm: {
-                    username: '',
-                    password: '',
-                    visible: false,
-                    responseMsg: 'Please Enter Your Username Or Password!'
+                _submitForm(formName) {
+                    this.$refs[formName].validate((valid) => {
+                        if (valid) {
+                            console.log('username is : ' + this.loginForm.username + ' password is : ' + this.loginForm.password);
+                            let username = this.loginForm.username;
+                            let password = this.loginForm.password;
+
+                            axios.post("http://localhost:9096/login", {
+                                username, password
+                            }).then(function (response) {
+                                console.log(response);
+                                if (response.data?.code) {
+                                    console.log(response.data.code);
+                                    console.log(response.data.msg);
+                                    console.log(response.data.data);
+                                    // alert(response.data.data);
+                                }
+                                this._responseMsg(response.data.data, 'success');
+                            }).catch(function (error) {
+                                console.log(error);
+                            });
+                        } else {
+                            console.log('valid param fail');
+                        }
+                    })
                 },
                 /**
-                 * 校验规则
+                 * 重置参数
+                 * @private
                  */
-                rules: {
-                    username: [
-                        {required: true, message: '请输入用户名!', trigger: 'blur'},
-                        {min: 4, max: 12, message: '输入字符长度在4~12之间!', trigger: 'blur'}
-                    ],
-                    password: [
-                        {required: true, message: '请输入用户名!', trigger: 'blur'},
-                        {min: 4, max: 12, message: '输入字符长度在4~12之间!', trigger: 'blur'}
-                    ]
+                _reset(formName) {
+                    this.$refs[formName].resetFields();
+                },
+
+                _responseMsg(msg, type) {
+                    this.$message({
+                        message: msg,
+                        type: type
+                    });
                 }
+
+                // _login() {
+                //     console.log('input username is : ' + this.username + ' input password is : ' + this.password);
+                //     const authentication = {
+                //         username: this.username,
+                //         password: this.password
+                //     }
+                //     console.log(authentication);
+                //     let stringify = JSON.stringify(authentication);
+                //     console.log(stringify);
+                //
+                //     let xmlHttpRequest = new XMLHttpRequest();
+                //     xmlHttpRequest.open("POST", "/login", true);
+                //     xmlHttpRequest.setRequestHeader("Content-Type", "application/json");
+                //     xmlHttpRequest.send(stringify);
+                //     xmlHttpRequest.onreadystatechange = function () {
+                //         if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
+                //             console.log('async request success');
+                //             let responseText = xmlHttpRequest.responseText;
+                //             console.log('result data is : ' + responseText);
+                //             let data = JSON.parse(responseText);
+                //             console.log('data is : ' + data);
+                //             alert(data.msg);
+                //         }
+                //     }
+                // },
             }
-        },
-        methods: {
-            /**
-             * 登录
-             * @private
-             */
-            _submitForm(formName) {
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {
-                        console.log('username is : ' + this.loginForm.username + ' password is : ' + this.loginForm.password);
-                        let username = this.loginForm.username;
-                        let password = this.loginForm.password;
-                        axios.post("http://localhost:9096/login", {
-                            username, password
-                        }).then(function (response) {
-                            console.log(response);
-                            if (response.data?.code) {
-                                console.log(response.data.code);
-                                console.log(response.data.msg);
-                                console.log(response.data.data);
-                                // alert(response.data.data);
-                            }
-                            this.$message({
-                                message: response.data.data,
-                                type: 'success'
-                            });
-                        }).catch(function (error) {
-                            console.log(error);
-                        });
-                    } else {
-                        console.log('valid param fail');
-                    }
-                })
-            },
-            /**
-             * 重置参数
-             * @private
-             */
-            _reset(formName) {
-                this.$refs[formName].resetFields();
-            },
-
-            _responseMsg() {
-
-            }
-
-            // _login() {
-            //     console.log('input username is : ' + this.username + ' input password is : ' + this.password);
-            //     const authentication = {
-            //         username: this.username,
-            //         password: this.password
-            //     }
-            //     console.log(authentication);
-            //     let stringify = JSON.stringify(authentication);
-            //     console.log(stringify);
-            //
-            //     let xmlHttpRequest = new XMLHttpRequest();
-            //     xmlHttpRequest.open("POST", "/login", true);
-            //     xmlHttpRequest.setRequestHeader("Content-Type", "application/json");
-            //     xmlHttpRequest.send(stringify);
-            //     xmlHttpRequest.onreadystatechange = function () {
-            //         if (xmlHttpRequest.readyState === 4 && xmlHttpRequest.status === 200) {
-            //             console.log('async request success');
-            //             let responseText = xmlHttpRequest.responseText;
-            //             console.log('result data is : ' + responseText);
-            //             let data = JSON.parse(responseText);
-            //             console.log('data is : ' + data);
-            //             alert(data.msg);
-            //         }
-            //     }
-            // },
-        }
-    });
+        });
 </script>
 </html>
