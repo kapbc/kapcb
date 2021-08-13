@@ -110,6 +110,11 @@
             <artifactId>java-jwt</artifactId>
             <version>3.4.1</version>
         </dependency>
+                     <dependency>
+            <groupId>io.vavr</groupId>
+            <artifactId>vavr-jackson</artifactId>
+            <version>1.0.0-alpha-3</version>
+        </dependency>
     </dependencies>
 
     <build>
