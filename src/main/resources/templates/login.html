@@ -126,11 +126,13 @@
                                     this.showMsg(res.data.msg, 'success');
                                     return;
                                 }
-                                this.showMsg(res.data.msg, 'warning')
-                            }).catch(function (error) {
+                                this.showMsg(res.data.msg, 'warning');
+                            }).catch((error) => {
+                                this.showMsg(error, 'warning');
                                 console.log('error message is : ' + error);
                             });
                         } else {
+                            this.showMsg('Please Check Your Username Or Password!')
                             console.log('valid param fail');
                         }
                     })
