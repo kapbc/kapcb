@@ -53,7 +53,8 @@
 <el-container id="login">
     <el-header width="200px">Header</el-header>
     <el-main>
-        <el-form :model="loginForm" :rules="rules" ref="loginForm" status-icon label-width="100px" size="medium" style="width: 500px;margin:0 auto">
+        <el-form :model="loginForm" :rules="rules" ref="loginForm" status-icon label-width="100px" size="medium"
+                 style="width: 500px;margin:0 auto">
             <el-form-item label="用户名" prop="username">
                 <el-input type="text" autocomplete="off" v-model="loginForm.username"></el-input>
             </el-form-item>
@@ -119,8 +120,7 @@
                             let username = this.loginForm.username;
                             let password = this.loginForm.password;
 
-                            let data = JSON.stringify({username, password});
-                            axios.post("http://localhost:9096/login", {data}).then((res) => {
+                            axios.post("http://localhost:9096/login", {username, password}).then((res) => {
                                 console.log(res);
                                 if (res.data?.code) {
                                     this.showMsg(res.data.msg, 'success');
