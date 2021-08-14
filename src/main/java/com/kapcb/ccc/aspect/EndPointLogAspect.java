@@ -6,8 +6,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 
 /**
@@ -23,6 +26,12 @@ import java.time.LocalDateTime;
 @Aspect
 @Component
 public class EndPointLogAspect {
+
+    @Resource
+    private Environment environment;
+    @Resource
+    private HttpServletRequest request;
+
 
     @Around("(@within(org.springframework.stereotype.Controller)) || @within(org.springframework.web.bind.annotation.RestController) && execution(public * com.kapcb.ccc..*.controller..*.*(..))")
     public Object EndPointLog(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {

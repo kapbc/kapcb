@@ -3,6 +3,7 @@ package com.kapcb.ccc.configure;
 import cn.hutool.http.ContentType;
 import com.alibaba.fastjson.JSON;
 import com.kapcb.ccc.filter.CustomAuthenticationFilter;
+import com.kapcb.ccc.filter.JwtAuthenticationFilter;
 import com.kapcb.ccc.handler.LoginAuthenticationFailureHandler;
 import com.kapcb.ccc.handler.LoginAuthenticationSuccessHandler;
 import io.vavr.collection.HashMap;
@@ -13,6 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
@@ -37,6 +39,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final LoginAuthenticationSuccessHandler loginAuthenticationSuccessHandler;
     private final LoginAuthenticationFailureHandler loginAuthenticationFailureHandler;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     /**
      * security configure
@@ -46,7 +49,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.cors().and().authorizeRequests()
+        // 使用JWT 关闭token
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .cors().and().authorizeRequests()
                 .antMatchers("/static/**")
                 .permitAll()
                 .anyRequest().authenticated()
@@ -84,6 +90,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 }, new AntPathRequestMatcher("/logout1", "POST"))
                 .and().csrf().disable();
 
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
         // 用重写的Filter替换掉原有的UsernamePasswordAuthenticationFilter
         http.addFilterAt(customAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
