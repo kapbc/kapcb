@@ -154,16 +154,16 @@ public class JwtAuthenticationUtil {
         return null;
     }
 
-    public static void main(String[] args) {
-        Map<String, Object> claims = new HashMap<>(4);
-        claims.put("role", Arrays.asList("admin", "user", "boss"));
-        claims.put("userId", 1000000000L);
-        String token = JwtAuthenticationUtil.generateToken("Mike", 1000000000L, claims);
-        System.out.println("token = " + token);
-
-        String subject = JwtAuthenticationUtil.parseToken(token);
-        System.out.println("subject = " + subject);
-        Map<String, Object> claims1 = JwtAuthenticationUtil.getClaims(token);
-        System.out.println("claims1 = " + claims1);
-    }
+//    public static void main(String[] args) {
+//        Map<String, Object> claims = new HashMap<>(4);
+//        claims.put("role", Arrays.asList("admin", "user", "boss"));
+//        claims.put("userId", 1000000000L);
+//        String token = JwtAuthenticationUtil.generateToken("Mike", 1000000000L, claims);
+//        System.out.println("token = " + token);
+//
+//        String subject = JwtAuthenticationUtil.parseToken(token);
+//        System.out.println("subject = " + subject);
+//        Map<String, Object> claims1 = JwtAuthenticationUtil.getClaims(token);
+//        System.out.println("claims1 = " + claims1);
+//    }
 }
