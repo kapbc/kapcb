@@ -41,10 +41,10 @@ public class RedisService {
      * @param redis databases index
      */
     @SneakyThrows(Exception.class)
-    private synchronized void select(int index) {
+    private synchronized void select(Integer index) {
         if (Objects.nonNull(index) && (index >= 0) && (index <= 15)) {
             LettuceConnectionFactory connectionFactory = (LettuceConnectionFactory) redisTemplate.getConnectionFactory();
-            if (connectionFactory != null) {
+            if (Objects.nonNull(connectionFactory)) {
                 connectionFactory.setDatabase(index);
                 redisTemplate.setConnectionFactory(connectionFactory);
                 connectionFactory.afterPropertiesSet();
