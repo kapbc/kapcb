@@ -2,16 +2,20 @@ package com.kapcb.ccc.aspect;
 
 import cn.hutool.core.date.DateUtil;
 import com.kapcb.ccc.common.constants.DatePatternPool;
+import com.kapcb.ccc.enums.StringPool;
+import com.kapcb.ccc.properties.EndPointAutoConfigureProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * <a>Title: EndPointLogAspect </a>
@@ -24,37 +28,60 @@ import java.time.LocalDateTime;
  */
 @Slf4j
 @Aspect
-@Component
+@Configuration
+@ConditionalOnProperty(prefix = "kapcb.end.point", name = "enable", havingValue = "true")
 public class EndPointLogAspect {
 
     @Resource
     private Environment environment;
     @Resource
     private HttpServletRequest request;
-
+    @Resource
+    private EndPointAutoConfigureProperties endPointAutoConfigureProperties;
 
     @Around("(@within(org.springframework.stereotype.Controller)) || @within(org.springframework.web.bind.annotation.RestController) && execution(public * com.kapcb.ccc..*.controller..*.*(..))")
     public Object EndPointLog(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-        String className = proceedingJoinPoint.getTarget().getClass().getName();
-        String methodName = proceedingJoinPoint.getSignature().getName();
         LocalDateTime now = LocalDateTime.now();
         long startTime = System.currentTimeMillis();
         Object returnValue = null;
-        Exception exception;
+        Exception exception = null;
         try {
             returnValue = proceedingJoinPoint.proceed();
             return returnValue;
         } catch (Exception e) {
+            exception = e;
             throw e;
         } finally {
-            long costTime = System.currentTimeMillis() - startTime;
-            log.info("[----------------------------------------------------------------------]");
-            log.info("process cost time : {}", costTime);
-            log.info("process class name : {}", className);
-            log.info("process method name : {}", methodName);
-            log.info("current local date time : {}", DateUtil.format(now, DatePatternPool.NORM_DATETIME_PATTERN));
-            log.info("[----------------------------------------------------------------------]");
+            log.info(StringPool.END_POINT_LOG_SPILT_LINE.value());
+            if (endPointAutoConfigureProperties.isRequestCostTime()) {
+                log.info(StringPool.END_POINT_LOG_COST_TIME.value(), System.currentTimeMillis() - startTime);
+            }
+            if (endPointAutoConfigureProperties.isApplicationName()) {
+                log.info(StringPool.END_POINT_LOG_SERVER_NAME.value(), environment.getProperty(StringPool.SERVER_APPLICATION_NAME.value()));
+            }
+            if (endPointAutoConfigureProperties.isRequestUri()) {
+                log.info(StringPool.END_POINT_LOG_REQUEST_URI.value(), request.getRequestURI());
+            }
+            if (endPointAutoConfigureProperties.isRequestUrl()) {
+                log.info(StringPool.END_POINT_LOG_REQUEST_URL.value(), request.getRequestURL());
+            }
+            if (endPointAutoConfigureProperties.isMethodName()) {
+                log.info(StringPool.END_POINT_LOG_METHOD_NAME.value(), proceedingJoinPoint.getSignature().getName());
+            }
+            if (endPointAutoConfigureProperties.isClassName()) {
+                log.info(StringPool.END_POINT_LOG_CLASS_NAME.value(), proceedingJoinPoint.getTarget().getClass().getName());
+            }
+            if (endPointAutoConfigureProperties.isRequestTime()) {
+                log.info(StringPool.END_POINT_LOG_REQUEST_TIME.value(), DateUtil.format(now, DatePatternPool.NORM_DATETIME_PATTERN));
+            }
+            if (Objects.isNull(exception) && endPointAutoConfigureProperties.isReturnValue()) {
+                log.info(StringPool.END_POINT_LOG_RETURN_VALUE.value(), returnValue);
+            }
+            if (Objects.nonNull(exception) && endPointAutoConfigureProperties.isExceptionMessage()) {
+                log.error(StringPool.END_POINT_LOG_ERROR_MESSAGE.value(), exception.getMessage());
+            }
+            log.info(StringPool.END_POINT_LOG_SPILT_LINE.value());
         }
     }
-    
+
 }

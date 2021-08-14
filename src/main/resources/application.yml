@@ -48,4 +48,16 @@ logging:
   config: classpath:logback.xml
   level:
     root: info
-
+kapcb:
+  end:
+    point:
+      enable: true
+      exception-message: true
+      application-name: true
+      class-name: true
+      method-name: true
+      request-cost-time: true
+      request-time: true
+      request-uri: true
+      request-url: true
+      return-value: true

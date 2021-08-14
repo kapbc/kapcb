@@ -1,5 +1,6 @@
 package com.kapcb.ccc.filter;
 
+import com.kapcb.ccc.enums.StringPool;
 import com.kapcb.ccc.utils.AccessAddressUtil;
 import com.kapcb.ccc.utils.JwtAuthenticationUtil;
 import lombok.RequiredArgsConstructor;
@@ -29,20 +30,17 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    public static final String AUTHORIZATION = "Authorization";
-    public static final String BEARER = "Bearer ";
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         // 获取请求头的token
-        String authorization = request.getHeader(AUTHORIZATION);
+        String authorization = request.getHeader(StringPool.HTTP_REQUEST_AUTHORIZATION.value());
         log.info("::::access authorization is : {}", authorization);
         String ipAddress = AccessAddressUtil.getIpAddress(request);
         log.info("::::ip address is : {}", ipAddress);
 
-        if (StringUtils.isNotBlank(authorization) && authorization.startsWith(BEARER)) {
+        if (StringUtils.isNotBlank(authorization) && authorization.startsWith(StringPool.AUTHORIZATION_BEARER.value())) {
             // 从Authorization获取token
-            String accessToken = authorization.substring(BEARER.length());
+            String accessToken = authorization.substring(StringPool.AUTHORIZATION_BEARER.value().length());
             log.info("::::access token is : {}", accessToken);
             if (StringUtils.isNotBlank(accessToken)) {
                 String username = JwtAuthenticationUtil.parseToken(accessToken);

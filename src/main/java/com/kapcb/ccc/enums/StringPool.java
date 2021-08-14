@@ -51,6 +51,32 @@ public enum StringPool {
      */
     SERVER_APPLICATION_NAME("spring.application.name", "获取服务名称"),
     SERVER_PORT("server.port", "获取服务端口号"),
+
+    /**
+     * Http Servlet Request
+     */
+    HTTP_REQUEST_UN_KNOWN("unknown", "未知"),
+    HTTP_REQUEST_X_FOR_WARDED_FOR("x-forwarded-for", "获取ip地址请求中的key"),
+    HTTP_REQUEST_PROXY_CLIENT_IP("Proxy-Client-IP", "获取ip地址请求中的key"),
+    HTTP_REQUEST_WL_PROXY_CLIENT_IP("WL-Proxy-Client-IP", "获取ip地址请求中的key"),
+    HTTP_REQUEST_HTTP_CLIENT_IP("HTTP_CLIENT_IP", "获取ip地址请求中的key"),
+    HTTP_REQUEST_HTTP_X_FORWARDED_FOR("HTTP_X_FORWARDED_FOR", "获取ip地址请求中的key"),
+    HTTP_REQUEST_AUTHORIZATION("Authorization", "http请求头中的Authorization"),
+    AUTHORIZATION_BEARER("Bearer ", "Bearer "),
+
+    /**
+     * End Point Log Aspect
+     */
+    END_POINT_LOG_SPILT_LINE("[----------------------------------------------------------------------]", "spilt line"),
+    END_POINT_LOG_COST_TIME("request process cost time : {}", "request process cost time"),
+    END_POINT_LOG_SERVER_NAME("server name is : {}", "server name"),
+    END_POINT_LOG_REQUEST_URI("request uri is : {}", "request uri"),
+    END_POINT_LOG_REQUEST_URL("request url is : {}", "request url"),
+    END_POINT_LOG_METHOD_NAME("request process method name : {}", "method name"),
+    END_POINT_LOG_CLASS_NAME("request process class name : {}", "class name"),
+    END_POINT_LOG_REQUEST_TIME("request time : {}", "request time"),
+    END_POINT_LOG_RETURN_VALUE("request return value is : {}", "return value"),
+    END_POINT_LOG_ERROR_MESSAGE("handler request error, error message is : {}", "error message"),
     ;
 
     private String value;

@@ -25,9 +25,9 @@ public class KapcbUtil {
 
     public static void serverStartUpBanner(Environment environment) {
         String banner = "\n----------------------------------------------------------------------------------\n" +
-                "server start success, current time is : " + DateUtil.format(LocalDateTime.now(), DatePatternPool.NORM_DATETIME_PATTERN) + "\n" +
                 "server name : " + environment.getProperty(StringPool.SERVER_APPLICATION_NAME.value()) + "\n" +
                 "server port : " + environment.getProperty(StringPool.SERVER_PORT.value()) + "\n" +
+                "server start success, current time is : " + DateUtil.format(LocalDateTime.now(), DatePatternPool.NORM_DATETIME_PATTERN) + "\n" +
                 "----------------------------------------------------------------------------------";
         log.info(banner);
     }
