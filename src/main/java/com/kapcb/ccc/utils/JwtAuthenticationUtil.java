@@ -1,5 +1,6 @@
 package com.kapcb.ccc.utils;
 
+import com.google.common.collect.Maps;
 import com.kapcb.ccc.enums.StringPool;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
@@ -17,7 +18,9 @@ import java.io.InputStream;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
@@ -60,6 +63,14 @@ public class JwtAuthenticationUtil {
         }
     }
 
+    /**
+     * generate jwt token
+     *
+     * @param subject String
+     * @param ttl     Long
+     * @param claims  Map<String, Object>
+     * @return String
+     */
     @NonNull
     public static String generateToken(@NonNull String subject, @NonNull Long ttl, @Nullable Map<String, Object> claims) {
         long currentTimeMillis = System.currentTimeMillis();
@@ -80,6 +91,12 @@ public class JwtAuthenticationUtil {
         return StringPool.EMPTY_STRING.value();
     }
 
+    /**
+     * parse jwt token
+     *
+     * @param token String
+     * @return String
+     */
     @NonNull
     public static String parseToken(@NonNull String token) {
         String subject = StringPool.EMPTY_STRING.value();
@@ -89,9 +106,34 @@ public class JwtAuthenticationUtil {
                 subject = tokenClaims.getSubject();
             }
         } catch (Exception e) {
-            log.error("::::parse token error, error message is {}", e.getMessage());
+            log.error("::::parse token error, error message is : {}", e.getMessage());
         }
         return subject;
+    }
+
+    /**
+     * get claims from jwt token
+     *
+     * @param token String
+     * @return Map<String, Object>
+     */
+    @NonNull
+    public static Map<String, Object> getClaims(@NonNull String token) {
+        Map<String, Object> claims = Maps.newHashMap();
+        try {
+            Claims tokenClaims = getTokenClaims(token);
+            if (Objects.nonNull(tokenClaims)) {
+                claims = tokenClaims;
+            }
+        } catch (Exception e) {
+            log.error("::::get claims error, error message is : {}", e.getMessage());
+        }
+        return claims;
+    }
+
+    public static boolean expired(@NonNull Date expireDate) {
+        log.info("::::expire date is : {}", expireDate);
+        return expireDate.after(new Date());
     }
 
     /**
@@ -110,5 +152,18 @@ public class JwtAuthenticationUtil {
                     .getBody();
         }
         return null;
+    }
+
+    public static void main(String[] args) {
+        Map<String, Object> claims = new HashMap<>(4);
+        claims.put("role", Arrays.asList("admin", "user", "boss"));
+        claims.put("userId", 1000000000L);
+        String token = JwtAuthenticationUtil.generateToken("Mike", 1000000000L, claims);
+        System.out.println("token = " + token);
+
+        String subject = JwtAuthenticationUtil.parseToken(token);
+        System.out.println("subject = " + subject);
+        Map<String, Object> claims1 = JwtAuthenticationUtil.getClaims(token);
+        System.out.println("claims1 = " + claims1);
     }
 }
