@@ -1,4 +1,4 @@
-package com.kapcb.ccc.common.util;
+package com.kapcb.ccc.utils;
 
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;

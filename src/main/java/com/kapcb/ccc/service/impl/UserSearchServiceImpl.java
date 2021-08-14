@@ -1,7 +1,7 @@
 package com.kapcb.ccc.service.impl;
 
 import cn.hutool.core.util.PageUtil;
-import com.kapcb.ccc.common.util.OrikaUtil;
+import com.kapcb.ccc.utils.OrikaUtil;
 import com.kapcb.ccc.model.base.BasePageResult;
 import com.kapcb.ccc.model.dto.user.req.UserListRequestDTO;
 import com.kapcb.ccc.model.index.UserIndex;

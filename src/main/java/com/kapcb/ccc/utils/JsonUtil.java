@@ -1,4 +1,4 @@
-package com.kapcb.ccc.common.util;
+package com.kapcb.ccc.utils;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -30,7 +30,7 @@ import java.util.Objects;
 @UtilityClass
 public class JsonUtil {
 
-    private static final int INITIAL_CAPACITY = 16;
+    private static final int INITIAL_CAPACITY = 6;
     private static final String DEFAULT_JSON_VALUE = "{}";
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 

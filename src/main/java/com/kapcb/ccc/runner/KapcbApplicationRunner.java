@@ -1,6 +1,6 @@
 package com.kapcb.ccc.runner;
 
-import com.kapcb.ccc.common.util.KapcbUtil;
+import com.kapcb.ccc.utils.KapcbUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;

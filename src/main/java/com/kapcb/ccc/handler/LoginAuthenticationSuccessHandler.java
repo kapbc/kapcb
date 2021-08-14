@@ -2,8 +2,11 @@ package com.kapcb.ccc.handler;
 
 import cn.hutool.http.ContentType;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kapcb.ccc.enums.StringPool;
+import com.kapcb.ccc.utils.JwtAuthenticationUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
@@ -29,9 +32,11 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        String accessToken = JwtAuthenticationUtil.generateToken(userDetails.getUsername(), 100000000000L, null);
         httpServletResponse.setContentType(ContentType.JSON.toString());
         Map<String, Object> resultMap = new HashMap<>(2);
-        resultMap.put("data", "kapcb login!");
+        resultMap.put("data", StringPool.AUTHORIZATION_BEARER.value() + accessToken);
         resultMap.put("msg", "login success!");
         resultMap.put("code", "200");
         ObjectMapper objectMapper = new ObjectMapper();

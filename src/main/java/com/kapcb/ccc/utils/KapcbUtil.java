@@ -1,4 +1,4 @@
-package com.kapcb.ccc.common.util;
+package com.kapcb.ccc.utils;
 
 import cn.hutool.core.date.DateUtil;
 import com.kapcb.ccc.common.constants.DatePatternPool;
