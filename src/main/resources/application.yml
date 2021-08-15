@@ -26,7 +26,7 @@ spring:
       auto-commit: true
       max-lifetime: 1800000
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localshot:3306/febs_base?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
+    url: jdbc:mysql://localshot:3306/kapcb?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
     username: root
     password: 123456
 

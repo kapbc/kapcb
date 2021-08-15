@@ -125,7 +125,7 @@
                                 if (res.data?.code && res.data.code === "200") {
                                     localStorage.setItem('Authentication', res.data.data);
                                     axios.get("http://localhost:9096/login", {
-                                        
+
                                     }).then((res) => {
 
                                     }).catch((error) => {

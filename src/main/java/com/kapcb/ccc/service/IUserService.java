@@ -18,5 +18,9 @@ public interface IUserService extends IService<UserPO> {
 
     List<UserPO> getStoreUserInfoList(Long storeId);
 
-    UserPO getUserByUsername(String email);
+    UserPO getUserByEmail(String email);
+
+    UserPO getUserByUsername(String username);
+
+    UserPO getUserByTelephone(String phoneNumber);
 }

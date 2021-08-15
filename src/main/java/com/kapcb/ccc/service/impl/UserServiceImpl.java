@@ -58,7 +58,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
     }
 
     @Override
-    public UserPO getUserByUsername(@NonNull String email) {
-        return this.baseMapper.selectOne(new LambdaQueryWrapper<UserPO>().eq(UserPO::getEmail, email));
+    public UserPO getUserByEmail(String email) {
+        return this.baseMapper.selectOne(new LambdaQueryWrapper<UserPO>().eq(UserPO::getEmail, email).orderByDesc(UserPO::getCreateDate).last("LIMIT 1"));
+    }
+
+    @Override
+    public UserPO getUserByUsername(@NonNull String username) {
+        return this.baseMapper.selectOne(new LambdaQueryWrapper<UserPO>().eq(UserPO::getNickName, username).orderByDesc(UserPO::getCreateDate).last("LIMIT 1"));
+    }
+
+    @Override
+    public UserPO getUserByTelephone(String phoneNumber) {
+        return this.baseMapper.selectOne(new LambdaQueryWrapper<UserPO>().eq(UserPO::getTelephoneNumber, phoneNumber).orderByDesc(UserPO::getCreateDate).last("LIMIT 1"));
     }
 }

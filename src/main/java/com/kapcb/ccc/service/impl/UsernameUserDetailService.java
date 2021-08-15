@@ -1,5 +1,6 @@
 package com.kapcb.ccc.service.impl;
 
+import com.kapcb.ccc.model.po.UserPO;
 import com.kapcb.ccc.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <a>Title: UsernameUserDetailService </a>
@@ -32,7 +34,12 @@ public class UsernameUserDetailService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserPO userByUsername = userService.getUserByUsername(username);
+        log.info("user by username is : {}", userByUsername);
+        if (Objects.isNull(userByUsername)) {
+            throw new UsernameNotFoundException("username or password error!");
+        }
         List<GrantedAuthority> boss = AuthorityUtils.commaSeparatedStringToAuthorityList("boss");
-        return new User("kapcb", new BCryptPasswordEncoder().encode("123456"), boss);
+        return new User(userByUsername.getNickName(), new BCryptPasswordEncoder().encode(userByUsername.getPassword()), boss);
     }
 }
