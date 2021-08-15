@@ -12,10 +12,10 @@ spring:
       read-timeout: 30s
       connection-timeout: 5s
 
-  security:
-    user:
-      name: kapcb
-      password: 123456
+#  security:
+#    user:
+#      name: kapcb
+#      password: 123456
 
   datasource:
     hikari:

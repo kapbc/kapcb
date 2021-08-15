@@ -123,7 +123,15 @@
                             axios.post("http://localhost:9096/login", {username, password}).then((res) => {
                                 console.log(res);
                                 if (res.data?.code && res.data.code === "200") {
-                                    window.localStorage.setItem('Authentication', res.data.data);
+                                    localStorage.setItem('Authentication', res.data.data);
+                                    axios.get("http://localhost:9096/login", {
+                                        
+                                    }).then((res) => {
+
+                                    }).catch((error) => {
+
+                                    });
+
                                     this.showMsg(res.data.msg, 'success');
                                     return;
                                 }

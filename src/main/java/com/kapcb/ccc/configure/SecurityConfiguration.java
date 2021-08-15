@@ -6,15 +6,19 @@ import com.kapcb.ccc.filter.CustomAuthenticationFilter;
 import com.kapcb.ccc.filter.JwtAuthenticationFilter;
 import com.kapcb.ccc.handler.LoginAuthenticationFailureHandler;
 import com.kapcb.ccc.handler.LoginAuthenticationSuccessHandler;
+import com.kapcb.ccc.service.impl.UsernameUserDetailService;
 import io.vavr.collection.HashMap;
 import io.vavr.collection.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.security.web.util.matcher.OrRequestMatcher;
@@ -37,9 +41,10 @@ import org.springframework.web.filter.CorsFilter;
 @RequiredArgsConstructor
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final UsernameUserDetailService usernameUserDetailService;
     private final LoginAuthenticationSuccessHandler loginAuthenticationSuccessHandler;
     private final LoginAuthenticationFailureHandler loginAuthenticationFailureHandler;
-    private final JwtAuthenticationFilter jwtAuthenticationFilter;
 
     /**
      * security configure
@@ -67,6 +72,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
+//                .logoutSuccessHandler()
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
                 .clearAuthentication(true)
@@ -106,7 +112,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         CustomAuthenticationFilter customAuthenticationFilter = new CustomAuthenticationFilter();
         customAuthenticationFilter.setAuthenticationSuccessHandler(loginAuthenticationSuccessHandler);
         customAuthenticationFilter.setAuthenticationFailureHandler(loginAuthenticationFailureHandler);
-        // 这句很关键，重用WebSecurityConfigurerAdapter配置的AuthenticationManager，不然要自己组装AuthenticationManager
+        // 重用WebSecurityConfigurerAdapter配置的AuthenticationManager，不然要自己组装AuthenticationManager
         customAuthenticationFilter.setAuthenticationManager(authenticationManager());
         return customAuthenticationFilter;
     }
@@ -129,7 +135,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return new CorsFilter(source);
     }
 
-//    @Bean
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(usernameUserDetailService).passwordEncoder(passwordEncoder());
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    //    @Bean
 //    public SimpleUrlAuthenticationFailureHandler failureHandler() {
 //        SimpleUrlAuthenticationFailureHandler simpleUrlAuthenticationFailureHandler = new SimpleUrlAuthenticationFailureHandler();
 //        simpleUrlAuthenticationFailureHandler.setDefaultFailureUrl("/login.html");
