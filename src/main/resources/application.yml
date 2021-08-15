@@ -25,10 +25,24 @@ spring:
       connection-timeout: 20000 # 连接超时时间
       auto-commit: true
       max-lifetime: 1800000
+      connection-test-query: select 1
+      pool-name: KapcbHikariCP
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localshot:3306/kapcb?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
+    url: jdbc:mysql://localhost:3306/kapcb?useUnicode=true&characterEncoding=UTF-8&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=GMT%2b8
     username: root
     password: 123456
+#  redis:
+#    host: 192.168.80.129
+#    database: 0
+#    port: 6379
+#    password: ccc
+#    lettuce:
+#      pool:
+#        min-idle: 8
+#        max-idle: 500
+#        max-active: 2000
+#        max-wait: 10000
+#      shutdown-timeout: 5000
 
 mybatis-plus:
   configuration:
