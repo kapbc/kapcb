@@ -1,10 +1,11 @@
 package com.kapcb.ccc.service.impl;
 
-import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.lang.NonNull;
 import org.springframework.lang.Nullable;
@@ -27,7 +28,7 @@ import java.util.concurrent.TimeUnit;
  */
 @Slf4j
 @SuppressWarnings("all")
-public class RedisService {
+public class RedisService implements IRedisService{
 
     private final RedisTemplate<String, Object> redisTemplate;
 
