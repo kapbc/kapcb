@@ -5,12 +5,13 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * <a>Title: IRedisService </a>
- * <a>Author: Mike Chen <a>
+ * <a>Title: RedisService </a>
+ * <a>Author: Kapcb <a>
  * <a>Description:  <a>
  *
- * @author Mike Chen
- * @date 2021/8/19 8:21
+ * @author Kapcb
+ * @version 1.0.0
+ * @date 2021/7/3 14:29
  */
 public interface IRedisService {
 
