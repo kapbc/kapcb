@@ -55,25 +55,25 @@ public class RedisService {
 
 
     /**
-     * 指定缓存失效的时间
+     * expire time
      *
      * @param key  String
      * @param time Long
-     * @return Boolean
+     * @return boolean
      */
-    public Boolean expire(@NonNull String key, @NonNull Long time, boolean selectIndex, @Nullable int index) {
+    @Override
+    public boolean expire(@NonNull String key, @NonNull Long time) {
+        boolean result = false;
+        if (time <= 0) {
+            log.error("expire time : {} for key : {}, can not be less than zero", time, key);
+            return result;
+        }
         try {
-            if (selectIndex) {
-                select(index);
-            }
-            if (time > 0) {
-                redisTemplate.expire(key, time, TimeUnit.SECONDS);
-            }
-            return true;
+            result = redisTemplate.expire(key, time, TimeUnit.SECONDS);
         } catch (Exception e) {
             log.error("redis set expire time for key : " + key + " error, the exception is : " + e.getMessage());
-            return false;
         }
+        return result;
     }
 
     /**
@@ -84,43 +84,42 @@ public class RedisService {
      * @param key String
      * @return Long
      */
-    @SneakyThrows
-    public Long getExpire(@NonNull String key, boolean selectIndex, @Nullable int index) {
-        if (selectIndex) {
-            select(index);
+    @Override
+    public long getExpire(@NonNull String key) {
+        long expireTime = -1L;
+        try {
+            expireTime = StringUtils.isBlank(key) ? -1L : redisTemplate.getExpire(Objects.requireNonNull(key), TimeUnit.SECONDS);
+        } catch (Exception e) {
+            log.error("redis ops expire for key : {} error, error message is : {}", key, e.getMessage());
         }
-        return redisTemplate.getExpire(Objects.requireNonNull(key), TimeUnit.SECONDS);
+        return expireTime;
     }
 
     /**
-     * 判断key是否存在
+     * judgement whather has the value of the key
      *
      * @param key String
-     * @return Boolean
+     * @return boolean
      */
-    public Boolean hasKey(@NonNull String key, boolean selectIndex, @Nullable int index) {
+    @Override
+    public boolean hasKey(@NonNull String key) {
         try {
-            if (selectIndex) {
-                select(index);
-            }
             return redisTemplate.hasKey(key);
         } catch (Exception e) {
-            log.error("redis judgement has key error, the exception is : " + e.getMessage());
+            log.error("redis has key for key : {} error, the exception is : {}", key, e.getMessage());
             return false;
         }
     }
 
     /**
-     * 输出缓存
+     * delete redis cache
      *
-     * @param key String... 可以是一个值或者多个值
+     * @param key String...
      */
-    @SneakyThrows
-    public void delete(boolean selectIndex, @Nullable int index, @Nullable String... key) {
-        if (selectIndex) {
-            select(index);
-        }
-        if (Objects.nonNull(key) && key.length > 0) {
+    @Override
+    @Deprecated
+    public void delete(String... key) {
+        if (key != null && key.length > 0) {
             if (key.length == 1) {
                 redisTemplate.delete(key[0]);
                 log.warn("delete key : " + key[0] + " in redis success");
@@ -132,31 +131,81 @@ public class RedisService {
     }
 
     /**
-     * 普通缓存获取
+     * delete redis cache
+     *
+     * @param key String
+     */
+    @Override
+    public void delete(@NonNull String key) {
+        if (StringUtils.isNotBlank(key)) {
+            try {
+                boolean result = redisTemplate.delete(key);
+                log.warn("delete key : {}, in redis success!", key);
+            } catch (Exception e) {
+                log.error("delete key : {} in redis error, error message is : {}", key, e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * multiple delete
+     *
+     * @param keys List<String></String>
+     */
+    @Override
+    public void multiDelete(@NonNull List<String> keys) {
+        if (CollectionUtils.isNotEmpty(keys)) {
+            try {
+                Long deleteCount = redisTemplate.delete(keys);
+                log.warn("delete key : {} in redis success, ops count is : {}", keys, deleteCount);
+            } catch (Exception e) {
+                log.error("multiple delete keys : {} in redis error, error message is : {}", keys, e.getMessage());
+            }
+        }
+    }
+
+    /**
+     * get value
      *
      * @param key String
      * @return Object
      */
-    @SneakyThrows
-    public Object get(boolean selectIndex, @Nullable int index, @NonNull String key) {
-        if (selectIndex) {
-            select(index);
+    @Override
+    @Nullable
+    public Object get(@NonNull String key) {
+        try {
+            return StringUtils.isBlank(key) ? null : redisTemplate.opsForValue().get(key);
+        } catch (Exception e) {
+            log.error("redis ops for key : {} error, error message is : {}", key, e.getMessage());
         }
-        return redisTemplate.opsForValue().get(key);
+        return null;
     }
 
     /**
-     * 普通缓存放入
+     * @param keys List<String>
+     * @return List<Object>
+     */
+    @Override
+    @Nullable
+    public List<Object> getMulti(@NonNull List<String> keys) {
+        try {
+            return CollectionUtils.isEmpty(keys) ? null : redisTemplate.opsForValue().multiGet(keys);
+        } catch (Exception e) {
+            log.error("redis ops for keys : {} error, error message is : {}", keys, e.getMessage());
+        }
+        return null;
+    }
+
+    /**
+     * set into
      *
      * @param key   String
      * @param value Object
-     * @return Boolean
+     * @return boolean
      */
-    public Boolean set(String key, Object value, boolean selectIndex, @Nullable int index) {
+    @Override
+    public boolean set(String key, Object value) {
         try {
-            if (selectIndex) {
-                select(index);
-            }
             redisTemplate.opsForValue().set(key, value);
             return true;
         } catch (Exception e) {
@@ -166,19 +215,60 @@ public class RedisService {
     }
 
     /**
-     * 普通缓存放入并设置失效时间
+     * multiple set
+     *
+     * @param keyValueMap Map<String, String>
+     * @return boolean
+     */
+    @Override
+    public boolean set(Map<String, String> keyValueMap) {
+        boolean result = false;
+        if (MapUtils.isNotEmpty(keyValueMap)) {
+            try {
+                redisTemplate.opsForValue().multiSet(keyValueMap);
+                result = true;
+            } catch (Exception e) {
+                log.error("multiple set error, error message is : {}", e.getMessage());
+            }
+        }
+        return result;
+    }
+
+    /**
+     * multiple set
+     *
+     * @param keyValueMap Map<String, List<Object>>
+     * @return boolean
+     */
+    @Override
+    public boolean multiSet(Map<String, List<Object>> keyValueMap) {
+        boolean result = false;
+        if (MapUtils.isNotEmpty(keyValueMap)) {
+            try {
+                redisTemplate.opsForValue().multiSet(keyValueMap);
+                result = true;
+            } catch (Exception e) {
+                log.error("multiple set error, error message is : {}", e.getMessage());
+            }
+        }
+        return result;
+    }
+
+    /**
+     * put the cache with expire time
      *
      * @param key   String
      * @param value Object
      * @param time  Long
-     * @return Boolean
+     * @return boolean
      */
-    public Boolean set(String key, Object value, Long time) {
+    @Override
+    public boolean set(String key, Object value, Long time) {
         try {
             if (time > 0) {
                 redisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
             } else {
-//                this.set(key, value);
+                this.set(key, value);
             }
             return true;
         } catch (Exception e) {
@@ -194,6 +284,7 @@ public class RedisService {
      * @param delta Long
      * @return Long
      */
+    @Override
     public Long increase(String key, Long delta) {
         if (delta < 0) {
             throw new RuntimeException("the delta of the increase must bigger than zero");
@@ -208,6 +299,7 @@ public class RedisService {
      * @param delta Long
      * @return Long
      */
+    @Override
     public Long decrement(String key, Long delta) {
         if (delta < 0) {
             throw new RuntimeException("the delta of the increase must bigger than zero");
@@ -222,6 +314,7 @@ public class RedisService {
      * @param item String
      * @return Object
      */
+    @Override
     public Object getHash(String key, String item) {
         return redisTemplate.opsForHash().get(key, item);
     }
@@ -232,6 +325,7 @@ public class RedisService {
      * @param key String
      * @return Map<Object, Object>
      */
+    @Override
     public Map<Object, Object> getMultipleHash(String key) {
         return redisTemplate.opsForHash().entries(key);
     }
@@ -242,9 +336,10 @@ public class RedisService {
      * @param key   String
      * @param item  String
      * @param value Object
-     * @return Boolean
+     * @return boolean
      */
-    public Boolean setHash(String key, String item, Object value) {
+    @Override
+    public boolean setHash(String key, String item, Object value) {
         try {
             redisTemplate.opsForHash().put(key, item, value);
             return true;
@@ -261,13 +356,14 @@ public class RedisService {
      * @param item  String
      * @param value Object
      * @param time  Long
-     * @return Boolean
+     * @return boolean
      */
-    public Boolean setHashWithExpireTime(String key, String item, Object value, Long time) {
+    @Override
+    public boolean setHashWithExpireTime(String key, String item, Object value, Long time) {
         try {
             redisTemplate.opsForHash().put(key, item, value);
             if (time > 0) {
-//                this.expire(key, time);
+                this.expire(key, time);
             }
             return true;
         } catch (Exception e) {
@@ -281,9 +377,10 @@ public class RedisService {
      *
      * @param key   String
      * @param value Map<String, Object>
-     * @return Boolean
+     * @return boolean
      */
-    public Boolean setMultipleHash(String key, Map<String, Object> value) {
+    @Override
+    public boolean setMultipleHash(String key, Map<String, Object> value) {
         try {
             redisTemplate.opsForHash().putAll(key, value);
             return true;
@@ -299,13 +396,14 @@ public class RedisService {
      * @param key   String
      * @param value Map<String, Object>
      * @param time  Long
-     * @return Boolean
+     * @return boolean
      */
-    public Boolean setMultipleHashWithExpireTime(String key, Map<String, Object> value, Long time) {
+    @Override
+    public boolean setMultipleHashWithExpireTime(String key, Map<String, Object> value, Long time) {
         try {
             redisTemplate.opsForHash().putAll(key, value);
             if (time > 0) {
-//                this.expire(key, time);
+                this.expire(key, time);
             }
             return true;
         } catch (Exception e) {
@@ -320,6 +418,7 @@ public class RedisService {
      * @param key  String
      * @param item Object...
      */
+    @Override
     public void deleteHash(String key, Object... item) {
         try {
             redisTemplate.opsForHash().delete(key, item);
@@ -333,9 +432,10 @@ public class RedisService {
      *
      * @param key  String
      * @param item String
-     * @return Boolean
+     * @return boolean
      */
-    public Boolean hasHashKey(String key, String item) {
+    @Override
+    public boolean hasHashKey(String key, String item) {
         try {
             return redisTemplate.opsForHash().hasKey(Objects.requireNonNull(key), Objects.requireNonNull(item));
         } catch (Exception e) {
@@ -352,6 +452,7 @@ public class RedisService {
      * @param by   Double
      * @return Double
      */
+    @Override
     public Double hashIncrease(String key, String item, Double by) {
         if (by < 0) {
             throw new RuntimeException("the hash delta of the increase must bigger than zero");
@@ -367,6 +468,7 @@ public class RedisService {
      * @param by   Double
      * @return Double
      */
+    @Override
     public Double hashDecrement(String key, String item, Double by) {
         if (by < 0) {
             throw new RuntimeException("the hash delta of the increase must bigger than zero");
@@ -380,6 +482,7 @@ public class RedisService {
      * @param key String
      * @return Set<Object>
      */
+    @Override
     public Set<Object> getSet(String key) {
         try {
             return redisTemplate.opsForSet().members(key);
@@ -394,9 +497,10 @@ public class RedisService {
      *
      * @param key   String
      * @param value Object
-     * @return Boolean
+     * @return boolean
      */
-    public Boolean hasSetKey(String key, Object value) {
+    @Override
+    public boolean hasSetKey(String key, Object value) {
         try {
             return redisTemplate.opsForSet().isMember(key, value);
         } catch (Exception e) {
@@ -413,6 +517,7 @@ public class RedisService {
      * @param values Object...
      * @return Long
      */
+    @Override
     public Long setSet(String key, Object... values) {
         try {
             return redisTemplate.opsForSet().add(key, values);
@@ -430,11 +535,12 @@ public class RedisService {
      * @param values Object...
      * @return Long
      */
+    @Override
     public Long setSetWithExpireTime(String key, Long time, Object... values) {
         try {
             Long count = redisTemplate.opsForSet().add(key, values);
             if (time > 0) {
-//                this.expire(key, time);
+                this.expire(key, time);
             }
             return count;
         } catch (Exception e) {
@@ -449,6 +555,7 @@ public class RedisService {
      * @param key String
      * @return Long
      */
+    @Override
     public Long getSetSize(String key) {
         try {
             return redisTemplate.opsForSet().size(key);
@@ -465,6 +572,7 @@ public class RedisService {
      * @param values Object...
      * @return Long
      */
+    @Override
     public Long removeSet(String key, Object... values) {
         try {
             return redisTemplate.opsForSet().remove(key, values);
@@ -480,9 +588,10 @@ public class RedisService {
      * @param key   String
      * @param start Long
      * @param end   Long
-     * @return List<Object>
+     * @return Object
      */
-    public List<Object> getList(String key, Long start, Long end) {
+    @Override
+    public Object getList(String key, Long start, Long end) {
         try {
             return redisTemplate.opsForList().range(key, start, end);
         } catch (Exception e) {
@@ -497,6 +606,7 @@ public class RedisService {
      * @param key String
      * @return Long
      */
+    @Override
     public Long getListSize(String key) {
         try {
             return redisTemplate.opsForList().size(key);
@@ -513,6 +623,7 @@ public class RedisService {
      * @param index Long
      * @return Object
      */
+    @Override
     public Object getListByIndex(String key, Long index) {
         try {
             return redisTemplate.opsForList().index(key, index);
@@ -527,9 +638,10 @@ public class RedisService {
      *
      * @param key   String
      * @param value Object
-     * @return Boolean
+     * @return boolean
      */
-    public Boolean setList(String key, Object value) {
+    @Override
+    public boolean setList(String key, Object value) {
         try {
             redisTemplate.opsForList().rightPush(key, value);
             return true;
@@ -545,13 +657,14 @@ public class RedisService {
      * @param key   String
      * @param value Object
      * @param time  Long
-     * @return Boolean
+     * @return boolean
      */
-    public Boolean setListWithExpireTime(String key, Object value, Long time) {
+    @Override
+    public boolean setListWithExpireTime(String key, Object value, Long time) {
         try {
             redisTemplate.opsForList().rightPush(key, value);
             if (time > 0) {
-//                this.expire(key, time);
+                this.expire(key, time);
             }
             return true;
         } catch (Exception e) {
@@ -565,9 +678,10 @@ public class RedisService {
      *
      * @param key   String
      * @param value List<Object>
-     * @return Boolean
+     * @return boolean
      */
-    public Boolean setList(String key, List<Object> value) {
+    @Override
+    public boolean setList(String key, List<Object> value) {
         try {
             redisTemplate.opsForList().rightPushAll(key, value);
             return true;
@@ -583,13 +697,14 @@ public class RedisService {
      * @param key   String
      * @param value List<Object>
      * @param time  Long
-     * @return Boolean
+     * @return boolean
      */
-    public Boolean setListWithExpireTime(String key, List<Object> value, Long time) {
+    @Override
+    public boolean setListWithExpireTime(String key, List<Object> value, Long time) {
         try {
             redisTemplate.opsForList().rightPushAll(key, value);
             if (time > 0) {
-//                this.expire(key, time);
+                this.expire(key, time);
             }
             return true;
         } catch (Exception e) {
@@ -604,52 +719,15 @@ public class RedisService {
      * @param key   String
      * @param index Long
      * @param value Object
-     * @return Boolean
+     * @return boolean
      */
-    public Boolean updateListByIndex(String key, Long index, Object value) {
+    @Override
+    public boolean updateListByIndex(String key, Long index, Object value) {
         try {
             redisTemplate.opsForList().set(key, index, value);
             return true;
         } catch (Exception e) {
             log.error("update list by index error, the exception is : " + e.getMessage());
-            return false;
-        }
-    }
-
-
-    /**
-     * set bit
-     *
-     * @param key    String
-     * @param offset long
-     * @param value  boolean
-     * @param index  int
-     * @return Boolean
-     */
-    public Boolean setBit(String key, long offset, boolean value, int index) {
-        try {
-            select(index);
-            return redisTemplate.opsForValue().setBit(key, offset, value);
-        } catch (Exception e) {
-            log.error("set bit fail, the error message is : " + e.getMessage());
-            return false;
-        }
-    }
-
-    /**
-     * get bit
-     *
-     * @param key    String
-     * @param offset long
-     * @param index  int
-     * @return Boolean
-     */
-    public Boolean getBit(String key, long offset, int index) {
-        try {
-            select(index);
-            return redisTemplate.opsForValue().getBit(key, offset);
-        } catch (Exception e) {
-            log.error("get bit fail, the error message is : " + e.getMessage());
             return false;
         }
     }
