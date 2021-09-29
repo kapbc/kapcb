@@ -27,7 +27,7 @@ public class ProductCategoryAnalyzeUtil {
 
     public static List<String> analyzeProductCategory() {
         List<String> productCategoryList = new ArrayList<>();
-        try (InputStream inputStream = Files.newInputStream(Paths.get("src/main/resources/product_category.xlsx"))) {
+        try (InputStream inputStream = Files.newInputStream(Paths.get("src/main/resources/doc/product_category.xlsx"))) {
             EasyExcel.read(inputStream, String.class, new AnalysisEventListener<String>() {
                 @Override
                 public void invoke(String productCategory, AnalysisContext analysisContext) {
