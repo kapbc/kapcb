@@ -47,6 +47,8 @@ public class ProductCategoryAnalyzeUtil {
     }
 
     public static void main(String[] args) {
+
         List<String> strings = analyzeProductCategory();
     }
+
 }
