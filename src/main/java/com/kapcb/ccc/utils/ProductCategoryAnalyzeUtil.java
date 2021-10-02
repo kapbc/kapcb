@@ -25,12 +25,12 @@ import java.util.List;
 @UtilityClass
 public class ProductCategoryAnalyzeUtil {
 
-    public static List<String> analyzeProductCategory() {
-        List<String> productCategoryList = new ArrayList<>();
+    public static List<CategoryAnalyze> analyzeProductCategory() {
+        List<CategoryAnalyze> productCategoryList = new ArrayList<>();
         try (InputStream inputStream = Files.newInputStream(Paths.get("src/main/resources/doc/product_category.xlsx"))) {
-            EasyExcel.read(inputStream, String.class, new AnalysisEventListener<String>() {
+            EasyExcel.read(inputStream, CategoryAnalyze.class, new AnalysisEventListener<CategoryAnalyze>() {
                 @Override
-                public void invoke(String productCategory, AnalysisContext analysisContext) {
+                public void invoke(CategoryAnalyze productCategory, AnalysisContext analysisContext) {
                     productCategoryList.add(productCategory);
                 }
 
@@ -48,7 +48,7 @@ public class ProductCategoryAnalyzeUtil {
 
     public static void main(String[] args) {
 
-        List<String> strings = analyzeProductCategory();
+        List<CategoryAnalyze> strings = analyzeProductCategory();
     }
 
 }
