@@ -28,20 +28,7 @@ public class ProductCategoryAnalyzeUtil {
     public static List<CategoryAnalyze> analyzeProductCategory() {
         List<CategoryAnalyze> productCategoryList = new ArrayList<>();
         try (InputStream inputStream = Files.newInputStream(Paths.get("src/main/resources/doc/product_category.xlsx"))) {
-            EasyExcel.read(inputStream, CategoryAnalyze.class, new AnalysisEventListener<CategoryAnalyze>() {
-                @Override
-                public void invoke(CategoryAnalyze productCategory, AnalysisContext analysisContext) {
-                    productCategoryList.add(productCategory);
-                }
-
-                @Override
-                public void doAfterAllAnalysed(AnalysisContext analysisContext) {
-
-                }
-            }).sheet().doRead();
-        } catch (Exception e) {
-            log.error("analyze product category error, error message is : {}", e.getMessage());
-        }
+            EasyExcel.read(inputStream, CategoryAnalyze.class, new PageRead
         productCategoryList.forEach(System.out::println);
         return productCategoryList;
     }

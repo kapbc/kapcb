@@ -19,13 +19,13 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CategoryAnalyze {
 
-    @ExcelProperty(value = {"category_l3"}, index = 0)
+    @ExcelProperty(index = 0)
     private String categoryL3;
 
-    @ExcelProperty(value = {"category_l2"}, index = 1)
+    @ExcelProperty(index = 1)
     private String categoryL2;
 
-    @ExcelProperty(value = {"category_l1"}, index = 2)
+    @ExcelProperty(index = 2)
     private String categoryL1;
 
 
