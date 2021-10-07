@@ -1,15 +1,12 @@
 package com.kapcb.ccc.utils;
 
-import com.alibaba.excel.EasyExcel;
-import com.alibaba.excel.context.AnalysisContext;
-import com.alibaba.excel.event.AnalysisEventListener;
+import com.alibaba.excel.EasyExcelFactory;
+import com.alibaba.excel.ExcelReader;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,16 +23,27 @@ import java.util.List;
 public class ProductCategoryAnalyzeUtil {
 
     public static List<CategoryAnalyze> analyzeProductCategory() {
-        List<CategoryAnalyze> productCategoryList = new ArrayList<>();
-        try (InputStream inputStream = Files.newInputStream(Paths.get("src/main/resources/doc/product_category.xlsx"))) {
-            EasyExcel.read(inputStream, CategoryAnalyze.class, new PageRead
-        productCategoryList.forEach(System.out::println);
-        return productCategoryList;
+        String fileName = FileUtil.getPath() + "doc/product_category.xlsx";
+
+        CategoryAnalyzeListener testDataListener = new CategoryAnalyzeListener();
+        InputStream inputStream = null;
+        try {
+            inputStream = new FileInputStream(fileName);
+        } catch (Exception e) {
+            log.error("exception message is : {}", e.getMessage());
+        }
+        ExcelReader build = EasyExcelFactory.read(inputStream, CategoryAnalyze.class, testDataListener).headRowNumber(1).build();
+        build.readAll();
+        build.finish();
+        List<CategoryAnalyze> result = testDataListener.getResult();
+        return null;
     }
 
     public static void main(String[] args) {
 
         List<CategoryAnalyze> strings = analyzeProductCategory();
+//        List<Test> test = getTest();
+
     }
 
 }

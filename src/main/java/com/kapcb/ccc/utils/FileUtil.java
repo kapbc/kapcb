@@ -24,7 +24,9 @@ public class FileUtil {
         return Thread.currentThread().getContextClassLoader().getResourceAsStream("" + filename);
     }
 
-    public static String getPath(){
-
+    public static String getPath() {
+        String path = FileUtil.class.getResource("/").getPath();
+        log.info("the path is : {}", path);
+        return path;
     }
 }
