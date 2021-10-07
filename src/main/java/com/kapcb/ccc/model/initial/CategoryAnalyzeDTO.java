@@ -1,4 +1,4 @@
-package com.kapcb.ccc.utils;
+package com.kapcb.ccc.model.initial;
 
 import com.alibaba.excel.annotation.ExcelProperty;
 import lombok.AllArgsConstructor;
@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CategoryAnalyze {
+public class CategoryAnalyzeDTO {
 
     @ExcelProperty(index = 0)
     private String categoryL3;
@@ -27,6 +27,4 @@ public class CategoryAnalyze {
 
     @ExcelProperty(index = 2)
     private String categoryL1;
-
-
 }

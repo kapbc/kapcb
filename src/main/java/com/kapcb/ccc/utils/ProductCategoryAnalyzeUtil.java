@@ -2,6 +2,7 @@ package com.kapcb.ccc.utils;
 
 import com.alibaba.excel.EasyExcelFactory;
 import com.alibaba.excel.ExcelReader;
+import com.kapcb.ccc.model.initial.CategoryAnalyzeDTO;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,7 +23,7 @@ import java.util.List;
 @UtilityClass
 public class ProductCategoryAnalyzeUtil {
 
-    public static List<CategoryAnalyze> analyzeProductCategory() {
+    public static List<CategoryAnalyzeDTO> analyzeProductCategory() {
         String fileName = FileUtil.getPath() + "doc/product_category.xlsx";
 
         CategoryAnalyzeListener testDataListener = new CategoryAnalyzeListener();
@@ -32,14 +33,14 @@ public class ProductCategoryAnalyzeUtil {
         } catch (Exception e) {
             log.error("exception message is : {}", e.getMessage());
         }
-        ExcelReader build = EasyExcelFactory.read(inputStream, CategoryAnalyze.class, testDataListener).headRowNumber(1).build();
+        ExcelReader build = EasyExcelFactory.read(inputStream, CategoryAnalyzeDTO.class, testDataListener).headRowNumber(1).build();
         build.readAll();
         build.finish();
-        List<CategoryAnalyze> result = testDataListener.getResult();
+        List<CategoryAnalyzeDTO> result = testDataListener.getResult();
         return null;
     }
 
     public static void main(String[] args) {
-        List<CategoryAnalyze> strings = analyzeProductCategory();
+        List<CategoryAnalyzeDTO> strings = analyzeProductCategory();
     }
 }

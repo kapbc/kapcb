@@ -6,6 +6,7 @@ import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.metadata.CellData;
 import com.alibaba.excel.metadata.CellExtra;
 import com.alibaba.excel.read.listener.ReadListener;
+import com.kapcb.ccc.model.initial.CategoryAnalyzeDTO;
 import lombok.extern.slf4j.Slf4j;
 
 import java.util.ArrayList;
@@ -25,12 +26,12 @@ import java.util.Map;
 //@UtilityClass
 public class EasyExcelUtil {
 
-    public static class ModelExcelReader extends AnalysisEventListener<CategoryAnalyze> {
+    public static class ModelExcelReader extends AnalysisEventListener<CategoryAnalyzeDTO> {
 
-        private List<CategoryAnalyze> analysisResult = new ArrayList<>();
+        private List<CategoryAnalyzeDTO> analysisResult = new ArrayList<>();
 
         @Override
-        public void invoke(CategoryAnalyze o, AnalysisContext analysisContext) {
+        public void invoke(CategoryAnalyzeDTO o, AnalysisContext analysisContext) {
             analysisResult.add(o);
         }
 
@@ -39,16 +40,16 @@ public class EasyExcelUtil {
             log.info("[analysed finished]");
         }
 
-        public List<CategoryAnalyze> getAnalysisResult() {
+        public List<CategoryAnalyzeDTO> getAnalysisResult() {
             return this.analysisResult;
         }
     }
 
 
     public static void main(String[] args) {
-        EasyExcel.read("src/main/resources/doc/product_category.xlsx", CategoryAnalyze.class, new ReadListener<CategoryAnalyze>() {
+        EasyExcel.read("src/main/resources/doc/product_category.xlsx", CategoryAnalyzeDTO.class, new ReadListener<CategoryAnalyzeDTO>() {
 
-            private List<CategoryAnalyze> analyzeResult = new ArrayList<>();
+            private List<CategoryAnalyzeDTO> analyzeResult = new ArrayList<>();
 
             @Override
             public void onException(Exception e, AnalysisContext analysisContext) throws Exception {
@@ -60,7 +61,7 @@ public class EasyExcelUtil {
             }
 
             @Override
-            public void invoke(CategoryAnalyze categoryAnalyze, AnalysisContext analysisContext) {
+            public void invoke(CategoryAnalyzeDTO categoryAnalyze, AnalysisContext analysisContext) {
                 log.info("categoryAnalyze : {}", categoryAnalyze);
                 analyzeResult.add(categoryAnalyze);
             }
