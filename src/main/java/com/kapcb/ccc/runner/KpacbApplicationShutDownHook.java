@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 /**
  * <a>Title: KpacbWebShutDownHook </a>
  * <a>Author: Kapcb <a>
- * <a>Description:  <a>
+ * <a>Description: KpacbApplicationShutDownHook <a>
  *
  * @author Kapcb
  * @version 1.0.0

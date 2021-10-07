@@ -40,10 +40,6 @@ public class ProductCategoryAnalyzeUtil {
     }
 
     public static void main(String[] args) {
-
         List<CategoryAnalyze> strings = analyzeProductCategory();
-//        List<Test> test = getTest();
-
     }
-
 }
