@@ -70,4 +70,5 @@ public class StoreOnlinePO implements Serializable {
     private Date createDate;
 
     private Date lastUpdateDate;
+
 }
