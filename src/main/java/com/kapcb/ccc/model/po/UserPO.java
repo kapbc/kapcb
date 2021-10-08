@@ -26,7 +26,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "kapcb.user")
+@TableName(value = "user_grp.user")
 public class UserPO implements Serializable {
 
     private static final long serialVersionUID = -3821173666664111882L;

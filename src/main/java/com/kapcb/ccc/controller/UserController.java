@@ -3,7 +3,9 @@ package com.kapcb.ccc.controller;
 import com.kapcb.ccc.model.base.BasePageResult;
 import com.kapcb.ccc.model.dto.user.req.UserListRequestDTO;
 import com.kapcb.ccc.model.index.UserIndex;
+import com.kapcb.ccc.model.po.UserPO;
 import com.kapcb.ccc.service.IUserSearchService;
+import com.kapcb.ccc.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 
 
 /**
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("user")
 public class UserController {
 
+    private final IUserService userService;
     private final IUserSearchService userSearchService;
 
     @GetMapping("sync/{storeId}")
@@ -42,4 +44,8 @@ public class UserController {
         return userSearchService.getUserList(requestDTO);
     }
 
+    @GetMapping("test/{username}")
+    public UserPO test(@PathVariable("username") String username) {
+        return userService.getUserByUsername(username);
+    }
 }

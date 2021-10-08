@@ -7,6 +7,7 @@ import com.kapcb.ccc.model.po.UserPO;
 import com.kapcb.ccc.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
@@ -64,7 +65,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
 
     @Override
     public UserPO getUserByUsername(@NonNull String username) {
-        return this.baseMapper.selectOne(new LambdaQueryWrapper<UserPO>().eq(UserPO::getNickName, username).orderByDesc(UserPO::getCreateDate).last("LIMIT 1"));
+        LambdaQueryWrapper<UserPO> wrapper = new LambdaQueryWrapper<>();
+        return this.baseMapper.selectOne(wrapper.eq(StringUtils.isNoneBlank(username), UserPO::getNickName, username));
+//        return this.baseMapper.selectOne(new LambdaQueryWrapper<UserPO>().eq(UserPO::getNickName, username).orderByDesc(UserPO::getCreateDate).last("LIMIT 1"));
     }
 
     @Override
