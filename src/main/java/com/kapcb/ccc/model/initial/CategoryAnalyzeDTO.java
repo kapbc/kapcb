@@ -27,4 +27,5 @@ public class CategoryAnalyzeDTO {
 
     @ExcelProperty(index = 2)
     private String categoryL1;
+
 }

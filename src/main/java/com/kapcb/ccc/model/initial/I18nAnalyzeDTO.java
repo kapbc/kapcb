@@ -46,4 +46,5 @@ public class I18nAnalyzeDTO implements Serializable {
 
     @ExcelProperty(index = 7)
     private String remark;
+
 }
