@@ -1,8 +1,8 @@
 package com.kapcb.ccc.filter;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kapcb.ccc.enums.StringPool;
 import com.kapcb.ccc.model.dto.user.AuthenticationDTO;
+import com.kapcb.ccc.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
@@ -41,8 +41,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
             String password = StringPool.EMPTY_STRING.value();
             // 通过流解析出json, get delete请求就没有流
             try (InputStream inputStream = request.getInputStream()) {
-                ObjectMapper objectMapper = new ObjectMapper();
-                AuthenticationDTO authentication = objectMapper.readValue(inputStream, AuthenticationDTO.class);
+                AuthenticationDTO authentication = JsonUtil.readValue(inputStream, AuthenticationDTO.class);
                 log.info("authentication params is : {}", authentication);
                 if (Objects.nonNull(authentication)) {
                     username = authentication.getUsername();

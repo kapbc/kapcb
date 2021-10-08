@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -41,6 +42,16 @@ public class JsonUtil {
         OBJECT_MAPPER.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);
     }
 
+
+    public static <T> T readValue(InputStream inputStream, Class<? extends T> clazz) {
+        T result = null;
+        try {
+            result = OBJECT_MAPPER.readValue(inputStream, clazz);
+        } catch (IOException e) {
+            log.error("json util read value error, error message is : {}", e.getMessage());
+        }
+        return result;
+    }
 
     /**
      * convert service transfer json result

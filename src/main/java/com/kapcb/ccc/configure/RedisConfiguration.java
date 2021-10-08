@@ -33,9 +33,8 @@ import org.springframework.data.redis.serializer.RedisSerializer;
 @Configuration
 @ConditionalOnProperty(prefix = "kapcb.redis", name = "enable", havingValue = "true")
 public class RedisConfiguration {
-  
-  
-      @Bean("redisTemplate")
+
+    @Bean("redisTemplate")
     public RedisTemplate<String, Object> redisTemplate(LettuceConnectionFactory lettuceConnectionFactory) {
         log.info("[:::::begin to create redis template:::]");
         lettuceConnectionFactory.setShareNativeConnection(false);

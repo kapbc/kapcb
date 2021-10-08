@@ -29,7 +29,7 @@ import org.springframework.web.filter.CorsFilter;
 /**
  * <a>Title: SecurityConfiguration </a>
  * <a>Author: Kapcb <a>
- * <a>Description:  <a>
+ * <a>Description: SecurityConfiguration <a>
  * AuthenticationFilter that supports rest login(json login) and form login.
  *
  * @author Kapcb
