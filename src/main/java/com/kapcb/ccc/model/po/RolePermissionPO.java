@@ -1,5 +1,8 @@
 package com.kapcb.ccc.model.po;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -22,16 +25,20 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-@TableName(value = "kapcb.role_permission")
+@TableName(value = "user_grp.role_permission")
 public class RolePermissionPO implements Serializable {
 
     private static final long serialVersionUID = 1311095667573626727L;
 
+    @TableId(type = IdType.AUTO, value = "permission_id")
     private Long permissionId;
 
+    @TableField(value = "role_id")
     private Long roleId;
 
+    @TableField(value = "create_date")
     private Date createDate;
 
+    @TableField(value = "create_by")
     private Long createBy;
 }
