@@ -9,7 +9,7 @@ import java.io.Serializable;
 /**
  * <a>Title: AuthenticationDTO </a>
  * <a>Author: Kapcb <a>
- * <a>Description:  <a>
+ * <a>Description: AuthenticationDTO <a>
  *
  * @author Kapcb
  * @version 1.0.0

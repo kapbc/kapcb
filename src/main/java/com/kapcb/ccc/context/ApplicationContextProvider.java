@@ -10,7 +10,7 @@ import java.util.Objects;
 /**
  * <a>Title: ApplicationContextProvider </a>
  * <a>Author: Kapcb <a>
- * <a>Description:  <a>
+ * <a>Description: ApplicationContextProvider <a>
  *
  * @author Kapcb
  * @version 1.0.0
