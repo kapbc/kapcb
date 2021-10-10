@@ -18,16 +18,14 @@ import java.io.InputStream;
 import java.security.KeyStore;
 import java.security.PrivateKey;
 import java.security.PublicKey;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 /**
  * <a>Title: JwtAuthenticationUtil </a>
  * <a>Author: Kapcb <a>
- * <a>Description:  <a>
+ * <a>Description: JwtAuthenticationUtil <a>
  *
  * @author Kapcb
  * @version 1.0.0
