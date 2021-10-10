@@ -24,12 +24,12 @@ import java.util.Set;
 public class ResultUtil {
 
     @NonNull
-    public static <T> List<T> conditionList(List<T> data) {
+    public static <T> List<T> resultList(List<T> data) {
         return CollectionUtils.isNotEmpty(data) ? data : Collections.emptyList();
     }
 
     @NonNull
-    public static <T> Set<T> conditionSet(List<T> data) {
+    public static <T> Set<T> resultSet(List<T> data) {
         return CollectionUtils.isNotEmpty(data) ? new HashSet<>(data) : Collections.emptySet();
     }
 }
