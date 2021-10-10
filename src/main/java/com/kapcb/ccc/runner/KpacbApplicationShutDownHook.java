@@ -1,5 +1,6 @@
 package com.kapcb.ccc.runner;
 
+import com.kapcb.ccc.utils.KapcbUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.event.ContextClosedEvent;
@@ -22,12 +23,7 @@ import org.springframework.stereotype.Component;
 public class KpacbApplicationShutDownHook {
 
     @EventListener(classes = {ContextClosedEvent.class})
-    public void onKapcbApplicationShutDown(@NonNull ApplicationEvent applicationEvent) {
-        String banner = "\n----------------------------------------------------------------------------------\n" +
-                "--------------------------< Kapcb Application Shut Down >-------------------------\n" +
-                "-----< No Matter How High The Mountain Is, One Can Always Ascend To It‘s Top >----\n" +
-                "----------------------------------< Kapcb >---------------------------------------\n" +
-                "----------------------------------------------------------------------------------";
-        log.info(banner);
+    public void applicationShutDownHook(@NonNull ApplicationEvent applicationEvent) {
+        KapcbUtil.serverShutDownHookBanner();
     }
 }

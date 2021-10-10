@@ -32,4 +32,13 @@ public class KapcbUtil {
         log.info(banner);
     }
 
+    public static void serverShutDownHookBanner() {
+        String banner = "\n----------------------------------------------------------------------------------\n" +
+                "--------------------------< Kapcb Application Shut Down >-------------------------\n" +
+                "-----< No Matter How High The Mountain Is, One Can Always Ascend To It‘s Top >----\n" +
+                "----------------------------------< Kapcb >---------------------------------------\n" +
+                "----------------------------------------------------------------------------------";
+        log.info(banner);
+    }
+
 }
