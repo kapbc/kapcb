@@ -119,6 +119,4 @@ public class CategoryServiceImpl extends ServiceImpl<ProductCategoryMapper, Prod
         }
         return Boolean.TRUE;
     }
-
-
 }
