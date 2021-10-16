@@ -11,6 +11,7 @@ package com.kapcb.ccc.enums;
  */
 public enum LongPool {
 
+    DEFAULT_SUPER_ADMIN(1000000001L, "default super admin"),
     ZERO(0L, "number 0"),
     ONE(1L, "number 1"),
     FIVE(5L, "number 5"),
