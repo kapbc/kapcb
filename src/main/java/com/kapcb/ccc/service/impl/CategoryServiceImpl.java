@@ -13,6 +13,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import javax.annotation.PostConstruct;
@@ -46,6 +47,7 @@ public class CategoryServiceImpl extends ServiceImpl<ProductCategoryMapper, Prod
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Boolean analyzeCategoryL1() {
         if (CollectionUtils.isNotEmpty(categoryAnalyzeDTOS)) {
             Date currentDate = new Date();
@@ -71,7 +73,10 @@ public class CategoryServiceImpl extends ServiceImpl<ProductCategoryMapper, Prod
             log.info("l1 data is : {}", l1Date);
             if (CollectionUtils.isNotEmpty(l1Date)) {
                 for (ProductCategoryPO productCategoryPO : l1Date) {
-                    this.baseMapper.insert(productCategoryPO);
+                    ProductCategoryPO existCategory = this.baseMapper.selectOne(new LambdaQueryWrapper<ProductCategoryPO>().eq(ProductCategoryPO::getCategoryName, productCategoryPO.getCategoryName()).eq(ProductCategoryPO::getCategoryLevel, 1));
+                    if (Objects.isNull(existCategory)) {
+                        this.baseMapper.insert(productCategoryPO);
+                    }
                     log.info("insert l1 category id is : {}, category zh is : {}", productCategoryPO.getCategoryId(), productCategoryPO.getCategoryName());
                 }
             }
@@ -80,6 +85,7 @@ public class CategoryServiceImpl extends ServiceImpl<ProductCategoryMapper, Prod
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Boolean analyzeCategoryL2() {
         if (CollectionUtils.isNotEmpty(categoryAnalyzeDTOS)) {
             Date currentDate = new Date();
@@ -100,8 +106,10 @@ public class CategoryServiceImpl extends ServiceImpl<ProductCategoryMapper, Prod
                     CategoryAnalyzeDTO categoryAnalyzeDTO = value.get(0);
                     String categoryL1 = categoryAnalyzeDTO.getCategoryL1();
                     if (StringUtils.isNotBlank(categoryL1)) {
-                        ProductCategoryPO productCategoryPO = this.baseMapper.selectOne(new LambdaQueryWrapper<ProductCategoryPO>().eq(ProductCategoryPO::getCategoryName, categoryL1));
-                        if (Objects.nonNull(productCategoryPO)) {
+                        ProductCategoryPO productCategoryPO = this.baseMapper.selectOne(new LambdaQueryWrapper<ProductCategoryPO>().eq(ProductCategoryPO::getCategoryName, categoryL1).eq(ProductCategoryPO::getCategoryLevel, 1));
+                        ProductCategoryPO existCategory = this.baseMapper.selectOne(new LambdaQueryWrapper<ProductCategoryPO>().eq(ProductCategoryPO::getCategoryName, key).eq(ProductCategoryPO::getCategoryLevel, 2));
+
+                        if (Objects.nonNull(productCategoryPO) && !StringUtils.equalsAnyIgnoreCase(productCategoryPO.getCategoryName(), key) && Objects.isNull(existCategory)) {
                             this.baseMapper.insert(ProductCategoryPO.builder()
                                     .parentId(productCategoryPO.getCategoryId())
                                     .categoryName(key)
@@ -117,14 +125,26 @@ public class CategoryServiceImpl extends ServiceImpl<ProductCategoryMapper, Prod
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public Boolean analyzeCategoryL3() {
         if (CollectionUtils.isNotEmpty(categoryAnalyzeDTOS)) {
+            Date currentDate = new Date();
             for (CategoryAnalyzeDTO categoryAnalyzeDTO : categoryAnalyzeDTOS) {
                 String categoryL2 = categoryAnalyzeDTO.getCategoryL2();
-                ProductCategoryPO productCategoryPO = this.baseMapper.selectOne(new LambdaQueryWrapper<ProductCategoryPO>().eq(ProductCategoryPO::getCategoryName, categoryL2));
-
+                ProductCategoryPO productCategoryPOl1 = this.baseMapper.selectOne(new LambdaQueryWrapper<ProductCategoryPO>().eq(ProductCategoryPO::getCategoryName, categoryL2).eq(ProductCategoryPO::getCategoryLevel, 1));
+                ProductCategoryPO productCategoryPOl2 = this.baseMapper.selectOne(new LambdaQueryWrapper<ProductCategoryPO>().eq(ProductCategoryPO::getCategoryName, categoryL2).eq(ProductCategoryPO::getCategoryLevel, 2));
+                ProductCategoryPO productCategoryPOl3 = this.baseMapper.selectOne(new LambdaQueryWrapper<ProductCategoryPO>().eq(ProductCategoryPO::getCategoryName, categoryL2).eq(ProductCategoryPO::getCategoryLevel, 3));
+                if (Objects.nonNull(productCategoryPOl2) && Objects.isNull(productCategoryPOl3) && Objects.isNull(productCategoryPOl1) &&
+                        !StringUtils.equalsAnyIgnoreCase(productCategoryPOl2.getCategoryName(), categoryAnalyzeDTO.getCategoryL3())) {
+                    this.baseMapper.insert(ProductCategoryPO.builder()
+                            .parentId(productCategoryPOl2.getCategoryId())
+                            .categoryName(categoryAnalyzeDTO.getCategoryL3())
+                            .categoryLevel(3)
+                            .createBy(LongPool.DEFAULT_SUPER_ADMIN.value())
+                            .createDate(currentDate).build());
+                }
             }
         }
-        return null;
+        return Boolean.TRUE;
     }
 }

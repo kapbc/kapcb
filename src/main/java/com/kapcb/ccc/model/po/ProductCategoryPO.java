@@ -32,8 +32,7 @@ public class ProductCategoryPO implements Serializable {
 
     private static final long serialVersionUID = -3823181862793064458L;
 
-    @TableField("category_id")
-    @TableId(type = IdType.AUTO)
+    @TableId(value = "category_id", type = IdType.AUTO)
     private Integer categoryId;
 
     @TableField("parent_id")
