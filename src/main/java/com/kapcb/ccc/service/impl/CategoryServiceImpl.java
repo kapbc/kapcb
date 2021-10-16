@@ -2,8 +2,10 @@ package com.kapcb.ccc.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.kapcb.ccc.enums.IntegerPool;
 import com.kapcb.ccc.enums.LongPool;
 import com.kapcb.ccc.mapper.ProductCategoryMapper;
+import com.kapcb.ccc.model.bo.ProductCategoryBO;
 import com.kapcb.ccc.model.initial.CategoryAnalyzeDTO;
 import com.kapcb.ccc.model.po.ProductCategoryPO;
 import com.kapcb.ccc.service.ICategoryService;
@@ -146,5 +148,15 @@ public class CategoryServiceImpl extends ServiceImpl<ProductCategoryMapper, Prod
             }
         }
         return Boolean.TRUE;
+    }
+
+    @Override
+    public void test() {
+        List<ProductCategoryBO> productCategoryBOList = this.baseMapper.getProductCategory();
+        List<ProductCategoryBO> categoryL1List = productCategoryBOList.parallelStream().filter(productCategory -> IntegerPool.ONE.value().equals(productCategory.getCategoryLevel())).distinct().collect(Collectors.toList());
+    }
+
+    private static List<String> handler(ProductCategoryBO parent, List<ProductCategoryBO> list) {
+
     }
 }

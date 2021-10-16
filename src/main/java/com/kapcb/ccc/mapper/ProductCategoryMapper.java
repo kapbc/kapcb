@@ -1,7 +1,10 @@
 package com.kapcb.ccc.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.kapcb.ccc.model.bo.ProductCategoryBO;
 import com.kapcb.ccc.model.po.ProductCategoryPO;
+
+import java.util.List;
 
 /**
  * <a>Title: ProductCategoryMapper </a>
@@ -13,4 +16,7 @@ import com.kapcb.ccc.model.po.ProductCategoryPO;
  * @date 2021/10/16 15:14
  */
 public interface ProductCategoryMapper extends BaseMapper<ProductCategoryPO> {
+
+    List<ProductCategoryBO> getProductCategory();
+
 }

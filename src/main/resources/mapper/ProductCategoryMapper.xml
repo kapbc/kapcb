@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kapcb.ccc.mapper.ProductCategoryMapper">
+
+    <resultMap id="productCategoryBOResultMap" type="com.kapcb.ccc.model.bo.ProductCategoryBO">
+        <id property="categoryId" column="category_id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="categoryLevel" column="category_level"/>
+        <result property="categoryName" column="category_name"/>
+    </resultMap>
+
+    <select id="getProductCategory" resultMap="productCategoryBOResultMap">
+        SELECT
+            ppc.category_id,
+            ppc.parent_id,
+            ppc.category_level,
+            ppc.category_name
+        FROM
+            product_grp.product_category ppc
+        WHERE
+            ppc.delete_flag = FALSE
+    </select>
+
+</mapper>

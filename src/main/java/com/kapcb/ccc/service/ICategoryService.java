@@ -18,4 +18,7 @@ public interface ICategoryService extends IService<ProductCategoryPO> {
     Boolean analyzeCategoryL2();
 
     Boolean analyzeCategoryL3();
+
+    void test();
+
 }
