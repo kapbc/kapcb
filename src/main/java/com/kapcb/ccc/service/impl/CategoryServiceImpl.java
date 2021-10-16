@@ -50,9 +50,6 @@ public class CategoryServiceImpl extends ServiceImpl<ProductCategoryMapper, Prod
         if (CollectionUtils.isNotEmpty(categoryAnalyzeDTOS)) {
             Date currentDate = new Date();
             CompletableFuture<Map<String, List<CategoryAnalyzeDTO>>> categoryL1CompletableFuture = CompletableFuture.supplyAsync(() -> categoryAnalyzeDTOS.parallelStream().collect(Collectors.groupingBy(CategoryAnalyzeDTO::getCategoryL1)));
-//            CompletableFuture<Map<String, List<CategoryAnalyzeDTO>>> categoryL2CompletableFuture = CompletableFuture.supplyAsync(() -> categoryAnalyzeDTOS.parallelStream().collect(Collectors.groupingBy(CategoryAnalyzeDTO::getCategoryL2)));
-//            CompletableFuture<Map<String, List<CategoryAnalyzeDTO>>> categoryL3CompletableFuture = CompletableFuture.supplyAsync(() -> categoryAnalyzeDTOS.parallelStream().collect(Collectors.groupingBy(CategoryAnalyzeDTO::getCategoryL3)));
-
             CompletableFuture.allOf(categoryL1CompletableFuture).join();
             Map<String, List<CategoryAnalyzeDTO>> categoryL1 = null;
             try {
@@ -115,8 +112,19 @@ public class CategoryServiceImpl extends ServiceImpl<ProductCategoryMapper, Prod
                     }
                 }
             }
-
         }
         return Boolean.TRUE;
+    }
+
+    @Override
+    public Boolean analyzeCategoryL3() {
+        if (CollectionUtils.isNotEmpty(categoryAnalyzeDTOS)) {
+            for (CategoryAnalyzeDTO categoryAnalyzeDTO : categoryAnalyzeDTOS) {
+                String categoryL2 = categoryAnalyzeDTO.getCategoryL2();
+                ProductCategoryPO productCategoryPO = this.baseMapper.selectOne(new LambdaQueryWrapper<ProductCategoryPO>().eq(ProductCategoryPO::getCategoryName, categoryL2));
+
+            }
+        }
+        return null;
     }
 }

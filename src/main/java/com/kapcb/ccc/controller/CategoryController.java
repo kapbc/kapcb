@@ -33,4 +33,9 @@ public class CategoryController {
     public String analyzeCategoryL2() {
         return categoryService.analyzeCategoryL2() ? "success" : "fail";
     }
+
+    @GetMapping("l3")
+    public String analyzeCategoryL3(){
+        return categoryService.analyzeCategoryL3() ? "success" : "fail";
+    }
 }
