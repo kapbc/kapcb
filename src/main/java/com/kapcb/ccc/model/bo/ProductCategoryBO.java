@@ -1,11 +1,11 @@
 package com.kapcb.ccc.model.bo;
 
-import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,5 +31,5 @@ public class ProductCategoryBO {
 
     private String categoryName;
 
-    private List<ProductCategoryBO> children;
+    private List<ProductCategoryBO> children = new ArrayList<>();
 }

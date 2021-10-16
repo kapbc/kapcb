@@ -1,7 +1,10 @@
 package com.kapcb.ccc.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.kapcb.ccc.model.bo.ProductCategoryBO;
 import com.kapcb.ccc.model.po.ProductCategoryPO;
+
+import java.util.List;
 
 /**
  * <a>Title: ICategoryService </a>
@@ -19,6 +22,6 @@ public interface ICategoryService extends IService<ProductCategoryPO> {
 
     Boolean analyzeCategoryL3();
 
-    void test();
+    List<ProductCategoryBO> handlerCategory();
 
 }

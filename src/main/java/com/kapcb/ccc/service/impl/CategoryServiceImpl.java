@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -151,12 +152,19 @@ public class CategoryServiceImpl extends ServiceImpl<ProductCategoryMapper, Prod
     }
 
     @Override
-    public void test() {
+    public List<ProductCategoryBO> handlerCategory() {
         List<ProductCategoryBO> productCategoryBOList = this.baseMapper.getProductCategory();
         List<ProductCategoryBO> categoryL1List = productCategoryBOList.parallelStream().filter(productCategory -> IntegerPool.ONE.value().equals(productCategory.getCategoryLevel())).distinct().collect(Collectors.toList());
+        categoryL1List.forEach(parent -> parent = handlerTortoise(parent, productCategoryBOList));
+        return categoryL1List;
     }
 
-    private static List<String> handler(ProductCategoryBO parent, List<ProductCategoryBO> list) {
-
+    private static ProductCategoryBO handlerTortoise(@NonNull ProductCategoryBO parent, List<ProductCategoryBO> list) {
+        list.forEach(child -> {
+            if (Objects.equals(parent.getCategoryId(), child.getParentId())) {
+                parent.getChildren().add(handlerTortoise(child, list));
+            }
+        });
+        return parent;
     }
 }

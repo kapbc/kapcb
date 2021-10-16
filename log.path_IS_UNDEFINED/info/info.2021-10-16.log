@@ -2674,3 +2674,140 @@ server start success, current time is : 2021-10-16 21:56:34
 2021-10-16 22:06:38 INFO  SpringContextShutdownHook org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor Shutting down ExecutorService 'applicationTaskExecutor'
 2021-10-16 22:06:38 INFO  SpringContextShutdownHook com.zaxxer.hikari.HikariDataSource KapcbHikariCP - Shutdown initiated...
 2021-10-16 22:06:38 INFO  SpringContextShutdownHook com.zaxxer.hikari.HikariDataSource KapcbHikariCP - Shutdown completed.
+2021-10-16 23:29:59 INFO  main com.kapcb.ccc.KapcbApplication Starting KapcbApplication on LAPTOP-SDEJ0P4N with PID 15884 (D:\DevelopTools\IDEA\IDEA-workspace\kapcb\target\classes started by chenc in D:\DevelopTools\IDEA\IDEA-workspace\kapcb)
+2021-10-16 23:29:59 INFO  main com.kapcb.ccc.KapcbApplication No active profile set, falling back to default profiles: default
+2021-10-16 23:29:59 INFO  background-preinit org.hibernate.validator.internal.util.Version HV000001: Hibernate Validator 6.1.7.Final
+2021-10-16 23:30:02 INFO  main org.springframework.data.repository.config.RepositoryConfigurationDelegate Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-16 23:30:02 INFO  main org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data Elasticsearch repositories in DEFAULT mode.
+2021-10-16 23:30:02 INFO  main org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 75ms. Found 0 Elasticsearch repository interfaces.
+2021-10-16 23:30:02 INFO  main org.springframework.data.repository.config.RepositoryConfigurationDelegate Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-16 23:30:02 INFO  main org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data Reactive Elasticsearch repositories in DEFAULT mode.
+2021-10-16 23:30:02 INFO  main org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 33ms. Found 0 Reactive Elasticsearch repository interfaces.
+2021-10-16 23:30:05 INFO  main org.springframework.boot.web.embedded.tomcat.TomcatWebServer Tomcat initialized with port(s): 9096 (http)
+2021-10-16 23:30:05 INFO  main org.apache.coyote.http11.Http11NioProtocol Initializing ProtocolHandler ["http-nio-9096"]
+2021-10-16 23:30:05 INFO  main org.apache.catalina.core.StandardService Starting service [Tomcat]
+2021-10-16 23:30:05 INFO  main org.apache.catalina.core.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.46]
+2021-10-16 23:30:05 INFO  main org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] Initializing Spring embedded WebApplicationContext
+2021-10-16 23:30:05 INFO  main org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 5516 ms
+2021-10-16 23:30:08 INFO  main com.kapcb.ccc.configure.SecurityConfiguration -----------------begin initial cors filter-----------------
+2021-10-16 23:30:09 INFO  main com.kapcb.ccc.utils.FileUtil the path is : /D:/DevelopTools/IDEA/IDEA-workspace/kapcb/target/classes/
+2021-10-16 23:30:10 INFO  main com.kapcb.ccc.utils.CategoryAnalyzeListener All Category Analyze Finished!
+2021-10-16 23:30:13 INFO  main org.springframework.data.elasticsearch.support.VersionInfo Version Spring Data Elasticsearch: 4.0.9.RELEASE
+2021-10-16 23:30:13 INFO  main org.springframework.data.elasticsearch.support.VersionInfo Version Elasticsearch Client in build: 7.6.2
+2021-10-16 23:30:13 INFO  main org.springframework.data.elasticsearch.support.VersionInfo Version Elasticsearch Client used: 7.6.2
+2021-10-16 23:30:15 INFO  main org.springframework.security.web.DefaultSecurityFilterChain Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@47994b51, org.springframework.security.web.context.SecurityContextPersistenceFilter@2e40ea48, org.springframework.security.web.header.HeaderWriterFilter@5c3924fd, org.springframework.web.filter.CorsFilter@340c5fb6, org.springframework.security.web.authentication.logout.LogoutFilter@1f7557fe, com.kapcb.ccc.filter.JwtAuthenticationFilter@2f2e4bde, com.kapcb.ccc.filter.CustomAuthenticationFilter@3db1ce78, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@d271d6c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2f2f92f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6765b6a2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@19f99aaf, org.springframework.security.web.session.SessionManagementFilter@6a97517, org.springframework.security.web.access.ExceptionTranslationFilter@7c9512c6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3b6c740b]
+2021-10-16 23:30:16 INFO  main org.apache.coyote.http11.Http11NioProtocol Starting ProtocolHandler ["http-nio-9096"]
+2021-10-16 23:30:16 INFO  main org.springframework.boot.web.embedded.tomcat.TomcatWebServer Tomcat started on port(s): 9096 (http) with context path ''
+2021-10-16 23:30:17 INFO  main com.kapcb.ccc.KapcbApplication Started KapcbApplication in 18.789 seconds (JVM running for 24.384)
+2021-10-16 23:30:17 INFO  main org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-16 23:30:17 INFO  task-1 com.kapcb.ccc.utils.KapcbUtil 
+----------------------------------------------------------------------------------
+server name : kapcb
+server port : 9096
+server start success, current time is : 2021-10-16 23:30:17
+----------------------------------------------------------------------------------
+2021-10-16 23:30:28 INFO  http-nio-9096-exec-2 org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-10-16 23:30:28 INFO  http-nio-9096-exec-2 org.springframework.web.servlet.DispatcherServlet Initializing Servlet 'dispatcherServlet'
+2021-10-16 23:30:28 INFO  http-nio-9096-exec-2 org.springframework.web.servlet.DispatcherServlet Completed initialization in 35 ms
+2021-10-16 23:30:28 INFO  http-nio-9096-exec-2 com.kapcb.ccc.filter.JwtAuthenticationFilter ::::access authorization is : null
+2021-10-16 23:30:28 INFO  http-nio-9096-exec-2 com.kapcb.ccc.filter.JwtAuthenticationFilter ::::ip address is : 0:0:0:0:0:0:0:1
+2021-10-16 23:30:28 INFO  http-nio-9096-exec-2 com.zaxxer.hikari.HikariDataSource KapcbHikariCP - Starting...
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-2 com.zaxxer.hikari.HikariDataSource KapcbHikariCP - Start completed.
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-2 com.kapcb.ccc.aspect.EndPointLogAspect [----------------------------------------------------------------------]
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-2 com.kapcb.ccc.aspect.EndPointLogAspect request process cost time : 21
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-2 com.kapcb.ccc.aspect.EndPointLogAspect server name is : kapcb
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-2 com.kapcb.ccc.aspect.EndPointLogAspect request uri is : /error
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-2 com.kapcb.ccc.aspect.EndPointLogAspect request url is : http://localhost:9096/error
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-2 com.kapcb.ccc.aspect.EndPointLogAspect request process method name : errorHtml
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-2 com.kapcb.ccc.aspect.EndPointLogAspect request process class name : org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-2 com.kapcb.ccc.aspect.EndPointLogAspect request time : 2021-10-16 23:30:29
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-2 com.kapcb.ccc.aspect.EndPointLogAspect request return value is : ModelAndView [view="error"; model={timestamp=Sat Oct 16 23:30:29 CST 2021, status=500, error=Internal Server Error, message=, path=/category/test}]
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-2 com.kapcb.ccc.aspect.EndPointLogAspect [----------------------------------------------------------------------]
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-1 com.kapcb.ccc.filter.JwtAuthenticationFilter ::::access authorization is : null
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-1 com.kapcb.ccc.filter.JwtAuthenticationFilter ::::ip address is : 0:0:0:0:0:0:0:1
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-3 com.kapcb.ccc.filter.JwtAuthenticationFilter ::::access authorization is : null
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-3 com.kapcb.ccc.filter.JwtAuthenticationFilter ::::ip address is : 0:0:0:0:0:0:0:1
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-3 com.kapcb.ccc.aspect.EndPointLogAspect [----------------------------------------------------------------------]
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-3 com.kapcb.ccc.aspect.EndPointLogAspect request process cost time : 85
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-3 com.kapcb.ccc.aspect.EndPointLogAspect server name is : kapcb
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-3 com.kapcb.ccc.aspect.EndPointLogAspect request uri is : /login.html
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-3 com.kapcb.ccc.aspect.EndPointLogAspect request url is : http://localhost:9096/login.html
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-3 com.kapcb.ccc.aspect.EndPointLogAspect request process method name : login
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-3 com.kapcb.ccc.aspect.EndPointLogAspect request process class name : com.kapcb.ccc.controller.AuthController
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-3 com.kapcb.ccc.aspect.EndPointLogAspect request time : 2021-10-16 23:30:29
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-3 com.kapcb.ccc.aspect.EndPointLogAspect request return value is : login
+2021-10-16 23:30:29 INFO  http-nio-9096-exec-3 com.kapcb.ccc.aspect.EndPointLogAspect [----------------------------------------------------------------------]
+2021-10-16 23:53:15 INFO  SpringContextShutdownHook com.kapcb.ccc.utils.KapcbUtil 
+----------------------------------------------------------------------------------
+--------------------------< Kapcb Application Shut Down >-------------------------
+-----< No Matter How High The Mountain Is, One Can Always Ascend To It‘s Top >----
+----------------------------------< Kapcb >---------------------------------------
+----------------------------------------------------------------------------------
+2021-10-16 23:53:16 INFO  SpringContextShutdownHook org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor Shutting down ExecutorService 'applicationTaskExecutor'
+2021-10-16 23:53:16 INFO  SpringContextShutdownHook com.zaxxer.hikari.HikariDataSource KapcbHikariCP - Shutdown initiated...
+2021-10-16 23:53:16 INFO  SpringContextShutdownHook com.zaxxer.hikari.HikariDataSource KapcbHikariCP - Shutdown completed.
+2021-10-16 23:57:35 INFO  background-preinit org.hibernate.validator.internal.util.Version HV000001: Hibernate Validator 6.1.7.Final
+2021-10-16 23:57:35 INFO  main com.kapcb.ccc.KapcbApplication Starting KapcbApplication on LAPTOP-SDEJ0P4N with PID 17380 (D:\DevelopTools\IDEA\IDEA-workspace\kapcb\target\classes started by chenc in D:\DevelopTools\IDEA\IDEA-workspace\kapcb)
+2021-10-16 23:57:35 INFO  main com.kapcb.ccc.KapcbApplication No active profile set, falling back to default profiles: default
+2021-10-16 23:57:37 INFO  main org.springframework.data.repository.config.RepositoryConfigurationDelegate Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-16 23:57:37 INFO  main org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data Elasticsearch repositories in DEFAULT mode.
+2021-10-16 23:57:38 INFO  main org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 86ms. Found 0 Elasticsearch repository interfaces.
+2021-10-16 23:57:38 INFO  main org.springframework.data.repository.config.RepositoryConfigurationDelegate Multiple Spring Data modules found, entering strict repository configuration mode!
+2021-10-16 23:57:38 INFO  main org.springframework.data.repository.config.RepositoryConfigurationDelegate Bootstrapping Spring Data Reactive Elasticsearch repositories in DEFAULT mode.
+2021-10-16 23:57:38 INFO  main org.springframework.data.repository.config.RepositoryConfigurationDelegate Finished Spring Data repository scanning in 30ms. Found 0 Reactive Elasticsearch repository interfaces.
+2021-10-16 23:57:40 INFO  main org.springframework.boot.web.embedded.tomcat.TomcatWebServer Tomcat initialized with port(s): 9096 (http)
+2021-10-16 23:57:40 INFO  main org.apache.coyote.http11.Http11NioProtocol Initializing ProtocolHandler ["http-nio-9096"]
+2021-10-16 23:57:40 INFO  main org.apache.catalina.core.StandardService Starting service [Tomcat]
+2021-10-16 23:57:40 INFO  main org.apache.catalina.core.StandardEngine Starting Servlet engine: [Apache Tomcat/9.0.46]
+2021-10-16 23:57:40 INFO  main org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] Initializing Spring embedded WebApplicationContext
+2021-10-16 23:57:40 INFO  main org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext Root WebApplicationContext: initialization completed in 5588 ms
+2021-10-16 23:57:43 INFO  main com.kapcb.ccc.configure.SecurityConfiguration -----------------begin initial cors filter-----------------
+2021-10-16 23:57:44 INFO  main com.kapcb.ccc.utils.FileUtil the path is : /D:/DevelopTools/IDEA/IDEA-workspace/kapcb/target/classes/
+2021-10-16 23:57:45 INFO  main com.kapcb.ccc.utils.CategoryAnalyzeListener All Category Analyze Finished!
+2021-10-16 23:57:48 INFO  main org.springframework.data.elasticsearch.support.VersionInfo Version Spring Data Elasticsearch: 4.0.9.RELEASE
+2021-10-16 23:57:48 INFO  main org.springframework.data.elasticsearch.support.VersionInfo Version Elasticsearch Client in build: 7.6.2
+2021-10-16 23:57:48 INFO  main org.springframework.data.elasticsearch.support.VersionInfo Version Elasticsearch Client used: 7.6.2
+2021-10-16 23:57:50 INFO  main org.springframework.security.web.DefaultSecurityFilterChain Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@729c8def, org.springframework.security.web.context.SecurityContextPersistenceFilter@4eace42b, org.springframework.security.web.header.HeaderWriterFilter@1368e2f7, org.springframework.web.filter.CorsFilter@467af68c, org.springframework.security.web.authentication.logout.LogoutFilter@3bf40c74, com.kapcb.ccc.filter.JwtAuthenticationFilter@72c4a3aa, com.kapcb.ccc.filter.CustomAuthenticationFilter@25fd6d1e, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@406808eb, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@418bdde9, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@74c23525, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@41c88e00, org.springframework.security.web.session.SessionManagementFilter@27e3dc9a, org.springframework.security.web.access.ExceptionTranslationFilter@3fd6dfbc, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@67d8613]
+2021-10-16 23:57:51 INFO  main org.apache.coyote.http11.Http11NioProtocol Starting ProtocolHandler ["http-nio-9096"]
+2021-10-16 23:57:51 INFO  main org.springframework.boot.web.embedded.tomcat.TomcatWebServer Tomcat started on port(s): 9096 (http) with context path ''
+2021-10-16 23:57:52 INFO  main com.kapcb.ccc.KapcbApplication Started KapcbApplication in 18.488 seconds (JVM running for 22.751)
+2021-10-16 23:57:52 INFO  main org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor Initializing ExecutorService 'applicationTaskExecutor'
+2021-10-16 23:57:52 INFO  task-1 com.kapcb.ccc.utils.KapcbUtil 
+----------------------------------------------------------------------------------
+server name : kapcb
+server port : 9096
+server start success, current time is : 2021-10-16 23:57:52
+----------------------------------------------------------------------------------
+2021-10-16 23:58:16 INFO  http-nio-9096-exec-2 org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-10-16 23:58:16 INFO  http-nio-9096-exec-2 org.springframework.web.servlet.DispatcherServlet Initializing Servlet 'dispatcherServlet'
+2021-10-16 23:58:16 INFO  http-nio-9096-exec-2 org.springframework.web.servlet.DispatcherServlet Completed initialization in 32 ms
+2021-10-16 23:58:16 INFO  http-nio-9096-exec-2 com.kapcb.ccc.filter.JwtAuthenticationFilter ::::access authorization is : null
+2021-10-16 23:58:16 INFO  http-nio-9096-exec-2 com.kapcb.ccc.filter.JwtAuthenticationFilter ::::ip address is : 0:0:0:0:0:0:0:1
+2021-10-16 23:58:17 INFO  http-nio-9096-exec-2 com.zaxxer.hikari.HikariDataSource KapcbHikariCP - Starting...
+2021-10-16 23:58:17 INFO  http-nio-9096-exec-2 com.zaxxer.hikari.HikariDataSource KapcbHikariCP - Start completed.
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-2 com.kapcb.ccc.service.impl.CategoryServiceImpl the child is : ProductCategoryBO(categoryId=10033, parentId=10000, categoryLevel=2, categoryName=洗发护发, children=null)
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-2 com.kapcb.ccc.service.impl.CategoryServiceImpl the child is : ProductCategoryBO(categoryId=10704, parentId=10033, categoryLevel=3, categoryName=洗发水, children=null)
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-2 com.kapcb.ccc.aspect.EndPointLogAspect [----------------------------------------------------------------------]
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-2 com.kapcb.ccc.aspect.EndPointLogAspect request process cost time : 24
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-2 com.kapcb.ccc.aspect.EndPointLogAspect server name is : kapcb
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-2 com.kapcb.ccc.aspect.EndPointLogAspect request uri is : /error
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-2 com.kapcb.ccc.aspect.EndPointLogAspect request url is : http://localhost:9096/error
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-2 com.kapcb.ccc.aspect.EndPointLogAspect request process method name : errorHtml
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-2 com.kapcb.ccc.aspect.EndPointLogAspect request process class name : org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-2 com.kapcb.ccc.aspect.EndPointLogAspect request time : 2021-10-16 23:58:18
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-2 com.kapcb.ccc.aspect.EndPointLogAspect request return value is : ModelAndView [view="error"; model={timestamp=Sat Oct 16 23:58:18 CST 2021, status=500, error=Internal Server Error, message=, path=/category/test}]
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-2 com.kapcb.ccc.aspect.EndPointLogAspect [----------------------------------------------------------------------]
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-1 com.kapcb.ccc.filter.JwtAuthenticationFilter ::::access authorization is : null
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-1 com.kapcb.ccc.filter.JwtAuthenticationFilter ::::ip address is : 0:0:0:0:0:0:0:1
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-3 com.kapcb.ccc.filter.JwtAuthenticationFilter ::::access authorization is : null
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-3 com.kapcb.ccc.filter.JwtAuthenticationFilter ::::ip address is : 0:0:0:0:0:0:0:1
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-3 com.kapcb.ccc.aspect.EndPointLogAspect [----------------------------------------------------------------------]
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-3 com.kapcb.ccc.aspect.EndPointLogAspect request process cost time : 83
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-3 com.kapcb.ccc.aspect.EndPointLogAspect server name is : kapcb
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-3 com.kapcb.ccc.aspect.EndPointLogAspect request uri is : /login.html
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-3 com.kapcb.ccc.aspect.EndPointLogAspect request url is : http://localhost:9096/login.html
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-3 com.kapcb.ccc.aspect.EndPointLogAspect request process method name : login
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-3 com.kapcb.ccc.aspect.EndPointLogAspect request process class name : com.kapcb.ccc.controller.AuthController
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-3 com.kapcb.ccc.aspect.EndPointLogAspect request time : 2021-10-16 23:58:18
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-3 com.kapcb.ccc.aspect.EndPointLogAspect request return value is : login
+2021-10-16 23:58:18 INFO  http-nio-9096-exec-3 com.kapcb.ccc.aspect.EndPointLogAspect [----------------------------------------------------------------------]
