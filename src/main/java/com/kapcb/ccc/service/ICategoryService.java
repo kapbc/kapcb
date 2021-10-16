@@ -13,5 +13,8 @@ import com.kapcb.ccc.model.po.ProductCategoryPO;
  * @date 2021/10/16 15:13
  */
 public interface ICategoryService extends IService<ProductCategoryPO> {
-    Boolean analyzeCategory();
+    Boolean analyzeCategoryL1();
+
+    Boolean analyzeCategoryL2();
+
 }

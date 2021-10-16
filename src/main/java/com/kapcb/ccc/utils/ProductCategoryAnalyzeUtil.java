@@ -38,4 +38,8 @@ public class ProductCategoryAnalyzeUtil {
         build.finish();
         return categoryAnalyzeListener.getResult();
     }
+
+    public static void main(String[] args) {
+        List<CategoryAnalyzeDTO> categoryAnalyzeDTOS = analyzeProductCategory();
+    }
 }

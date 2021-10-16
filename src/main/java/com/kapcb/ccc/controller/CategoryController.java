@@ -24,8 +24,13 @@ public class CategoryController {
 
     private final ICategoryService categoryService;
 
-    @GetMapping("test")
-    public String analyzeCategory() {
-        return categoryService.analyzeCategory() ? "success" : "fail";
+    @GetMapping("l1")
+    public String analyzeCategoryL1() {
+        return categoryService.analyzeCategoryL1() ? "success" : "fail";
+    }
+
+    @GetMapping("l2")
+    public String analyzeCategoryL2() {
+        return categoryService.analyzeCategoryL2() ? "success" : "fail";
     }
 }

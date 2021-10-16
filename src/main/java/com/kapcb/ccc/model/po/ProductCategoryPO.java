@@ -1,5 +1,11 @@
 package com.kapcb.ccc.model.po;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
+import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.Version;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,29 +27,41 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
+@TableName("product_grp.product_category")
 public class ProductCategoryPO implements Serializable {
 
     private static final long serialVersionUID = -3823181862793064458L;
 
+    @TableField("category_id")
+    @TableId(type = IdType.AUTO)
     private Integer categoryId;
 
-    private Integer parentCategoryId;
+    @TableField("parent_id")
+    private Integer parentId;
 
+    @TableField("category_level")
     private Integer categoryLevel;
 
-    private String categoryNameEn;
+    @TableField("category_name")
+    private String categoryName;
 
-    private String categoryNameZh;
-
+    @TableLogic
+    @TableField("delete_flag")
     private Boolean deleteFlag;
 
+    @Version
+    @TableField("version")
     private Integer version;
 
+    @TableField("create_date")
     private Date createDate;
 
+    @TableField("create_by")
     private Long createBy;
 
+    @TableField("last_update_date")
     private Date lastUpdateDate;
 
+    @TableField("last_update_by")
     private Long lastUpdateBy;
 }
