@@ -10,7 +10,7 @@ import com.kapcb.ccc.model.bo.ProductCategoryBO;
 import com.kapcb.ccc.model.initial.CategoryAnalyzeDTO;
 import com.kapcb.ccc.model.po.ProductCategoryPO;
 import com.kapcb.ccc.service.ICategoryService;
-import com.kapcb.ccc.utils.ProductCategoryAnalyzeUtil;
+import com.kapcb.ccc.utils.InitialDataAnalyzeUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
@@ -48,7 +48,7 @@ public class CategoryServiceImpl extends ServiceImpl<ProductCategoryMapper, Prod
 
     @PostConstruct
     void init() {
-        categoryAnalyzeDTOS = ProductCategoryAnalyzeUtil.analyzeProductCategory();
+        categoryAnalyzeDTOS = InitialDataAnalyzeUtil.analyzeProductCategory();
     }
 
     @Override
