@@ -3,7 +3,7 @@ package com.kapcb.ccc.enums;
 /**
  * <a>Title: LongPool </a>
  * <a>Author: Kapcb <a>
- * <a>Description:  <a>
+ * <a>Description: LongPool <a>
  *
  * @author Kapcb
  * @version 1.0.0
