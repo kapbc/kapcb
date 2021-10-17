@@ -28,4 +28,5 @@ public enum LongPool {
     public Long value() {
         return this.value;
     }
+
 }
