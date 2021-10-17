@@ -2,6 +2,7 @@ package com.kapcb.ccc.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.google.common.collect.Lists;
 import com.kapcb.ccc.enums.IntegerPool;
 import com.kapcb.ccc.enums.LongPool;
 import com.kapcb.ccc.mapper.ProductCategoryMapper;
@@ -20,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -155,8 +157,22 @@ public class CategoryServiceImpl extends ServiceImpl<ProductCategoryMapper, Prod
     public List<ProductCategoryBO> handlerCategory() {
         List<ProductCategoryBO> productCategoryBOList = this.baseMapper.getProductCategory();
         List<ProductCategoryBO> categoryL1List = productCategoryBOList.parallelStream().filter(productCategory -> IntegerPool.ONE.value().equals(productCategory.getCategoryLevel())).distinct().collect(Collectors.toList());
-        categoryL1List.forEach(parent -> parent = handlerTortoise(parent, productCategoryBOList));
-        return categoryL1List;
+        List<List<ProductCategoryBO>> partition = Lists.partition(categoryL1List, 2);
+        List<ProductCategoryBO> result = new ArrayList<>();
+
+        long currentTimeMillis = System.currentTimeMillis();
+        CompletableFuture.allOf(partition.stream().map(sub -> CompletableFuture.supplyAsync(() -> {
+            sub.forEach(parent -> parent = handlerTortoise(parent, productCategoryBOList));
+            return sub;
+        }).whenCompleteAsync((r, e) -> result.addAll(r)).exceptionally(e -> {
+            log.error("async product category error, error message is : {}", e.getMessage());
+            return result;
+        })).toArray(CompletableFuture[]::new)).join();
+
+
+//        categoryL1List.forEach(parent -> parent = handlerTortoise(parent, productCategoryBOList));
+        log.info("cost time is : {} ms", (System.currentTimeMillis() - currentTimeMillis));
+        return result;
     }
 
     private static ProductCategoryBO handlerTortoise(@NonNull ProductCategoryBO parent, List<ProductCategoryBO> list) {
