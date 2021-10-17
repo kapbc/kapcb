@@ -6,7 +6,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 /**
  * <a>Title: EndPointAutoConfigureProperties </a>
  * <a>Author: Kapcb <a>
- * <a>Description:  <a>
+ * <a>Description: EndPointAutoConfigureProperties <a>
  *
  * @author Kapcb
  * @version 1.0.0

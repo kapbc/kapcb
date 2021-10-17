@@ -5,7 +5,7 @@ import org.springframework.lang.NonNull;
 /**
  * <a>Title: StringPool </a>
  * <a>Author: Kapcb <a>
- * <a>Description:  <a>
+ * <a>Description: StringPool <a>
  *
  * @author Kapcb
  * @version 1.0.0
