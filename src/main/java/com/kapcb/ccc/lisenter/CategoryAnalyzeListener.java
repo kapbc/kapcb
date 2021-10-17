@@ -23,8 +23,8 @@ public class CategoryAnalyzeListener extends AnalysisEventListener<CategoryAnaly
     private List<CategoryAnalyzeDTO> result = new ArrayList<>();
 
     @Override
-    public void invoke(CategoryAnalyzeDTO test, AnalysisContext analysisContext) {
-        result.add(test);
+    public void invoke(CategoryAnalyzeDTO categoryAnalyzeDTO, AnalysisContext analysisContext) {
+        result.add(categoryAnalyzeDTO);
     }
 
     @Override

@@ -19,7 +19,7 @@ import java.io.Serializable;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class I18nAnalyzeDTO implements Serializable {
+public class CountryCodeAnalyzeDTO implements Serializable {
 
     private static final long serialVersionUID = -639179619373322146L;
 
