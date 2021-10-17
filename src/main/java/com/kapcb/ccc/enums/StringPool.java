@@ -77,7 +77,9 @@ public enum StringPool {
     END_POINT_LOG_REQUEST_TIME("request time : {}", "request time"),
     END_POINT_LOG_RETURN_VALUE("request return value is : {}", "return value"),
     END_POINT_LOG_ERROR_MESSAGE("handler request error, error message is : {}", "error message"),
-    ;
+
+
+    DICTIONARY_GROUP_COUNTRY("country", "dictionary country group");
 
     private String value;
     private String description;
