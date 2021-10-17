@@ -1,10 +1,12 @@
 package com.kapcb.ccc.utils;
 
+import com.kapcb.ccc.enums.StringPool;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.lang.NonNull;
 
 import java.io.InputStream;
+import java.util.Objects;
 
 /**
  * <a>Title: FileUtil </a>
@@ -21,11 +23,11 @@ public class FileUtil {
 
     public static InputStream getResourcesFileInputStream(@NonNull String filename) {
         log.info("file name is : {}", filename);
-        return Thread.currentThread().getContextClassLoader().getResourceAsStream("" + filename);
+        return Thread.currentThread().getContextClassLoader().getResourceAsStream(StringPool.EMPTY_STRING.value() + filename);
     }
 
     public static String getPath() {
-        String path = FileUtil.class.getResource("/").getPath();
+        String path = Objects.requireNonNull(FileUtil.class.getResource(StringPool.SLASH.value())).getPath();
         log.info("the path is : {}", path);
         return path;
     }
