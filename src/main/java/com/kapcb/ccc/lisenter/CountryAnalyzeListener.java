@@ -19,7 +19,6 @@ import java.util.List;
  */
 @Slf4j
 public class CountryAnalyzeListener extends AnalysisEventListener<CountryCodeAnalyzeDTO> {
-
     
     private List<CountryCodeAnalyzeDTO> result = new ArrayList<>();
 
