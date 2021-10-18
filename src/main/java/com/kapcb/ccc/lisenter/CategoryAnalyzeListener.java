@@ -19,9 +19,11 @@ import java.util.List;
  */
 @Slf4j
 public class CategoryAnalyzeListener extends AnalysisEventListener<CategoryAnalyzeDTO> {
+    
 
     private List<CategoryAnalyzeDTO> result = new ArrayList<>();
 
+    
     @Override
     public void invoke(CategoryAnalyzeDTO categoryAnalyzeDTO, AnalysisContext analysisContext) {
         result.add(categoryAnalyzeDTO);
