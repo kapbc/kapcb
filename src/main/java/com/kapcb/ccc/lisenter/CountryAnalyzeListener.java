@@ -20,8 +20,10 @@ import java.util.List;
 @Slf4j
 public class CountryAnalyzeListener extends AnalysisEventListener<CountryCodeAnalyzeDTO> {
 
+    
     private List<CountryCodeAnalyzeDTO> result = new ArrayList<>();
 
+    
     @Override
     public void invoke(CountryCodeAnalyzeDTO countryCodeAnalyzeDTO, AnalysisContext analysisContext) {
         result.add(countryCodeAnalyzeDTO);
