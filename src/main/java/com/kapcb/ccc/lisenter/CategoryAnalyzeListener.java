@@ -19,7 +19,6 @@ import java.util.List;
  */
 @Slf4j
 public class CategoryAnalyzeListener extends AnalysisEventListener<CategoryAnalyzeDTO> {
-    
 
     private List<CategoryAnalyzeDTO> result = new ArrayList<>();
 
