@@ -23,7 +23,6 @@ public class CountryAnalyzeListener extends AnalysisEventListener<CountryCodeAna
     
     private List<CountryCodeAnalyzeDTO> result = new ArrayList<>();
 
-    
     @Override
     public void invoke(CountryCodeAnalyzeDTO countryCodeAnalyzeDTO, AnalysisContext analysisContext) {
         result.add(countryCodeAnalyzeDTO);
