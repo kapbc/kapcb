@@ -32,4 +32,5 @@ public class ProductCategoryBO {
     private String categoryName;
 
     private List<ProductCategoryBO> children = new ArrayList<>();
+    
 }
