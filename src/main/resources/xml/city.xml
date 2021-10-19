@@ -1,0 +1,410 @@
+<ArrayOfString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://WebXml.com.cn/">
+    <string>北京 (54511)</string>
+    <string>上海 (58367)</string>
+    <string>天津 (54517)</string>
+    <string>重庆 (57516)</string>
+    <string>香港 (45005)</string>
+    <string>澳门 (45011)</string>
+    <string>哈尔滨 (50953)</string>
+    <string>齐齐哈尔 (50745)</string>
+    <string>牡丹江 (54094)</string>
+    <string>大庆 (50842)</string>
+    <string>伊春 (50774)</string>
+    <string>双鸭山 (50884)</string>
+    <string>鹤岗 (50775)</string>
+    <string>鸡西 (50978)</string>
+    <string>佳木斯 (50873)</string>
+    <string>七台河 (50971)</string>
+    <string>黑河 (50468)</string>
+    <string>绥化 (50853)</string>
+    <string>大兴安岭 (50442)</string>
+    <string>长春 (54161)</string>
+    <string>吉林 (54172)</string>
+    <string>白山 (54371)</string>
+    <string>白城 (50936)</string>
+    <string>四平 (54157)</string>
+    <string>松原 (50946)</string>
+    <string>辽源 (54260)</string>
+    <string>大安 (50945)</string>
+    <string>通化 (54363)</string>
+    <string>沈阳 (54342)</string>
+    <string>大连 (54662)</string>
+    <string>葫芦岛 (54453)</string>
+    <string>旅顺 (54660)</string>
+    <string>本溪 (54346)</string>
+    <string>抚顺 (54353)</string>
+    <string>铁岭 (54249)</string>
+    <string>辽阳 (54347)</string>
+    <string>营口 (54471)</string>
+    <string>阜新 (54237)</string>
+    <string>朝阳 (54324)</string>
+    <string>锦州 (54337)</string>
+    <string>丹东 (54497)</string>
+    <string>鞍山 (54339)</string>
+    <string>呼和浩特 (53463)</string>
+    <string>锡林浩特 (54102)</string>
+    <string>包头 (53446)</string>
+    <string>赤峰 (54218)</string>
+    <string>海拉尔 (50527)</string>
+    <string>乌海 (53512)</string>
+    <string>鄂尔多斯 (53543)</string>
+    <string>锡林浩特 (54102)</string>
+    <string>通辽 (54135)</string>
+    <string>石家庄 (53698)</string>
+    <string>唐山 (54534)</string>
+    <string>张家口 (54401)</string>
+    <string>廊坊 (54515)</string>
+    <string>邢台 (53798)</string>
+    <string>邯郸 (53892)</string>
+    <string>沧州 (54616)</string>
+    <string>衡水 (54702)</string>
+    <string>承德 (54423)</string>
+    <string>保定 (54602)</string>
+    <string>秦皇岛 (54449)</string>
+    <string>郑州 (57083)</string>
+    <string>开封 (57091)</string>
+    <string>洛阳 (57073)</string>
+    <string>平顶山 (57171)</string>
+    <string>焦作 (53982)</string>
+    <string>鹤壁 (53990)</string>
+    <string>新乡 (53986)</string>
+    <string>安阳 (53898)</string>
+    <string>濮阳 (54900)</string>
+    <string>许昌 (57089)</string>
+    <string>漯河 (57186)</string>
+    <string>三门峡 (57051)</string>
+    <string>南阳 (57178)</string>
+    <string>商丘 (58005)</string>
+    <string>信阳 (57297)</string>
+    <string>周口 (57195)</string>
+    <string>驻马店 (57290)</string>
+    <string>济南 (54823)</string>
+    <string>青岛 (54857)</string>
+    <string>淄博 (54830)</string>
+    <string>威海 (54774)</string>
+    <string>曲阜 (54918)</string>
+    <string>临沂 (54938)</string>
+    <string>烟台 (54765)</string>
+    <string>枣庄 (58024)</string>
+    <string>聊城 (54806)</string>
+    <string>济宁 (54915)</string>
+    <string>菏泽 (54906)</string>
+    <string>泰安 (54827)</string>
+    <string>日照 (54945)</string>
+    <string>东营 (54736)</string>
+    <string>德州 (54714)</string>
+    <string>滨州 (54734)</string>
+    <string>莱芜 (54828)</string>
+    <string>潍坊 (54843)</string>
+    <string>太原 (53772)</string>
+    <string>阳泉 (53782)</string>
+    <string>晋城 (53976)</string>
+    <string>晋中 (53778)</string>
+    <string>临汾 (53868)</string>
+    <string>运城 (53959)</string>
+    <string>长治 (53882)</string>
+    <string>朔州 (53578)</string>
+    <string>忻州 (53674)</string>
+    <string>大同 (53487)</string>
+    <string>南京 (58238)</string>
+    <string>苏州 (58357)</string>
+    <string>昆山 (58356)</string>
+    <string>南通 (58259)</string>
+    <string>太仓 (58377)</string>
+    <string>吴县 (58349)</string>
+    <string>徐州 (58027)</string>
+    <string>宜兴 (58346)</string>
+    <string>镇江 (58248)</string>
+    <string>淮安 (58145)</string>
+    <string>常熟 (58352)</string>
+    <string>盐城 (58151)</string>
+    <string>泰州 (58246)</string>
+    <string>无锡 (58354)</string>
+    <string>连云港 (58044)</string>
+    <string>扬州 (58245)</string>
+    <string>常州 (58343)</string>
+    <string>宿迁 (58131)</string>
+    <string>合肥 (58321)</string>
+    <string>巢湖 (58326)</string>
+    <string>蚌埠 (58221)</string>
+    <string>安庆 (58424)</string>
+    <string>六安 (58311)</string>
+    <string>滁州 (58236)</string>
+    <string>马鞍山 (58336)</string>
+    <string>阜阳 (58203)</string>
+    <string>宣城 (58433)</string>
+    <string>铜陵 (58429)</string>
+    <string>淮北 (58116)</string>
+    <string>芜湖 (58334)</string>
+    <string>宿州 (58122)</string>
+    <string>淮南 (58224)</string>
+    <string>池州 (58427)</string>
+    <string>西安 (57036)</string>
+    <string>韩城 (53955)</string>
+    <string>安康 (57245)</string>
+    <string>汉中 (57127)</string>
+    <string>宝鸡 (57016)</string>
+    <string>咸阳 (57048)</string>
+    <string>榆林 (53646)</string>
+    <string>渭南 (57045)</string>
+    <string>商洛 (57143)</string>
+    <string>铜川 (53947)</string>
+    <string>延安 (53845)</string>
+    <string>银川 (53614)</string>
+    <string>固原 (53817)</string>
+    <string>中卫 (53704)</string>
+    <string>石嘴山 (53518)</string>
+    <string>吴忠 (53612)</string>
+    <string>兰州 (52889)</string>
+    <string>白银 (52896)</string>
+    <string>庆阳 (53829)</string>
+    <string>酒泉 (52533)</string>
+    <string>天水 (57006)</string>
+    <string>武威 (52679)</string>
+    <string>张掖 (52652)</string>
+    <string>甘南 (50741)</string>
+    <string>临夏 (52984)</string>
+    <string>平凉 (53915)</string>
+    <string>定西 (52995)</string>
+    <string>金昌 (52675)</string>
+    <string>西宁 (52866)</string>
+    <string>海北 (52754)</string>
+    <string>海西 (52737)</string>
+    <string>黄南 (56065)</string>
+    <string>果洛 (56043)</string>
+    <string>玉树 (56029)</string>
+    <string>海东 (52875)</string>
+    <string>海南 (52856)</string>
+    <string>武汉 (57494)</string>
+    <string>宜昌 (57461)</string>
+    <string>黄冈 (57498)</string>
+    <string>恩施 (57447)</string>
+    <string>荆州 (57476)</string>
+    <string>神农架 (57362)</string>
+    <string>十堰 (57256)</string>
+    <string>咸宁 (57590)</string>
+    <string>襄樊 (57278)</string>
+    <string>孝感 (57482)</string>
+    <string>随州 (57381)</string>
+    <string>黄石 (58407)</string>
+    <string>荆门 (57377)</string>
+    <string>鄂州 (57496)</string>
+    <string>长沙 (57679)</string>
+    <string>邵阳 (57766)</string>
+    <string>常德 (57662)</string>
+    <string>郴州 (57972)</string>
+    <string>吉首 (57649)</string>
+    <string>株洲 (57780)</string>
+    <string>娄底 (57763)</string>
+    <string>湘潭 (57773)</string>
+    <string>益阳 (57674)</string>
+    <string>永州 (57866)</string>
+    <string>岳阳 (57584)</string>
+    <string>衡阳 (57872)</string>
+    <string>怀化 (57749)</string>
+    <string>韶山 (57771)</string>
+    <string>张家界 (57558)</string>
+    <string>杭州 (58457)</string>
+    <string>湖州 (58450)</string>
+    <string>金华 (58549)</string>
+    <string>宁波 (58563)</string>
+    <string>丽水 (58646)</string>
+    <string>绍兴 (58453)</string>
+    <string>衢州 (58633)</string>
+    <string>嘉兴 (58452)</string>
+    <string>台州 (58660)</string>
+    <string>舟山 (58477)</string>
+    <string>温州 (58659)</string>
+    <string>南昌 (58606)</string>
+    <string>萍乡 (57786)</string>
+    <string>九江 (58502)</string>
+    <string>上饶 (58637)</string>
+    <string>抚州 (58617)</string>
+    <string>吉安 (57799)</string>
+    <string>鹰潭 (58627)</string>
+    <string>宜春 (57793)</string>
+    <string>新余 (57796)</string>
+    <string>景德镇 (58527)</string>
+    <string>赣州 (57993)</string>
+    <string>福州 (58847)</string>
+    <string>厦门 (59134)</string>
+    <string>龙岩 (58927)</string>
+    <string>南平 (58834)</string>
+    <string>宁德 (58846)</string>
+    <string>莆田 (58946)</string>
+    <string>泉州 (59137)</string>
+    <string>三明 (58828)</string>
+    <string>漳州 (59126)</string>
+    <string>贵阳 (57816)</string>
+    <string>安顺 (57806)</string>
+    <string>赤水 (57609)</string>
+    <string>遵义 (57713)</string>
+    <string>铜仁 (57741)</string>
+    <string>六盘水 (56693)</string>
+    <string>毕节 (57707)</string>
+    <string>凯里 (57825)</string>
+    <string>都匀 (57827)</string>
+    <string>成都 (56294)</string>
+    <string>泸州 (57602)</string>
+    <string>内江 (57504)</string>
+    <string>凉山 (56571)</string>
+    <string>阿坝 (56171)</string>
+    <string>巴中 (57313)</string>
+    <string>广元 (57206)</string>
+    <string>乐山 (56386)</string>
+    <string>绵阳 (56196)</string>
+    <string>德阳 (56198)</string>
+    <string>攀枝花 (56666)</string>
+    <string>雅安 (56287)</string>
+    <string>宜宾 (56492)</string>
+    <string>自贡 (56396)</string>
+    <string>甘孜州 (56146)</string>
+    <string>达州 (57328)</string>
+    <string>资阳 (56298)</string>
+    <string>广安 (57415)</string>
+    <string>遂宁 (57405)</string>
+    <string>眉山 (56391)</string>
+    <string>南充 (57411)</string>
+    <string>广州 (59287)</string>
+    <string>深圳 (59493)</string>
+    <string>潮州 (59312)</string>
+    <string>韶关 (59082)</string>
+    <string>湛江 (59658)</string>
+    <string>惠州 (59298)</string>
+    <string>清远 (59280)</string>
+    <string>东莞 (59289)</string>
+    <string>江门 (59473)</string>
+    <string>茂名 (59659)</string>
+    <string>肇庆 (59278)</string>
+    <string>汕尾 (59501)</string>
+    <string>河源 (59293)</string>
+    <string>揭阳 (59315)</string>
+    <string>梅州 (59117)</string>
+    <string>中山 (59485)</string>
+    <string>德庆 (59269)</string>
+    <string>阳江 (59663)</string>
+    <string>云浮 (59471)</string>
+    <string>珠海 (59488)</string>
+    <string>汕头 (59316)</string>
+    <string>南宁 (59431)</string>
+    <string>桂林 (57957)</string>
+    <string>阳朔 (59051)</string>
+    <string>柳州 (59046)</string>
+    <string>梧州 (59265)</string>
+    <string>玉林 (59453)</string>
+    <string>桂平 (59254)</string>
+    <string>贺州 (59065)</string>
+    <string>钦州 (59632)</string>
+    <string>贵港 (59249)</string>
+    <string>防城港 (59635)</string>
+    <string>百色 (59211)</string>
+    <string>北海 (59644)</string>
+    <string>河池 (59023)</string>
+    <string>来宾 (59242)</string>
+    <string>崇左 (59425)</string>
+    <string>昆明 (56778)</string>
+    <string>保山 (56748)</string>
+    <string>楚雄 (56768)</string>
+    <string>德宏 (56844)</string>
+    <string>红河 (56975)</string>
+    <string>临沧 (56951)</string>
+    <string>怒江 (56533)</string>
+    <string>曲靖 (56783)</string>
+    <string>思茅 (56964)</string>
+    <string>文山 (56994)</string>
+    <string>玉溪 (56875)</string>
+    <string>昭通 (56586)</string>
+    <string>丽江 (56651)</string>
+    <string>大理 (56751)</string>
+    <string>海口 (59758)</string>
+    <string>三亚 (59948)</string>
+    <string>儋州 (59845)</string>
+    <string>琼山 (59757)</string>
+    <string>通什 (59941)</string>
+    <string>文昌 (59856)</string>
+    <string>乌鲁木齐 (51463)</string>
+    <string>阿勒泰 (51076)</string>
+    <string>阿克苏 (51628)</string>
+    <string>昌吉 (51368)</string>
+    <string>哈密 (52203)</string>
+    <string>和田 (51828)</string>
+    <string>喀什 (51709)</string>
+    <string>克拉玛依 (51243)</string>
+    <string>石河子 (51356)</string>
+    <string>塔城 (51133)</string>
+    <string>库尔勒 (51656)</string>
+    <string>吐鲁番 (51573)</string>
+    <string>拉萨 (55591)</string>
+    <string>阿里 (55437)</string>
+    <string>昌都 (56137)</string>
+    <string>那曲 (55299)</string>
+    <string>日喀则 (55578)</string>
+    <string>山南 (55598)</string>
+    <string>林芝 (56312)</string>
+    <string>台北 (58968)</string>
+    <string>高雄 (59554)</string>
+    <string>伊斯坦布尔 ISTANBUL (17060)</string>
+    <string>德黑兰 TEHRAN (40754)</string>
+    <string>卡拉奇 KARACHI (41781)</string>
+    <string>新德里 NEW DELHI (42182)</string>
+    <string>科伦坡 COLOMBO (43466)</string>
+    <string>首尔 SEOUL (47108)</string>
+    <string>釜山 BUSAN (47159)</string>
+    <string>东京 TOKYO (47662)</string>
+    <string>仰光 YANGON (48097)</string>
+    <string>曼谷 BANGKOK (48454)</string>
+    <string>吉隆坡 KUALA LUMPUR (48647)</string>
+    <string>河内 HA NOI (48820)</string>
+    <string>北京 BEIJING (54511)</string>
+    <string>雅加达 JAKARTA (96745)</string>
+    <string>汉堡 HAMBURG (10141)</string>
+    <string>柏林 BERLIN (10381)</string>
+    <string>法兰克福 FRANKFURT (10637)</string>
+    <string>维也纳 VIENNA (11034)</string>
+    <string>米兰 MILANO (16066)</string>
+    <string>罗马 ROMA (16235)</string>
+    <string>雅典 ATHENS (16701)</string>
+    <string>斯德哥尔摩 STOCKHOLM (2484)</string>
+    <string>莫斯科 MOSKVA (27612)</string>
+    <string>曼彻斯特 MANCHESTER (3334)</string>
+    <string>伦敦 LONDON (3779)</string>
+    <string>阿姆斯特丹 AMSTERDAM (6240)</string>
+    <string>布鲁塞尔 BRUSSELES (6451)</string>
+    <string>苏黎世 ZURICH (6660)</string>
+    <string>日内瓦 GENEVE (6700)</string>
+    <string>巴马科 BAMAKO (61291)</string>
+    <string>亚的斯亚贝巴 ADDIS ABABA (63450)</string>
+    <string>内罗毕 NAIROBI (63740)</string>
+    <string>阿克拉 ACCRA (65472)</string>
+    <string>马普托 MAPUTO (67341)</string>
+    <string>约翰内斯堡 JOHANNESBURG (68368)</string>
+    <string>曼齐尼 MANZINI (68396)</string>
+    <string>开普敦 CAPE TOWN (68816)</string>
+    <string>多伦多 TORONTO (71624)</string>
+    <string>蒙特利尔 MONTREAL (71627)</string>
+    <string>渥太华 OTTAWA (71628)</string>
+    <string>温哥华 VANCOUVER (71892)</string>
+    <string>迈阿密 MIAMI (72202)</string>
+    <string>亚特兰大 ATLANTA (72219)</string>
+    <string>休斯敦 HOUSTON (72243)</string>
+    <string>洛杉矶 LOS ANGELES (72295)</string>
+    <string>拉斯维加斯 LAS VEGAS (72386)</string>
+    <string>华盛顿 WASHINGTON DC (72405)</string>
+    <string>纽约 NEW YORK (72503)</string>
+    <string>波士顿 BOSTON (72509)</string>
+    <string>芝加哥 CHICAGO (72530)</string>
+    <string>西雅图 SEATTLE (72793)</string>
+    <string>圣地亚哥 SANTIAGO DE CUBA (78264)</string>
+    <string>波哥大 BOGOTA (80222)</string>
+    <string>利马 LIMA (84628)</string>
+    <string>蒙特港 PUERTO MONTT (85799)</string>
+    <string>布宜诺斯艾利斯 BUENOS AIRES (87585)</string>
+    <string>奥克兰 AUCKLAND (93110)</string>
+    <string>惠灵顿 WELLINGTON (93436)</string>
+    <string>悉尼 SYDNEY (94767)</string>
+    <string>墨尔本 MELBOURNE (94868)</string>
+    <string>堪培拉 CANBERRA (94926)</string>
+    <string>佛山 (59279)</string>
+    <string>吕梁 (53753)</string>
+    <string>伊宁 (51431)</string>
+</ArrayOfString>
