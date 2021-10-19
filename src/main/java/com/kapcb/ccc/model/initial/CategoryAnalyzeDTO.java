@@ -29,4 +29,3 @@ public class CategoryAnalyzeDTO {
     private String categoryL1;
 
 }
-
