@@ -109,6 +109,9 @@ public class InitialDataAnalyzeUtil {
         List<String> strings = analyzeXml("xml/province.xml");
         System.out.println("strings = " + strings);
 
+        List<String> strings1 = analyzeXml("xml/city.xml");
+        System.out.println("strings1 = " + strings1);
+
 //        List<CategoryAnalyzeDTO> categoryAnalyzeDTOS = analyzeProductCategory();
 
 //        CategoryAnalyzeListener analyze = analyze("doc/product_category.xlsx", new CategoryAnalyzeListener());
