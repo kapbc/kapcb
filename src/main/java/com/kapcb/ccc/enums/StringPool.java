@@ -81,7 +81,7 @@ public enum StringPool {
 
     DICTIONARY_GROUP_COUNTRY("country", "dictionary country group"),
     DICTIONARY_GROUP_CITY("city", "dictionary city group"),
-    DICTIONARY_GROUP_PROVINCE("province", "dictionary province group")
+    DICTIONARY_GROUP_PROVINCE("province", "dictionary province group");
 
     private String value;
     private String description;
