@@ -3,6 +3,7 @@ package com.kapcb.ccc.controller;
 import com.kapcb.ccc.service.IDictionaryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,4 +28,9 @@ public class DictionaryController {
 //    public String analyzeCountryCode() {
 //        return dictionaryService.analyzeCountryCode() ? "success" : "fail";
 //    }
+
+    @GetMapping("city")
+    public String analyzeCity() {
+        return dictionaryService.analyzeCity() ? "success" : "fail";
+    }
 }

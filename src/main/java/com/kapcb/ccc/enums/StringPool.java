@@ -79,7 +79,9 @@ public enum StringPool {
     END_POINT_LOG_ERROR_MESSAGE("handler request error, error message is : {}", "error message"),
 
 
-    DICTIONARY_GROUP_COUNTRY("country", "dictionary country group");
+    DICTIONARY_GROUP_COUNTRY("country", "dictionary country group"),
+    DICTIONARY_GROUP_CITY("city", "dictionary city group"),
+    DICTIONARY_GROUP_PROVINCE("province", "dictionary province group")
 
     private String value;
     private String description;
@@ -93,4 +95,4 @@ public enum StringPool {
     public String value() {
         return this.value;
     }
-}
+    }

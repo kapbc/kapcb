@@ -35,10 +35,14 @@ import java.util.stream.Collectors;
 public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, DictionaryPO> implements IDictionaryService {
 
     private static List<CountryCodeAnalyzeDTO> countryCodeAnalyzeDTOS;
+    private static List<String> cityAnalyze;
+    private static List<String> provinceAnalyze;
 
     @PostConstruct
     void init() {
         countryCodeAnalyzeDTOS = InitialDataAnalyzeUtil.analyzeExcel("doc/country_code.xls", CountryCodeAnalyzeDTO.class, new CountryAnalyzeListener()).getResult();
+        cityAnalyze = InitialDataAnalyzeUtil.analyzeXml("xml/province.xml");
+        provinceAnalyze = InitialDataAnalyzeUtil.analyzeXml("xml/city.xml");
     }
 
     @Override
@@ -64,6 +68,15 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
 
         }
         return Boolean.TRUE;
+    }
+
+    @Override
+    public Boolean analyzeCity() {
+        if (CollectionUtils.isNotEmpty(cityAnalyze)) {
+            Date currentDate = new Date();
+//            cityAnalyze.parallelStream().map(city->DictionaryPO.builder().)
+        }
+        return null;
     }
 
 }
