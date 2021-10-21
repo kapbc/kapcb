@@ -9,12 +9,20 @@ import com.kapcb.ccc.model.initial.CategoryAnalyzeDTO;
 import com.kapcb.ccc.model.initial.CountryCodeAnalyzeDTO;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import org.springframework.lang.NonNull;
+import org.springframework.util.Assert;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /**
  * <a>Title: InitialDataAnalyzeUtil </a>
@@ -62,7 +70,7 @@ public class InitialDataAnalyzeUtil {
         return null;
     }
 
-    public static <M, T extends AnalysisEventListener<M>> T analyze(@NonNull String docPath, @NonNull Class<? extends M> modelClazz, @NonNull T analyzeListener) {
+    public static <M, T extends AnalysisEventListener<M>> T analyzeExcel(@NonNull String docPath, @NonNull Class<? extends M> modelClazz, @NonNull T analyzeListener) {
         String fileName = FileUtil.getPath() + docPath;
         InputStream inputStream = null;
         try {
@@ -77,7 +85,30 @@ public class InitialDataAnalyzeUtil {
         return analyzeListener;
     }
 
+    public static List<String> analyzeXml(String xmlPath) {
+        // 创建SAXReader实例
+        SAXReader saxReader = new SAXReader();
+        String fileName = FileUtil.getPath() + xmlPath;
+        Document document = null;
+        try {
+            // read()读取指定的XML文档并形成DOM树
+            document = saxReader.read(new File(fileName));
+        } catch (DocumentException e) {
+            log.error("analyze xml document error, error message is : {}", e.getMessage());
+        }
+        Assert.notNull(document, "document can not be null!");
+        Element rootElement = document.getRootElement();
+        // elements()获取根节点的子节点
+        List<Element> elements = rootElement.elements();
+        // 获取xml中的内容
+        return elements.parallelStream().map(Element::getText).filter(Objects::nonNull).distinct().collect(Collectors.toList());
+    }
+
     public static void main(String[] args) {
+
+        List<String> strings = analyzeXml("xml/province.xml");
+        System.out.println("strings = " + strings);
+
 //        List<CategoryAnalyzeDTO> categoryAnalyzeDTOS = analyzeProductCategory();
 
 //        CategoryAnalyzeListener analyze = analyze("doc/product_category.xlsx", new CategoryAnalyzeListener());

@@ -38,7 +38,7 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
 
     @PostConstruct
     void init() {
-        countryCodeAnalyzeDTOS = InitialDataAnalyzeUtil.analyze("doc/country_code.xls", CountryCodeAnalyzeDTO.class, new CountryAnalyzeListener()).getResult();
+        countryCodeAnalyzeDTOS = InitialDataAnalyzeUtil.analyzeExcel("doc/country_code.xls", CountryCodeAnalyzeDTO.class, new CountryAnalyzeListener()).getResult();
     }
 
     @Override
