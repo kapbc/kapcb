@@ -78,6 +78,7 @@ public enum StringPool {
     END_POINT_LOG_RETURN_VALUE("request return value is : {}", "return value"),
     END_POINT_LOG_ERROR_MESSAGE("handler request error, error message is : {}", "error message"),
 
+    CHINESE_MATCH_PATTERN("[\\u4e00-\\u9fa5]", "chinese match pattern"),
 
     DICTIONARY_GROUP_COUNTRY("country", "dictionary country group"),
     DICTIONARY_GROUP_CITY("city", "dictionary city group"),
@@ -95,4 +96,4 @@ public enum StringPool {
     public String value() {
         return this.value;
     }
-    }
+}
