@@ -1,5 +1,6 @@
 package com.kapcb.ccc.utils;
 
+import com.kapcb.ccc.enums.IntegerPool;
 import com.kapcb.ccc.enums.StringPool;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
@@ -53,9 +54,9 @@ public class PinYinUtil {
                 for (int i = 0; i < chars.length; i++) {
                     char aChar = chars[i];
                     // 是否含有中文, 有中文则翻译
-                    if (Character.toString(aChar).matches("[\\u4e00-\\u9fa5]")) {
+                    if (Character.toString(aChar).matches(StringPool.CHINESE_MATCH_REGEX.value())) {
                         String[] temp = PinyinHelper.toHanyuPinyinStringArray(aChar, format);
-                        result.append(temp[0]);
+                        result.append(temp[IntegerPool.ZERO.value()]);
                     } else {
                         result.append(aChar);
                     }
