@@ -14,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.util.Date;
@@ -36,14 +37,14 @@ import java.util.stream.Collectors;
 public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, DictionaryPO> implements IDictionaryService {
 
     private static List<CountryCodeAnalyzeDTO> countryCodeAnalyzeDTOS;
-    private static List<String> cityAnalyze;
     private static List<String> provinceAnalyze;
+    private static List<String> cityAnalyze;
 
     @PostConstruct
     void init() {
         countryCodeAnalyzeDTOS = InitialDataAnalyzeUtil.analyzeExcel("doc/country_code.xls", CountryCodeAnalyzeDTO.class, new CountryAnalyzeListener()).getResult();
-        cityAnalyze = InitialDataAnalyzeUtil.analyzeXml("xml/province.xml");
-        provinceAnalyze = InitialDataAnalyzeUtil.analyzeXml("xml/city.xml");
+        provinceAnalyze = InitialDataAnalyzeUtil.analyzeXml("xml/province.xml");
+        cityAnalyze = InitialDataAnalyzeUtil.analyzeXml("xml/city.xml");
     }
 
     @Override
@@ -72,21 +73,30 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
     }
 
     @Override
-    public Boolean analyzeCity() {
-        if (CollectionUtils.isNotEmpty(cityAnalyze)) {
+    @Transactional(rollbackFor = Exception.class)
+    public Boolean analyzeProvince() {
+        if (CollectionUtils.isNotEmpty(provinceAnalyze)) {
             Date currentDate = new Date();
-            List<DictionaryPO> city_dictionary = cityAnalyze.parallelStream().map(city -> DictionaryPO.builder()
+            List<DictionaryPO> provinceDictionary = provinceAnalyze.parallelStream().map(city -> DictionaryPO.builder()
                     .dictionaryCode(PinYinUtil.getUpperAbbreviations(city))
-                    .dictionaryGroup(StringPool.DICTIONARY_GROUP_CITY.value())
+                    .dictionaryGroup(StringPool.DICTIONARY_GROUP_PROVINCE.value())
                     .dictionaryValueEn(city)
                     .dictionaryValueZh(PinYinUtil.getPinYin(city))
-                    .dictionaryDescription("city dictionary")
+                    .dictionaryDescription("province dictionary")
                     .createDate(currentDate)
                     .createBy(LongPool.DEFAULT_SUPER_ADMIN.value()).build()).collect(Collectors.toList());
-
+            provinceDictionary.forEach(province -> this.baseMapper.insert(province));
             return Boolean.TRUE;
         }
         return Boolean.FALSE;
+    }
+
+    @Override
+    public Boolean analyzeCity() {
+        if (CollectionUtils.isNotEmpty(cityAnalyze)) {
+
+        }
+        return null;
     }
 
 }

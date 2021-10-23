@@ -29,6 +29,11 @@ public class DictionaryController {
 //        return dictionaryService.analyzeCountryCode() ? "success" : "fail";
 //    }
 
+//    @GetMapping("province")
+//    public String analyzeProvince() {
+//        return dictionaryService.analyzeProvince() ? "success" : "fail";
+//    }
+
     @GetMapping("city")
     public String analyzeCity() {
         return dictionaryService.analyzeCity() ? "success" : "fail";

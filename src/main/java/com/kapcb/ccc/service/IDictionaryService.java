@@ -16,6 +16,8 @@ public interface IDictionaryService extends IService<DictionaryPO> {
 
     Boolean analyzeCountryCode();
 
+    Boolean analyzeProvince();
+
     Boolean analyzeCity();
 
 }
