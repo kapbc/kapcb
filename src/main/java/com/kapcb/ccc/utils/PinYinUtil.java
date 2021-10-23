@@ -1,5 +1,6 @@
 package com.kapcb.ccc.utils;
 
+import cn.hutool.core.util.StrUtil;
 import com.kapcb.ccc.enums.IntegerPool;
 import com.kapcb.ccc.enums.StringPool;
 import lombok.experimental.UtilityClass;
@@ -11,7 +12,7 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinToneType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.List;
+import java.util.Arrays;
 import java.util.stream.Collectors;
 
 /**
@@ -70,16 +71,30 @@ public class PinYinUtil {
         return StringPool.EMPTY_STRING.value();
     }
 
-    public static void main(String[] args) {
-        List<String> strings = InitialDataAnalyzeUtil.analyzeXml("xml/province.xml");
-        List<String> collect = strings.stream().map(content -> {
-            System.out.println("content = " + content);
+    public static String getUpperAbbreviations(String content) {
+        if (StringUtils.isNotBlank(content)) {
             String pinYin = getPinYin(content);
-            System.out.println("pinYin = " + pinYin);
-            return pinYin;
-        }).collect(Collectors.toList());
-        System.out.println("collect = " + collect);
+            if (StringUtils.isNotBlank(pinYin)) {
+                return Arrays.stream(pinYin.split(StringPool.SPACE.value())).map(keyword -> StrUtil.sub(keyword, 0, 1)).collect(Collectors.joining(StringPool.EMPTY_STRING.value()));
+            }
+        }
+        return null;
     }
 
-
+    public static void main(String[] args) {
+//        List<String> strings = InitialDataAnalyzeUtil.analyzeXml("xml/province.xml");
+//        List<String> collect = strings.stream().map(content -> {
+//            System.out.println("content = " + content);
+//            String pinYin = getPinYin(content);
+//            System.out.println("pinYin = " + pinYin);
+//            return pinYin;
+//        }).collect(Collectors.toList());
+//        System.out.println("collect = " + collect);
+        String chenbo = getPinYin("陈博");
+        System.out.println("chenbo = " + chenbo);
+        String[] split = chenbo.split(StringPool.SPACE.value());
+        System.out.println("split = " + split);
+        String result = Arrays.stream(split).map(keyword -> StrUtil.sub(keyword, 0, 1)).collect(Collectors.joining(StringPool.EMPTY_STRING.value()));
+        System.out.println("result = " + result);
+    }
 }

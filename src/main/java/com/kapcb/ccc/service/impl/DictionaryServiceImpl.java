@@ -9,6 +9,7 @@ import com.kapcb.ccc.model.initial.CountryCodeAnalyzeDTO;
 import com.kapcb.ccc.model.po.DictionaryPO;
 import com.kapcb.ccc.service.IDictionaryService;
 import com.kapcb.ccc.utils.InitialDataAnalyzeUtil;
+import com.kapcb.ccc.utils.PinYinUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
@@ -74,9 +75,18 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
     public Boolean analyzeCity() {
         if (CollectionUtils.isNotEmpty(cityAnalyze)) {
             Date currentDate = new Date();
-//            cityAnalyze.parallelStream().map(city->DictionaryPO.builder().)
+            List<DictionaryPO> city_dictionary = cityAnalyze.parallelStream().map(city -> DictionaryPO.builder()
+                    .dictionaryCode(PinYinUtil.getUpperAbbreviations(city))
+                    .dictionaryGroup(StringPool.DICTIONARY_GROUP_CITY.value())
+                    .dictionaryValueEn(city)
+                    .dictionaryValueZh(PinYinUtil.getPinYin(city))
+                    .dictionaryDescription("city dictionary")
+                    .createDate(currentDate)
+                    .createBy(LongPool.DEFAULT_SUPER_ADMIN.value()).build()).collect(Collectors.toList());
+
+            return Boolean.TRUE;
         }
-        return null;
+        return Boolean.FALSE;
     }
 
 }
