@@ -34,8 +34,13 @@ public enum StringPool {
     EXCLAMATION_SIGN("!", "!号"),
     SLASH("/", "斜杠"),
     DOT(".", "点"),
+    ARE_BRACKET("(", "正括号"),
+    PARENTHESES(")", "反括号"),
 
-    PK_NULL_VALUE("0", "主键为空的字符串值"),
+    ZERO("0", "字符串0"),
+    ONE("1", "字符串1"),
+    FIVE("5", "字符串5"),
+    TEN("10", "字符串10"),
 
     /**
      * SQL programmer

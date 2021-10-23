@@ -1,5 +1,6 @@
 package com.kapcb.ccc.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kapcb.ccc.enums.LongPool;
 import com.kapcb.ccc.enums.StringPool;
@@ -13,6 +14,7 @@ import com.kapcb.ccc.utils.PinYinUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -77,11 +79,11 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
     public Boolean analyzeProvince() {
         if (CollectionUtils.isNotEmpty(provinceAnalyze)) {
             Date currentDate = new Date();
-            List<DictionaryPO> provinceDictionary = provinceAnalyze.parallelStream().map(city -> DictionaryPO.builder()
-                    .dictionaryCode(PinYinUtil.getUpperAbbreviations(city))
+            List<DictionaryPO> provinceDictionary = provinceAnalyze.parallelStream().map(province -> DictionaryPO.builder()
+                    .dictionaryCode(PinYinUtil.getUpperAbbreviations(province))
                     .dictionaryGroup(StringPool.DICTIONARY_GROUP_PROVINCE.value())
-                    .dictionaryValueEn(city)
-                    .dictionaryValueZh(PinYinUtil.getPinYin(city))
+                    .dictionaryValueEn(province)
+                    .dictionaryValueZh(PinYinUtil.getPinYin(province))
                     .dictionaryDescription("province dictionary")
                     .createDate(currentDate)
                     .createBy(LongPool.DEFAULT_SUPER_ADMIN.value()).build()).collect(Collectors.toList());
@@ -94,9 +96,34 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
     @Override
     public Boolean analyzeCity() {
         if (CollectionUtils.isNotEmpty(cityAnalyze)) {
+            Date currentDate = new Date();
+            List<DictionaryPO> provinceDictionary = cityAnalyze.parallelStream().map(DictionaryServiceImpl::convert).map(city -> DictionaryPO.builder()
+                    .dictionaryCode(PinYinUtil.getUpperAbbreviations(city))
+                    .dictionaryGroup(StringPool.DICTIONARY_GROUP_CITY.value())
+                    .dictionaryValueEn(city)
+                    .dictionaryValueZh(PinYinUtil.getPinYin(city))
+                    .dictionaryDescription("city dictionary")
+                    .createDate(currentDate)
+                    .createBy(LongPool.DEFAULT_SUPER_ADMIN.value()).build()).collect(Collectors.toList());
+//            provinceDictionary.forEach(city -> this.baseMapper.insert(city));
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
 
+    private static String convert(String keyword) {
+        if (StringUtils.isNotBlank(keyword)) {
+            return StrUtil.sub(keyword, 0, keyword.indexOf(StringPool.ARE_BRACKET.value())).trim();
         }
         return null;
     }
 
+    public static void main(String[] args) {
+        String convert = convert("北京 (54511)");
+        System.out.println("convert = " + convert);
+        String pinYin = PinYinUtil.getPinYin(convert);
+        System.out.println("pinYin = " + pinYin);
+        String upperAbbreviations = PinYinUtil.getUpperAbbreviations(convert);
+        System.out.println("upperAbbreviations = " + upperAbbreviations);
+    }
 }
