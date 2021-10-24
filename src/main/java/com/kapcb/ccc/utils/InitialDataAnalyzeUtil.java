@@ -6,6 +6,7 @@ import com.alibaba.excel.event.AnalysisEventListener;
 import com.kapcb.ccc.lisenter.CategoryAnalyzeListener;
 import com.kapcb.ccc.lisenter.CountryAnalyzeListener;
 import com.kapcb.ccc.model.initial.CategoryAnalyzeDTO;
+import com.kapcb.ccc.model.initial.CityAnalyzeDTO;
 import com.kapcb.ccc.model.initial.CountryCodeAnalyzeDTO;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
@@ -104,13 +105,39 @@ public class InitialDataAnalyzeUtil {
         return elements.parallelStream().map(Element::getText).filter(Objects::nonNull).distinct().collect(Collectors.toList());
     }
 
+    public static List<CityAnalyzeDTO> analyzeCity(String xmlPath) {
+        SAXReader saxReader = new SAXReader();
+        String fileName = FileUtil.getPath() + xmlPath;
+        Document document = null;
+        try {
+            document = saxReader.read(new File(fileName));
+        } catch (DocumentException e) {
+            log.error("analyze xml document error, error message is : {}", e.getMessage());
+        }
+        Assert.notNull(document, "document can not be null!");
+        Element rootElement = document.getRootElement();
+        List<Element> elements = rootElement.elements();
+        for (Element element : elements) {
+            Element provinceElement = element.element("province");
+            String province = provinceElement.getText();
+
+            Element city = element.element("city");
+            String main = city.elementText("main");
+            String other = city.elementText("other");
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
 
-        List<String> strings = analyzeXml("xml/province.xml");
+        List<CityAnalyzeDTO> strings = analyzeCity("xml/china.xml");
         System.out.println("strings = " + strings);
 
-        List<String> strings1 = analyzeXml("xml/city.xml");
-        System.out.println("strings1 = " + strings1);
+//        List<String> strings = analyzeXml("xml/province.xml");
+//        System.out.println("strings = " + strings);
+//
+//        List<String> strings1 = analyzeXml("xml/city.xml");
+//        System.out.println("strings1 = " + strings1);
 
 //        List<CategoryAnalyzeDTO> categoryAnalyzeDTOS = analyzeProductCategory();
 
