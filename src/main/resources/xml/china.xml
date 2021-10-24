@@ -234,4 +234,8 @@
         <province>特别行政区</province>
         <city>香港 澳门</city>
     </node>
+    <node>
+        <province>直辖市</province>
+        <city>北京市 天津市 上海市 重庆市</city>
+    </node>
 </root>

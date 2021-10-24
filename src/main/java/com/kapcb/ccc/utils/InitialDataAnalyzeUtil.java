@@ -3,6 +3,8 @@ package com.kapcb.ccc.utils;
 import com.alibaba.excel.EasyExcelFactory;
 import com.alibaba.excel.ExcelReader;
 import com.alibaba.excel.event.AnalysisEventListener;
+import com.google.common.collect.Lists;
+import com.kapcb.ccc.enums.StringPool;
 import com.kapcb.ccc.lisenter.CategoryAnalyzeListener;
 import com.kapcb.ccc.lisenter.CountryAnalyzeListener;
 import com.kapcb.ccc.model.initial.CategoryAnalyzeDTO;
@@ -21,6 +23,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -117,15 +120,28 @@ public class InitialDataAnalyzeUtil {
         Assert.notNull(document, "document can not be null!");
         Element rootElement = document.getRootElement();
         List<Element> elements = rootElement.elements();
+        List<CityAnalyzeDTO> result = Lists.newArrayList();
         for (Element element : elements) {
+            CityAnalyzeDTO cityAnalyzeDTO = new CityAnalyzeDTO();
             Element provinceElement = element.element("province");
             String province = provinceElement.getText();
-
+            cityAnalyzeDTO.setProvince(province);
             Element city = element.element("city");
-            String main = city.elementText("main");
-            String other = city.elementText("other");
+            Element mainElement = city.element("main");
+            if (Objects.nonNull(mainElement)) {
+                String main = mainElement.getText();
+                cityAnalyzeDTO.setCapitalCity(main);
+                Element otherElement = city.element("other");
+                if (Objects.nonNull(otherElement)) {
+                    String other = otherElement.getText();
+                    cityAnalyzeDTO.setNonProvincialCapitalCity(Arrays.asList(other.split(StringPool.SPACE.value())));
+                }
+            } else {
+                cityAnalyzeDTO.setNonProvincialCapitalCity(Arrays.asList(city.getText().split(StringPool.SPACE.value())));
+            }
+            result.add(cityAnalyzeDTO);
         }
-        return null;
+        return result;
     }
 
     public static void main(String[] args) {
