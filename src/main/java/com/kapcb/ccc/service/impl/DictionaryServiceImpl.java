@@ -113,6 +113,7 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
                             .eq(DictionaryPO::getDeleteFlag, false)
                             .orderByDesc(DictionaryPO::getCreateDate)
                             .last("LIMIT 1");
+
                     DictionaryPO dictionaryPO = this.baseMapper.selectOne(wrapper);
                     if (Objects.nonNull(dictionaryPO)) {
                         CityAnalyzeDTO.City city = cityList.get(i);
