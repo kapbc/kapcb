@@ -1,11 +1,14 @@
 package com.kapcb.ccc.service.impl;
 
 import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kapcb.ccc.enums.LongPool;
 import com.kapcb.ccc.enums.StringPool;
 import com.kapcb.ccc.lisenter.CountryAnalyzeListener;
 import com.kapcb.ccc.mapper.DictionaryMapper;
+import com.kapcb.ccc.model.initial.CityAnalyzeDTO;
 import com.kapcb.ccc.model.initial.CountryCodeAnalyzeDTO;
 import com.kapcb.ccc.model.po.DictionaryPO;
 import com.kapcb.ccc.service.IDictionaryService;
@@ -19,8 +22,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
@@ -40,13 +45,13 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
 
     private static List<CountryCodeAnalyzeDTO> countryCodeAnalyzeDTOS;
     private static List<String> provinceAnalyze;
-    private static List<String> cityAnalyze;
+    private static List<CityAnalyzeDTO> cityAnalyze;
 
     @PostConstruct
     void init() {
         countryCodeAnalyzeDTOS = InitialDataAnalyzeUtil.analyzeExcel("doc/country_code.xls", CountryCodeAnalyzeDTO.class, new CountryAnalyzeListener()).getResult();
         provinceAnalyze = InitialDataAnalyzeUtil.analyzeXml("xml/province.xml");
-        cityAnalyze = InitialDataAnalyzeUtil.analyzeXml("xml/city.xml");
+        cityAnalyze = InitialDataAnalyzeUtil.analyzeCity("xml/china.xml");
     }
 
     @Override
@@ -97,14 +102,37 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
     public Boolean analyzeCity() {
         if (CollectionUtils.isNotEmpty(cityAnalyze)) {
             Date currentDate = new Date();
-            List<DictionaryPO> provinceDictionary = cityAnalyze.parallelStream().map(DictionaryServiceImpl::convert).map(city -> DictionaryPO.builder()
-                    .dictionaryCode(PinYinUtil.getUpperAbbreviations(city))
-                    .dictionaryGroup(StringPool.DICTIONARY_GROUP_CITY.value())
-                    .dictionaryValueEn(city)
-                    .dictionaryValueZh(PinYinUtil.getPinYin(city))
-                    .dictionaryDescription("city dictionary")
-                    .createDate(currentDate)
-                    .createBy(LongPool.DEFAULT_SUPER_ADMIN.value()).build()).collect(Collectors.toList());
+            LambdaQueryWrapper<DictionaryPO> wrapper = null;
+            List<DictionaryPO> dictionaryPOS = new ArrayList<>();
+            for (CityAnalyzeDTO cityAnalyzeDTO : cityAnalyze) {
+                String province = cityAnalyzeDTO.getProvince();
+                List<CityAnalyzeDTO.City> cityList = cityAnalyzeDTO.getCityList();
+                for (int i = 0; i < cityList.size(); i++) {
+                    wrapper = Wrappers.lambdaQuery();
+                    wrapper.like(DictionaryPO::getDictionaryValueZh, cityAnalyzeDTO.getProvince())
+                            .eq(DictionaryPO::getDictionaryGroup, StringPool.DICTIONARY_GROUP_PROVINCE)
+                            .eq(DictionaryPO::getDeleteFlag, false)
+                            .orderByDesc(DictionaryPO::getCreateDate)
+                            .last("LIMIT 1");
+                    DictionaryPO dictionaryPO = this.baseMapper.selectOne(wrapper);
+                    if (Objects.nonNull(dictionaryPO)) {
+                        CityAnalyzeDTO.City city = cityList.get(i);
+                        DictionaryPO data = new DictionaryPO();
+                        data.setDictionaryValueZh(city.getCity());
+//                    data.setDictionaryValueEn(city.getCity());
+                        data.setSort(i + 1);
+                        data.setCreateDate(currentDate);
+                        data.setCreateBy(LongPool.DEFAULT_SUPER_ADMIN.value());
+                        data.setDictionaryRemark(StringPool.DICTIONARY_REMARK_NON_CAPITAL_CITY.value());
+                        if (city.getCapitalCity()) {
+                            data.setDictionaryRemark(StringPool.DICTIONARY_REMARK_CAPITAL_CITY.value());
+                        }
+                        data.setParentId(dictionaryPO.getParentId());
+                        data.setDictionaryGroup(StringPool.DICTIONARY_GROUP_CITY.value());
+                        dictionaryPOS.add(data);
+                    }
+                }
+            }
 //            provinceDictionary.forEach(city -> this.baseMapper.insert(city));
             return Boolean.TRUE;
         }

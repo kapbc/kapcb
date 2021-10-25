@@ -27,7 +27,16 @@ public class CityAnalyzeDTO implements Serializable {
 
     private String province;
 
-    private String capitalCity;
+    private List<City> cityList;
 
-    private List<String> nonProvincialCapitalCity;
+    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
+    @Builder(toBuilder = true)
+    public class City {
+
+        private String city;
+
+        private Boolean capitalCity;
+    }
 }

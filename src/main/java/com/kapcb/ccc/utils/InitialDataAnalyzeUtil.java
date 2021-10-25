@@ -128,17 +128,19 @@ public class InitialDataAnalyzeUtil {
             cityAnalyzeDTO.setProvince(province);
             Element city = element.element("city");
             Element mainElement = city.element("main");
+            List<CityAnalyzeDTO.City> cityList = Lists.newArrayList();
             if (Objects.nonNull(mainElement)) {
                 String main = mainElement.getText();
-                cityAnalyzeDTO.setCapitalCity(main);
+                cityList.add(CityAnalyzeDTO.City.builder().city(main).capitalCity(Boolean.TRUE).build());
                 Element otherElement = city.element("other");
                 if (Objects.nonNull(otherElement)) {
-                    String other = otherElement.getText();
-                    cityAnalyzeDTO.setNonProvincialCapitalCity(Arrays.asList(other.split(StringPool.SPACE.value())));
+                    List<CityAnalyzeDTO.City> otherList = Arrays.stream(otherElement.getText().split(StringPool.SPACE.value())).map(other -> CityAnalyzeDTO.City.builder().city(other).capitalCity(Boolean.FALSE).build()).collect(Collectors.toList());
+                    cityList.addAll(otherList);
                 }
             } else {
-                cityAnalyzeDTO.setNonProvincialCapitalCity(Arrays.asList(city.getText().split(StringPool.SPACE.value())));
+                cityList.addAll(Arrays.stream(city.getText().split(StringPool.SPACE.value())).map(cityOther -> CityAnalyzeDTO.City.builder().city(cityOther).capitalCity(Boolean.FALSE).build()).collect(Collectors.toList()));
             }
+            cityAnalyzeDTO.setCityList(cityList);
             result.add(cityAnalyzeDTO);
         }
         return result;

@@ -85,6 +85,9 @@ public enum StringPool {
 
     CHINESE_MATCH_REGEX("[\\u4e00-\\u9fa5]", "chinese match regex"),
 
+
+    DICTIONARY_REMARK_CAPITAL_CITY("capital", "capital city remark"),
+    DICTIONARY_REMARK_NON_CAPITAL_CITY("default", "non capital city remark"),
     DICTIONARY_GROUP_COUNTRY("country", "dictionary country group"),
     DICTIONARY_GROUP_CITY("city", "dictionary city group"),
     DICTIONARY_GROUP_PROVINCE("province", "dictionary province group");

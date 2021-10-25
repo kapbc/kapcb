@@ -76,4 +76,10 @@ public class DictionaryPO implements Serializable {
     @Version
     @TableField(value = "version")
     private Integer version;
+
+    @TableField(value = "parent_id")
+    private Integer parentId;
+
+    @TableField(value = "sort")
+    private Integer sort;
 }
