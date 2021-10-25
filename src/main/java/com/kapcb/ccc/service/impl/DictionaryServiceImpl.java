@@ -107,6 +107,7 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
             for (CityAnalyzeDTO cityAnalyzeDTO : cityAnalyze) {
                 List<CityAnalyzeDTO.City> cityList = cityAnalyzeDTO.getCityList();
                 for (int i = 0; i < cityList.size(); i++) {
+
                     wrapper = Wrappers.lambdaQuery();
                     wrapper.like(DictionaryPO::getDictionaryValueZh, StrUtil.sub(cityAnalyzeDTO.getProvince(), 0, cityAnalyzeDTO.getProvince().length() - 1))
                             .eq(DictionaryPO::getDictionaryGroup, StringPool.DICTIONARY_GROUP_PROVINCE.value())
