@@ -104,18 +104,16 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
             Date currentDate = new Date();
             LambdaQueryWrapper<DictionaryPO> wrapper = null;
             List<DictionaryPO> dictionaryPOS = new ArrayList<>();
+            wrapper = Wrappers.lambdaQuery();
+            wrapper.eq(DictionaryPO::getDictionaryGroup, StringPool.DICTIONARY_GROUP_PROVINCE.value())
+                    .eq(DictionaryPO::getDeleteFlag, false);
+            List<DictionaryPO> dictionaryPOS1 = this.baseMapper.selectList(wrapper);
             for (CityAnalyzeDTO cityAnalyzeDTO : cityAnalyze) {
                 List<CityAnalyzeDTO.City> cityList = cityAnalyzeDTO.getCityList();
+                String province1 = cityAnalyzeDTO.getProvince();
+                DictionaryPO dictionaryPO = dictionaryPOS1.parallelStream().filter(province -> Objects.equals(province.getDictionaryValueZh(), StrUtil.sub(province1, 0, province1.length() - 1)))
+                        .findAny().orElse(null);
                 for (int i = 0; i < cityList.size(); i++) {
-
-                    wrapper = Wrappers.lambdaQuery();
-                    wrapper.like(DictionaryPO::getDictionaryValueZh, StrUtil.sub(cityAnalyzeDTO.getProvince(), 0, cityAnalyzeDTO.getProvince().length() - 1))
-                            .eq(DictionaryPO::getDictionaryGroup, StringPool.DICTIONARY_GROUP_PROVINCE.value())
-                            .eq(DictionaryPO::getDeleteFlag, false)
-                            .orderByDesc(DictionaryPO::getCreateDate)
-                            .last("LIMIT 1");
-
-                    DictionaryPO dictionaryPO = this.baseMapper.selectOne(wrapper);
                     if (Objects.nonNull(dictionaryPO)) {
                         CityAnalyzeDTO.City city = cityList.get(i);
                         DictionaryPO data = new DictionaryPO();
@@ -154,5 +152,16 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
         System.out.println("pinYin = " + pinYin);
         String upperAbbreviations = PinYinUtil.getUpperAbbreviations(convert);
         System.out.println("upperAbbreviations = " + upperAbbreviations);
+
+
+        String a = "广东";
+        String b = "广东";
+        boolean equals = a.equals(b);
+        System.out.println("equals = " + equals);
+
+        String c = "湖北省";
+        String ccc = StrUtil.sub(c, 0, c.length() - 1);
+        System.out.println("ccc = " + ccc);
+
     }
 }
