@@ -111,14 +111,15 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
             for (CityAnalyzeDTO cityAnalyzeDTO : cityAnalyze) {
                 List<CityAnalyzeDTO.City> cityList = cityAnalyzeDTO.getCityList();
                 String province1 = cityAnalyzeDTO.getProvince();
-                DictionaryPO dictionaryPO = dictionaryPOS1.parallelStream().filter(province -> Objects.equals(province.getDictionaryValueZh(), StrUtil.sub(province1, 0, province1.length() - 1)))
+                DictionaryPO dictionaryPO = dictionaryPOS1.parallelStream().filter(province -> Objects.equals(province.getDictionaryValueEn(), StrUtil.sub(province1, 0, province1.length() - 1)))
                         .findAny().orElse(null);
                 for (int i = 0; i < cityList.size(); i++) {
                     if (Objects.nonNull(dictionaryPO)) {
                         CityAnalyzeDTO.City city = cityList.get(i);
                         DictionaryPO data = new DictionaryPO();
                         data.setDictionaryValueZh(city.getCity());
-//                    data.setDictionaryValueEn(city.getCity());
+                        data.setDictionaryValueEn(PinYinUtil.getPinYin(StrUtil.sub(city.getCity(), 0, city.getCity().length() - 1)));
+                        data.setDictionaryCode(PinYinUtil.getUpperAbbreviations(StrUtil.sub(city.getCity(), 0, city.getCity().length() - 1)));
                         data.setSort(i + 1);
                         data.setCreateDate(currentDate);
                         data.setCreateBy(LongPool.DEFAULT_SUPER_ADMIN.value());
@@ -126,7 +127,7 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
                         if (city.getCapitalCity()) {
                             data.setDictionaryRemark(StringPool.DICTIONARY_REMARK_CAPITAL_CITY.value());
                         }
-                        data.setParentId(dictionaryPO.getParentId());
+                        data.setParentId(dictionaryPO.getDictionaryId());
                         data.setDictionaryGroup(StringPool.DICTIONARY_GROUP_CITY.value());
                         dictionaryPOS.add(data);
                     }
