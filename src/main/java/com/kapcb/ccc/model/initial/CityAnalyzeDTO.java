@@ -33,7 +33,7 @@ public class CityAnalyzeDTO implements Serializable {
     @NoArgsConstructor
     @AllArgsConstructor
     @Builder(toBuilder = true)
-    public class City {
+    public static class City {
 
         private String city;
 

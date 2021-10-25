@@ -105,12 +105,11 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
             LambdaQueryWrapper<DictionaryPO> wrapper = null;
             List<DictionaryPO> dictionaryPOS = new ArrayList<>();
             for (CityAnalyzeDTO cityAnalyzeDTO : cityAnalyze) {
-                String province = cityAnalyzeDTO.getProvince();
                 List<CityAnalyzeDTO.City> cityList = cityAnalyzeDTO.getCityList();
                 for (int i = 0; i < cityList.size(); i++) {
                     wrapper = Wrappers.lambdaQuery();
-                    wrapper.like(DictionaryPO::getDictionaryValueZh, cityAnalyzeDTO.getProvince())
-                            .eq(DictionaryPO::getDictionaryGroup, StringPool.DICTIONARY_GROUP_PROVINCE)
+                    wrapper.like(DictionaryPO::getDictionaryValueZh, StrUtil.sub(cityAnalyzeDTO.getProvince(), 0, cityAnalyzeDTO.getProvince().length() - 1))
+                            .eq(DictionaryPO::getDictionaryGroup, StringPool.DICTIONARY_GROUP_PROVINCE.value())
                             .eq(DictionaryPO::getDeleteFlag, false)
                             .orderByDesc(DictionaryPO::getCreateDate)
                             .last("LIMIT 1");
