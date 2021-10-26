@@ -133,7 +133,6 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
                     }
                 }
             }
-
 //            provinceDictionary.forEach(city -> this.baseMapper.insert(city));
             return Boolean.TRUE;
         }
