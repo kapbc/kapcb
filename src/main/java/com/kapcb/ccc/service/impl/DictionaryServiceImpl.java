@@ -142,6 +142,7 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
 
     @Override
     public Boolean test() {
+
         LambdaQueryWrapper<DictionaryPO> wrapper = Wrappers.lambdaQuery();
         wrapper.eq(DictionaryPO::getDictionaryGroup, StringPool.DICTIONARY_GROUP_PROVINCE.value())
                 .eq(DictionaryPO::getDeleteFlag, false);
@@ -153,6 +154,7 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
             dictionaryPO.setDictionaryValueZh(dictionaryValueEn);
             this.baseMapper.updateById(dictionaryPO);
         }
+
         return true;
     }
 
