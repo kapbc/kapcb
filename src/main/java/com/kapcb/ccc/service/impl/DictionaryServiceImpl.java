@@ -170,16 +170,5 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
         System.out.println("pinYin = " + pinYin);
         String upperAbbreviations = PinYinUtil.getUpperAbbreviations(convert);
         System.out.println("upperAbbreviations = " + upperAbbreviations);
-
-
-        String a = "广东";
-        String b = "广东";
-        boolean equals = a.equals(b);
-        System.out.println("equals = " + equals);
-
-        String c = "湖北省";
-        String ccc = StrUtil.sub(c, 0, c.length() - 1);
-        System.out.println("ccc = " + ccc);
-
     }
 }
