@@ -164,11 +164,14 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
     }
 
     public static void main(String[] args) {
+
         String convert = convert("北京 (54511)");
         System.out.println("convert = " + convert);
         String pinYin = PinYinUtil.getPinYin(convert);
         System.out.println("pinYin = " + pinYin);
         String upperAbbreviations = PinYinUtil.getUpperAbbreviations(convert);
         System.out.println("upperAbbreviations = " + upperAbbreviations);
+
     }
+
 }
