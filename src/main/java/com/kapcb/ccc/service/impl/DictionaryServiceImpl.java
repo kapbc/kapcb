@@ -4,6 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.google.common.collect.Lists;
 import com.kapcb.ccc.enums.LongPool;
 import com.kapcb.ccc.enums.StringPool;
 import com.kapcb.ccc.lisenter.CountryAnalyzeListener;
@@ -138,6 +139,23 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
             return Boolean.TRUE;
         }
         return Boolean.FALSE;
+    }
+
+    @Override
+    public Boolean test() {
+        LambdaQueryWrapper<DictionaryPO> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(DictionaryPO::getDictionaryGroup, StringPool.DICTIONARY_GROUP_PROVINCE.value())
+                .eq(DictionaryPO::getDeleteFlag, false);
+        List<DictionaryPO> dictionaryPOS = this.baseMapper.selectList(wrapper);
+        List<DictionaryPO> result = Lists.newArrayList();
+        for (DictionaryPO dictionaryPO : dictionaryPOS) {
+            String dictionaryValueEn = dictionaryPO.getDictionaryValueEn();
+            String dictionaryValueZh = dictionaryPO.getDictionaryValueZh();
+            dictionaryPO.setDictionaryValueEn(dictionaryValueZh);
+            dictionaryPO.setDictionaryValueZh(dictionaryValueEn);
+            result.add(dictionaryPO);
+        }
+        return true;
     }
 
     private static String convert(String keyword) {

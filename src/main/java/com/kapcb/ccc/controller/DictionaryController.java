@@ -38,4 +38,9 @@ public class DictionaryController {
     public String analyzeCity() {
         return dictionaryService.analyzeCity() ? "success" : "fail";
     }
+
+    @GetMapping("test")
+    public String test(){
+        return dictionaryService.test() ? "success" : "fail";
+    }
 }
