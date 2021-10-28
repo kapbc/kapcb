@@ -202,7 +202,5 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
         System.out.println("pinYin = " + pinYin);
         String upperAbbreviations = PinYinUtil.getUpperAbbreviations(convert);
         System.out.println("upperAbbreviations = " + upperAbbreviations);
-
     }
-
 }
