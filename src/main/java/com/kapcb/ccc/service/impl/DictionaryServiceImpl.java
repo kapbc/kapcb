@@ -19,6 +19,7 @@ import com.kapcb.ccc.utils.InitialDataAnalyzeUtil;
 import com.kapcb.ccc.utils.PinYinUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -202,5 +203,26 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
         System.out.println("pinYin = " + pinYin);
         String upperAbbreviations = PinYinUtil.getUpperAbbreviations(convert);
         System.out.println("upperAbbreviations = " + upperAbbreviations);
+
+        String s = DigestUtils.md5Hex("123456789");
+        System.out.println("s = " + s);
+
+    }
+
+    private static String reverseString(String s) {
+        if (s == null || s.length() == 0) {
+            return s;
+        }
+        char[] array = s.toCharArray();
+        for (int left = 0, right = array.length - 1; left < right; left++, right--) {
+            swap(array, left, right);
+        }
+        return new String(array);
+    }
+
+    private static void swap(char[] array, int left, int right) {
+        char temp = array[left];
+        array[left] = array[right];
+        array[right] = temp;
     }
 }
