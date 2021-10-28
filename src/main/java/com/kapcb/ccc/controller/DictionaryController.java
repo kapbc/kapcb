@@ -1,11 +1,14 @@
 package com.kapcb.ccc.controller;
 
+import com.kapcb.ccc.model.vo.LocationVO;
 import com.kapcb.ccc.service.IDictionaryService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * <a>Title: DictionaryController </a>
@@ -39,4 +42,8 @@ public class DictionaryController {
 //        return dictionaryService.analyzeCity() ? "success" : "fail";
 //    }
 
+    @GetMapping("all")
+    public List<LocationVO> all() {
+        return dictionaryService.getAllLocation();
+    }
 }

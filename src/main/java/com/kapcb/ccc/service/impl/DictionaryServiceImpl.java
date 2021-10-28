@@ -4,6 +4,8 @@ import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.google.common.collect.Lists;
+import com.kapcb.ccc.enums.IntegerPool;
 import com.kapcb.ccc.enums.LongPool;
 import com.kapcb.ccc.enums.StringPool;
 import com.kapcb.ccc.lisenter.CountryAnalyzeListener;
@@ -11,6 +13,7 @@ import com.kapcb.ccc.mapper.DictionaryMapper;
 import com.kapcb.ccc.model.initial.CityAnalyzeDTO;
 import com.kapcb.ccc.model.initial.CountryCodeAnalyzeDTO;
 import com.kapcb.ccc.model.po.DictionaryPO;
+import com.kapcb.ccc.model.vo.LocationVO;
 import com.kapcb.ccc.service.IDictionaryService;
 import com.kapcb.ccc.utils.InitialDataAnalyzeUtil;
 import com.kapcb.ccc.utils.PinYinUtil;
@@ -138,6 +141,40 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
         }
         return Boolean.FALSE;
     }
+
+    @Override
+    public List<LocationVO> getAllLocation() {
+        LambdaQueryWrapper<DictionaryPO> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(DictionaryPO::getDeleteFlag, false)
+                .in(DictionaryPO::getDictionaryGroup, Lists.newArrayList(StringPool.DICTIONARY_GROUP_CITY.value(), StringPool.DICTIONARY_GROUP_COUNTRY.value(), StringPool.DICTIONARY_GROUP_PROVINCE.value()));
+        List<DictionaryPO> dictionaryPOS = this.baseMapper.selectList(wrapper);
+        if (CollectionUtils.isNotEmpty(dictionaryPOS)) {
+            List<LocationVO> locationList = dictionaryPOS.stream().map(dictionary -> CompletableFuture.supplyAsync(() -> LocationVO.builder()
+                    .id(dictionary.getDictionaryId())
+                    .parentId(dictionary.getParentId())
+                    .locationEn(dictionary.getDictionaryValueEn())
+                    .locationZh(dictionary.getDictionaryValueZh())
+                    .children(new ArrayList<>()).build())).map(CompletableFuture::join).collect(Collectors.toList());
+
+            List<LocationVO> parentNode = locationList.stream().filter(dictionary -> IntegerPool.ZERO.value().equals(dictionary.getParentId())).distinct().collect(Collectors.toList());
+
+            if (CollectionUtils.isNotEmpty(parentNode)) {
+                parentNode.forEach(parent -> parent = handler(parent, locationList));
+                return parentNode;
+            }
+        }
+        return null;
+    }
+
+    private LocationVO handler(LocationVO parentNode, List<LocationVO> all) {
+        all.forEach(a -> {
+            if (Objects.equals(parentNode.getId(), a.getParentId())) {
+                parentNode.getChildren().add(handler(a, all));
+            }
+        });
+        return parentNode;
+    }
+
     private static String convert(String keyword) {
         if (StringUtils.isNotBlank(keyword)) {
             return StrUtil.sub(keyword, 0, keyword.indexOf(StringPool.ARE_BRACKET.value())).trim();

@@ -2,6 +2,9 @@ package com.kapcb.ccc.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.kapcb.ccc.model.po.DictionaryPO;
+import com.kapcb.ccc.model.vo.LocationVO;
+
+import java.util.List;
 
 /**
  * <a>Title: IDictionaryService </a>
@@ -20,4 +23,5 @@ public interface IDictionaryService extends IService<DictionaryPO> {
 
     Boolean analyzeCity();
 
+    List<LocationVO> getAllLocation();
 }
