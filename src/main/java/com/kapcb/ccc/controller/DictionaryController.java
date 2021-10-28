@@ -46,4 +46,9 @@ public class DictionaryController {
     public List<LocationVO> all() {
         return dictionaryService.getAllLocation();
     }
+
+    @GetMapping("trim")
+    public void trim() {
+        dictionaryService.trim();
+    }
 }

@@ -166,6 +166,18 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
         return null;
     }
 
+    @Override
+    public void trim() {
+        LambdaQueryWrapper<DictionaryPO> wrapper = Wrappers.lambdaQuery();
+        wrapper.eq(DictionaryPO::getDeleteFlag, false)
+                .in(DictionaryPO::getDictionaryGroup, Lists.newArrayList(StringPool.DICTIONARY_GROUP_PROVINCE.value(), StringPool.DICTIONARY_GROUP_CITY.value()));
+        List<DictionaryPO> dictionaryPOS = this.baseMapper.selectList(wrapper);
+        dictionaryPOS.forEach(dictionary -> CompletableFuture.runAsync(() -> {
+            dictionary.setDictionaryValueEn(dictionary.getDictionaryValueEn().trim());
+            this.baseMapper.updateById(dictionary);
+        }).join());
+    }
+
     private LocationVO handler(LocationVO parentNode, List<LocationVO> all) {
         all.forEach(a -> {
             if (Objects.equals(parentNode.getId(), a.getParentId())) {

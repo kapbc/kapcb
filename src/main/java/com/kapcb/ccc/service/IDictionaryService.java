@@ -24,4 +24,7 @@ public interface IDictionaryService extends IService<DictionaryPO> {
     Boolean analyzeCity();
 
     List<LocationVO> getAllLocation();
+
+    void trim();
+
 }
