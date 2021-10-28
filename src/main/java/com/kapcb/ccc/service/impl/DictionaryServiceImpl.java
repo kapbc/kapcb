@@ -43,15 +43,15 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, DictionaryPO> implements IDictionaryService {
 
-    private static List<CountryCodeAnalyzeDTO> countryCodeAnalyzeDTOS;
     private static List<String> provinceAnalyze;
     private static List<CityAnalyzeDTO> cityAnalyze;
+    private static List<CountryCodeAnalyzeDTO> countryCodeAnalyzeDTOS;
 
     @PostConstruct
     void init() {
-        countryCodeAnalyzeDTOS = InitialDataAnalyzeUtil.analyzeExcel("doc/country_code.xls", CountryCodeAnalyzeDTO.class, new CountryAnalyzeListener()).getResult();
-        provinceAnalyze = InitialDataAnalyzeUtil.analyzeXml("xml/province.xml");
         cityAnalyze = InitialDataAnalyzeUtil.analyzeCity("xml/china.xml");
+        provinceAnalyze = InitialDataAnalyzeUtil.analyzeXml("xml/province.xml");
+        countryCodeAnalyzeDTOS = InitialDataAnalyzeUtil.analyzeExcel("doc/country_code.xls", CountryCodeAnalyzeDTO.class, new CountryAnalyzeListener()).getResult();
     }
 
     @Override
