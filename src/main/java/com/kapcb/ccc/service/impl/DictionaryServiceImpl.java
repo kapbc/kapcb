@@ -87,8 +87,8 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
             List<DictionaryPO> provinceDictionary = provinceAnalyze.parallelStream().map(province -> DictionaryPO.builder()
                     .dictionaryCode(PinYinUtil.getUpperAbbreviations(province))
                     .dictionaryGroup(StringPool.DICTIONARY_GROUP_PROVINCE.value())
-                    .dictionaryValueEn(province)
-                    .dictionaryValueZh(PinYinUtil.getPinYin(province))
+                    .dictionaryValueEn(PinYinUtil.getPinYin(province))
+                    .dictionaryValueZh(province)
                     .dictionaryDescription("province dictionary")
                     .createDate(currentDate)
                     .createBy(LongPool.DEFAULT_SUPER_ADMIN.value()).build()).collect(Collectors.toList());
