@@ -24,23 +24,19 @@ public class DictionaryController {
 
     private final IDictionaryService dictionaryService;
 
-    @GetMapping("countryCode")
-    public String analyzeCountryCode() {
-        return dictionaryService.analyzeCountryCode() ? "success" : "fail";
-    }
+//    @GetMapping("countryCode")
+//    public String analyzeCountryCode() {
+//        return dictionaryService.analyzeCountryCode() ? "success" : "fail";
+//    }
+//
+//    @GetMapping("province")
+//    public String analyzeProvince() {
+//        return dictionaryService.analyzeProvince() ? "success" : "fail";
+//    }
 
-    @GetMapping("province")
-    public String analyzeProvince() {
-        return dictionaryService.analyzeProvince() ? "success" : "fail";
-    }
+//    @GetMapping("city")
+//    public String analyzeCity() {
+//        return dictionaryService.analyzeCity() ? "success" : "fail";
+//    }
 
-    @GetMapping("city")
-    public String analyzeCity() {
-        return dictionaryService.analyzeCity() ? "success" : "fail";
-    }
-
-    @GetMapping("test")
-    public String test(){
-        return dictionaryService.test() ? "success" : "fail";
-    }
 }

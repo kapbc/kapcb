@@ -20,6 +20,4 @@ public interface IDictionaryService extends IService<DictionaryPO> {
 
     Boolean analyzeCity();
 
-    Boolean test();
-
 }

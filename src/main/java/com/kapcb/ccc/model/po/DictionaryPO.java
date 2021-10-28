@@ -55,7 +55,7 @@ public class DictionaryPO implements Serializable {
     private String dictionaryRemark;
 
     @TableField(value = "dictionary_num")
-    private String dictionaryNum;
+    private Integer dictionaryNum;
 
     @TableField(value = "create_date")
     private Date createDate;
@@ -79,7 +79,4 @@ public class DictionaryPO implements Serializable {
 
     @TableField(value = "parent_id")
     private Integer parentId;
-
-    @TableField(value = "sort")
-    private Integer sort;
 }
