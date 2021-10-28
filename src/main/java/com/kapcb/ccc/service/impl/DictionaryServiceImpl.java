@@ -89,6 +89,7 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
                     .dictionaryGroup(StringPool.DICTIONARY_GROUP_PROVINCE.value())
                     .dictionaryValueEn(PinYinUtil.getPinYin(province))
                     .dictionaryValueZh(province)
+                    .parentId(10044)
                     .dictionaryDescription("province dictionary")
                     .createDate(currentDate)
                     .createBy(LongPool.DEFAULT_SUPER_ADMIN.value()).build()).collect(Collectors.toList());
