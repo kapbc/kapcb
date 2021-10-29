@@ -47,8 +47,8 @@ public class DictionaryController {
         return dictionaryService.getAllLocation();
     }
 
-    @GetMapping("trim")
-    public void trim() {
-        dictionaryService.trim();
-    }
+//    @GetMapping("trim")
+//    public void trim() {
+//        dictionaryService.trim();
+//    }
 }
