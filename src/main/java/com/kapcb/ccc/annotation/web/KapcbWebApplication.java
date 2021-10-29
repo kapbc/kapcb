@@ -2,6 +2,7 @@ package com.kapcb.ccc.annotation.web;
 
 import com.kapcb.ccc.configure.IndexConfiguration;
 import com.kapcb.ccc.properties.EndPointAutoConfigureProperties;
+import com.kapcb.ccc.properties.JwtConfigureProperties;
 import com.kapcb.ccc.properties.ShiroRedisProperties;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -30,6 +31,7 @@ import java.lang.annotation.Target;
 @EnableConfigurationProperties(value = {
         IndexConfiguration.class,
         ShiroRedisProperties.class,
+        JwtConfigureProperties.class,
         EndPointAutoConfigureProperties.class
 })
 @MapperScan(basePackages = {"com.kapcb.ccc.mapper"})
