@@ -12,7 +12,9 @@ import io.vavr.collection.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -39,6 +41,7 @@ import org.springframework.web.filter.CorsFilter;
 @Slf4j
 @EnableWebSecurity
 @RequiredArgsConstructor
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -54,6 +57,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.csrf()
+                .disable() // 使用JWT, 不需要csrf
+                .sessionManagement() // 基于token, 所以不需要使用session
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeRequests()
+                .antMatchers(HttpMethod.GET, "/static/**", "/category/**", "/dictionary/**") // 允许对静态资源文件的无授权访问
+                .permitAll()
+                .antMatchers("/login", "/register") // 允许登录注册
+                .permitAll()
+                .antMatchers(HttpMethod.OPTIONS) // 跨域请求会先进行一次options试探请求
+                .permitAll()
+                .antMatchers("/**") // 测试时允许所有请求
+                .permitAll()
+                .anyRequest() // 以上之外的所有请求都需要鉴权认证
+                .authenticated();
+
+        // 禁用缓存
+        http.headers().cacheControl();
+
+
         // 使用JWT 关闭token
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()

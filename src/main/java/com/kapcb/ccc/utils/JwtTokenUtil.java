@@ -1,6 +1,7 @@
 package com.kapcb.ccc.utils;
 
 import com.kapcb.ccc.context.ApplicationContextProvider;
+import com.kapcb.ccc.model.po.UserPO;
 import com.kapcb.ccc.properties.JwtConfigureProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -76,7 +77,7 @@ public class JwtTokenUtil {
         return username;
     }
 
-    public static Long userId(String token) {
+    public static Long getUserId(String token) {
         Long userId = null;
         try {
             Claims claims = getClaims(token);
@@ -89,8 +90,8 @@ public class JwtTokenUtil {
         return userId;
     }
 
-    public static boolean validateToken(String token, Long userId) {
-
+    public static boolean validateToken(String token, UserPO userPO) {
+        return expired(token) && Objects.nonNull(userPO) && Objects.equals(getUserId(token), userPO.getUserId());
     }
 
     public static boolean expired(String token) {
