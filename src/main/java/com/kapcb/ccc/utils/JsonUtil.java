@@ -104,16 +104,16 @@ public class JsonUtil {
      * @return String
      */
     public static <T> String convertObjectToString(T object) {
-        if (Objects.equals(null, object)) {
-            return null;
+        if (Objects.isNull(object)) {
+            throw new IllegalArgumentException("object can not be null");
         }
         String convertResult = null;
         try {
-            return object instanceof String ? (String) object : OBJECT_MAPPER.writeValueAsString(object);
+            convertResult = object instanceof String ? (String) object : OBJECT_MAPPER.writeValueAsString(object);
         } catch (JsonProcessingException e) {
             log.error("json process error, the exception is : " + e.getMessage());
-            return null;
         }
+        return convertResult;
     }
 
     @SuppressWarnings("unchecked")

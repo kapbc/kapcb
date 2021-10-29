@@ -1,8 +1,8 @@
 package com.kapcb.ccc.handler;
 
 import cn.hutool.http.ContentType;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kapcb.ccc.enums.StringPool;
+import com.kapcb.ccc.utils.JsonUtil;
 import com.kapcb.ccc.utils.JwtAuthenticationUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -34,13 +34,12 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String accessToken = JwtAuthenticationUtil.generateToken(userDetails.getUsername(), 100000000000L, null);
-        httpServletResponse.setContentType(ContentType.JSON.toString());
+        httpServletResponse.setContentType(ContentType.JSON.getValue());
         Map<String, Object> resultMap = new HashMap<>(2);
         resultMap.put("data", StringPool.AUTHORIZATION_BEARER.value() + accessToken);
         resultMap.put("msg", "login success!");
         resultMap.put("code", "200");
-        ObjectMapper objectMapper = new ObjectMapper();
-        String s = objectMapper.writeValueAsString(resultMap);
+        String s = JsonUtil.convertObjectToString(resultMap);
         httpServletResponse.getWriter().write(s);
         httpServletResponse.getWriter().flush();
         httpServletResponse.getWriter().close();
