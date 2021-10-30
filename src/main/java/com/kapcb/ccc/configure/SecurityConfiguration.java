@@ -67,8 +67,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .antMatchers(HttpMethod.OPTIONS) // 跨域请求会先进行一次options试探请求
                 .permitAll()
-                .antMatchers("/**") // 测试时允许所有请求
-                .permitAll()
+//                .antMatchers("/**") // 测试时允许所有请求
+//                .permitAll()
                 .anyRequest() // 以上之外的所有请求都需要鉴权认证
                 .authenticated()
                 .and().formLogin()
