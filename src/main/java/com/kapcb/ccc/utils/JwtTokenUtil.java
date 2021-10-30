@@ -40,10 +40,9 @@ public class JwtTokenUtil {
         jwtConfigureProperties = ApplicationContextProvider.getBean("jwtConfigureProperties", JwtConfigureProperties.class);
     }
 
-    public static String generateToke(String username, Long userId) {
+    public static String generateToke(String username) {
         Map<String, Object> claims = new HashMap<>(2);
         claims.put(CLAIM_KEY_USERNAME, username);
-        claims.put(USER_ID, userId);
         claims.put(CLAIM_KEY_CREATED, calendar.getTime());
         return generateJwtToken(claims);
     }
@@ -77,21 +76,8 @@ public class JwtTokenUtil {
         return username;
     }
 
-    public static Long getUserId(String token) {
-        Long userId = null;
-        try {
-            Claims claims = getClaims(token);
-            if (Objects.nonNull(claims)) {
-                userId = (Long) claims.get(USER_ID);
-            }
-        } catch (Exception e) {
-            log.error("get user id from token error, error message is : {}", e.getMessage());
-        }
-        return userId;
-    }
-
     public static boolean validateToken(String token, UserPO userPO) {
-        return expired(token) && Objects.nonNull(userPO) && Objects.equals(getUserId(token), userPO.getUserId());
+        return expired(token) && Objects.nonNull(userPO) && Objects.equals(getUsername(token), userPO.getNickName());
     }
 
     public static boolean expired(String token) {

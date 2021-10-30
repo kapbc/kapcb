@@ -1,7 +1,9 @@
 package com.kapcb.ccc.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.kapcb.ccc.enums.StringPool;
 import com.kapcb.ccc.mapper.UserMapper;
 import com.kapcb.ccc.model.po.UserPO;
 import com.kapcb.ccc.service.IUserService;
@@ -65,9 +67,8 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, UserPO> implements 
 
     @Override
     public UserPO getUserByUsername(@NonNull String username) {
-        LambdaQueryWrapper<UserPO> wrapper = new LambdaQueryWrapper<>();
-        return this.baseMapper.selectOne(wrapper.eq(StringUtils.isNoneBlank(username), UserPO::getNickName, username));
-//        return this.baseMapper.selectOne(new LambdaQueryWrapper<UserPO>().eq(UserPO::getNickName, username).orderByDesc(UserPO::getCreateDate).last("LIMIT 1"));
+        LambdaQueryWrapper<UserPO> wrapper = Wrappers.lambdaQuery();
+        return this.baseMapper.selectOne(wrapper.eq(StringUtils.isNoneBlank(username), UserPO::getNickName, username).last(StringPool.LIMIT.value() + " 1"));
     }
 
     @Override
