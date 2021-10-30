@@ -1,5 +1,4 @@
-package com.kapcb.ccc.strtus;
-
+package com.kapcb.ccc.struts;
 
 import com.kapcb.ccc.model.po.DictionaryPO;
 import com.kapcb.ccc.model.vo.LocationVO;
@@ -8,18 +7,18 @@ import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
 /**
- * <a>Title: UserStrtus </a>
+ * <a>Title: UserConvertMapper </a>
  * <a>Author: Kapcb <a>
- * <a>Description: UserStrtus <a>
+ * <a>Description: UserConvertMapper <a>
  *
  * @author Kapcb
  * @version 1.0.0
  * @date 2021/10/30 18:52
  */
 @Mapper(componentModel = "spring")
-public interface UserConvertMapper {
+public interface DictionaryConvertMapper {
 
-    UserConvertMapper instance = Mappers.getMapper(UserConvertMapper.class);
+    DictionaryConvertMapper instance = Mappers.getMapper(DictionaryConvertMapper.class);
 
     /**
      * convert DictionaryPO to LocationVO
@@ -32,5 +31,5 @@ public interface UserConvertMapper {
     @Mapping(source = "dictionaryId", target = "id")
     @Mapping(source = "dictionaryValueEn", target = "locationEn")
     @Mapping(source = "dictionaryValueZh", target = "locationZh")
-    LocationVO conver(DictionaryPO dictionaryPO);
+    LocationVO convertLocation(DictionaryPO dictionaryPO);
 }
