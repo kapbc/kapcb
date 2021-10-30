@@ -15,6 +15,7 @@ import com.kapcb.ccc.model.initial.CountryCodeAnalyzeDTO;
 import com.kapcb.ccc.model.po.DictionaryPO;
 import com.kapcb.ccc.model.vo.LocationVO;
 import com.kapcb.ccc.service.IDictionaryService;
+import com.kapcb.ccc.strtus.UserConvertMapper;
 import com.kapcb.ccc.utils.InitialDataAnalyzeUtil;
 import com.kapcb.ccc.utils.PinYinUtil;
 import lombok.RequiredArgsConstructor;
@@ -150,12 +151,7 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
                 .in(DictionaryPO::getDictionaryGroup, Lists.newArrayList(StringPool.DICTIONARY_GROUP_CITY.value(), StringPool.DICTIONARY_GROUP_COUNTRY.value(), StringPool.DICTIONARY_GROUP_PROVINCE.value()));
         List<DictionaryPO> dictionaryPOS = this.baseMapper.selectList(wrapper);
         if (CollectionUtils.isNotEmpty(dictionaryPOS)) {
-            List<LocationVO> locationList = dictionaryPOS.stream().map(dictionary -> CompletableFuture.supplyAsync(() -> LocationVO.builder()
-                    .id(dictionary.getDictionaryId())
-                    .parentId(dictionary.getParentId())
-                    .locationEn(dictionary.getDictionaryValueEn())
-                    .locationZh(dictionary.getDictionaryValueZh())
-                    .children(new ArrayList<>()).build())).map(CompletableFuture::join).collect(Collectors.toList());
+            List<LocationVO> locationList = dictionaryPOS.stream().map(dictionary -> CompletableFuture.supplyAsync(() -> UserConvertMapper.instance.conver(dictionary))).map(CompletableFuture::join).collect(Collectors.toList());
 
             List<LocationVO> parentNode = locationList.stream().filter(dictionary -> IntegerPool.ZERO.value().equals(dictionary.getParentId())).distinct().collect(Collectors.toList());
 

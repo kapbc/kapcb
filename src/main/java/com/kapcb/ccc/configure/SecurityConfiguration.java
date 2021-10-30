@@ -61,7 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/static/**", "/category/**", "/dictionary/**") // 允许对静态资源文件的无授权访问
+                .antMatchers(HttpMethod.GET, "/static/**") // 允许对静态资源文件的无授权访问
                 .permitAll()
                 .antMatchers("/login", "/register") // 允许登录注册
                 .permitAll()
