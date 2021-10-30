@@ -5,6 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.lang.NonNull;
 
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -31,5 +34,12 @@ public class ResultUtil {
     @NonNull
     public static <T> Set<T> resultSet(List<T> data) {
         return CollectionUtils.isNotEmpty(data) ? new HashSet<>(data) : Collections.emptySet();
+    }
+
+    public static <T> void setUpResponse(HttpServletResponse response, String contentType, T data) throws IOException {
+        response.setContentType(contentType);
+        response.getOutputStream().write(JsonUtil.toJsonString(data).getBytes(StandardCharsets.UTF_8));
+        response.getOutputStream().flush();
+        response.getOutputStream().close();
     }
 }

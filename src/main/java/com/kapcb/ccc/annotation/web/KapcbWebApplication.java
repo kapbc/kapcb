@@ -5,6 +5,7 @@ import com.kapcb.ccc.properties.EndPointAutoConfigureProperties;
 import com.kapcb.ccc.properties.ShiroRedisProperties;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchDataAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
@@ -26,7 +27,8 @@ import java.lang.annotation.Target;
 @Documented
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@SpringBootApplication(exclude = {RedisAutoConfiguration.class})
+@SpringBootApplication(exclude = {RedisAutoConfiguration.class,
+        ElasticsearchDataAutoConfiguration.class})
 @EnableConfigurationProperties(value = {
         IndexConfiguration.class,
         ShiroRedisProperties.class,
