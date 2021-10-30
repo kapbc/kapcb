@@ -1,8 +1,6 @@
 package com.kapcb.ccc.utils;
 
-import com.kapcb.ccc.context.ApplicationContextProvider;
 import com.kapcb.ccc.model.po.UserPO;
-import com.kapcb.ccc.properties.JwtConfigureProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -34,11 +32,11 @@ public class JwtTokenUtil {
     private static final String CLAIM_KEY_USERNAME = "sub";
     private static final String CLAIM_KEY_CREATED = "created";
     private static final Calendar calendar = Calendar.getInstance();
-    private static final JwtConfigureProperties jwtConfigureProperties;
-
-    static {
-        jwtConfigureProperties = ApplicationContextProvider.getBean("jwtConfigureProperties", JwtConfigureProperties.class);
-    }
+//    private static final JwtConfigureProperties jwtConfigureProperties;
+//
+//    static {
+//        jwtConfigureProperties = ApplicationContextProvider.getBean("jwtConfigureProperties", JwtConfigureProperties.class);
+//    }
 
     public static String generateToke(String username) {
         Map<String, Object> claims = new HashMap<>(2);
@@ -54,7 +52,7 @@ public class JwtTokenUtil {
         Claims claims = null;
         try {
             claims = Jwts.parser()
-                    .setSigningKey(jwtConfigureProperties.getSecretKey())
+                    .setSigningKey("kapcb")
                     .parseClaimsJws(token)
                     .getBody();
         } catch (Exception e) {
@@ -77,7 +75,7 @@ public class JwtTokenUtil {
     }
 
     public static boolean validateToken(String token, UserPO userPO) {
-        return expired(token) && Objects.nonNull(userPO) && Objects.equals(getUsername(token), userPO.getNickName());
+        return expired(token) && Objects.nonNull(userPO) && Objects.equals(getUsername(token), userPO.getUsername());
     }
 
     public static boolean expired(String token) {
@@ -108,12 +106,12 @@ public class JwtTokenUtil {
         return Jwts.builder()
                 .setClaims(claims)
                 .setExpiration(generateExpirationDate())
-                .signWith(SignatureAlgorithm.HS512, jwtConfigureProperties.getSecretKey())
+                .signWith(SignatureAlgorithm.HS512, "kapcb")
                 .compact();
     }
 
     private static Date generateExpirationDate() {
-        calendar.setTimeInMillis(System.currentTimeMillis() + (jwtConfigureProperties.getExpiration() * 1000));
+        calendar.setTimeInMillis(System.currentTimeMillis() + (60 * 60 * 24 * 1000));
         return calendar.getTime();
     }
 }

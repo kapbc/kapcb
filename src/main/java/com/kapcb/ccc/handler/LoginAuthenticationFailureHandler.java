@@ -1,7 +1,7 @@
 package com.kapcb.ccc.handler;
 
 import cn.hutool.http.ContentType;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.kapcb.ccc.utils.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -32,10 +32,9 @@ public class LoginAuthenticationFailureHandler implements AuthenticationFailureH
         httpServletResponse.setContentType(ContentType.JSON.getValue());
         Map<String, Object> resultMap = new HashMap<>(2);
         resultMap.put("code", "-1");
-        resultMap.put("data", "kapcb login fail!");
+        resultMap.put("data", "login fail!");
         resultMap.put("msg", "username or password error!");
-        ObjectMapper objectMapper = new ObjectMapper();
-        String s = objectMapper.writeValueAsString(resultMap);
+        String s = JsonUtil.convertObjectToString(resultMap);
         httpServletResponse.getWriter().write(s);
         httpServletResponse.getWriter().flush();
         httpServletResponse.getWriter().close();

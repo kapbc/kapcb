@@ -2,13 +2,14 @@ package com.kapcb.ccc.model.po;
 
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.baomidou.mybatisplus.annotation.Version;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -34,98 +35,106 @@ public class UserPO implements Serializable {
     /**
      * 用户id
      */
-    @Id
-    @TableId(type = IdType.AUTO)
+    @TableId(value = "user_id", type = IdType.AUTO)
     private Long userId;
 
     /**
      * 店铺id
      */
-    private Long storeId;
+    @TableField("supplier_id")
+    private Long supplierId;
 
     /**
      * 紧急联系人id
      */
+    @TableField("emergency_contact_id")
     private Long emergencyContactId;
-
-    /**
-     * first name
-     */
-    private String firstName;
-
-    /**
-     * last name
-     */
-    private String lastName;
 
     /**
      * 昵称
      */
-    private String nickName;
+    @TableField("user_name")
+    private String username;
 
     /**
      * 密码
      */
+    @TableField("password")
     private String password;
 
     /**
      * 邮箱
      */
+    @TableField("email")
     private String email;
-
-    /**
-     * 年龄
-     */
-    private Integer age;
 
     /**
      * 性别
      */
+    @TableField("gender")
     private Integer gender;
 
+    @TableField("country_code")
     private String countryCode;
 
+    @TableField("area_code")
     private String areaCode;
 
+    @TableField("city_code")
     private String cityCode;
 
+    @TableField("user_star_level")
     private Integer userStarLevel;
 
+    @TableField("available_status")
     private Boolean availableStatus;
 
+    @TableField("user_info_score")
     private Integer userInfoScore;
 
+    @TableField("user_credit_score")
     private Integer userCreditScore;
 
+    @TableField("create_by")
     private Long createBy;
 
+    @TableField("last_update_by")
     private Long lastUpdateBy;
 
+    @TableField("birthday")
     private Date birthday;
 
+    @TableField("create_date")
     private Date createDate;
 
+    @TableField("last_update_date")
     private Date lastUpdateDate;
 
+    @TableField("order_by_date")
     private Date orderByDate;
 
-    private String userJobTitle;
+    @TableField("job_title")
+    private String jobTitle;
 
-    private String telephonePrefix;
-
-    private String telephoneAcceptCountryCode;
-
-    private String telephoneAreaCode;
-
+    @TableField("telephone_number")
     private String telephoneNumber;
 
+    @TableField("online_status")
     private String onlineStatus;
 
+    @TableField("remark")
     private String remark;
 
+    @TableField("head_sculpture")
     private String headSculpture;
 
+    @TableField("user_source")
     private String userSource;
 
+    @Version
+    @TableField("version")
     private Integer version;
+
+    @TableField("supplier_flag")
+    private Boolean supplierFlag;
 }

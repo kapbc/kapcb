@@ -40,6 +40,6 @@ public class UsernameUserDetailService implements UserDetailsService {
             throw new UsernameNotFoundException("username or password error!");
         }
         List<GrantedAuthority> boss = AuthorityUtils.commaSeparatedStringToAuthorityList("boss");
-        return new User(userByUsername.getNickName(), new BCryptPasswordEncoder().encode(userByUsername.getPassword()), boss);
+        return new User(userByUsername.getUsername(), new BCryptPasswordEncoder().encode(userByUsername.getPassword()), boss);
     }
 }
