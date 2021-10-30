@@ -65,20 +65,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     SecurityContextHolder.getContext().setAuthentication(authenticationToken);
                 }
             }
-
-//            if (StringUtils.isNotBlank(accessToken)) {
-//                String username = JwtAuthenticationUtil.parseToken(accessToken);
-//                log.info("::::username is : {}", username);
-//                if (StringUtils.isNotBlank(username)) {
-//
-//                    // 检查用户名是否加入黑名单
-//
-//                    // 判断是否
-//                    log.info("::::access success!");
-//
-//                }
-//
-//            }
         }
         filterChain.doFilter(request, response);
     }

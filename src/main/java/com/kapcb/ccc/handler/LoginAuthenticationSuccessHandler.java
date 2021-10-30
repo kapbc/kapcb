@@ -1,7 +1,6 @@
 package com.kapcb.ccc.handler;
 
 import cn.hutool.http.ContentType;
-import com.kapcb.ccc.enums.StringPool;
 import com.kapcb.ccc.utils.JsonUtil;
 import com.kapcb.ccc.utils.JwtTokenUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -36,7 +35,7 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
         String accessToken = JwtTokenUtil.generateToke(userDetails.getUsername());
         httpServletResponse.setContentType(ContentType.JSON.getValue());
         Map<String, Object> resultMap = new HashMap<>(2);
-        resultMap.put("data", StringPool.AUTHORIZATION_BEARER.value() + accessToken);
+        resultMap.put("data", accessToken);
         resultMap.put("msg", "login success!");
         resultMap.put("code", "200");
         String s = JsonUtil.convertObjectToString(resultMap);

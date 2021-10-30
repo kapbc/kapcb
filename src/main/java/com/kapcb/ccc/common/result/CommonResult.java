@@ -69,6 +69,18 @@ public class CommonResult<T> {
         return new CommonResult<T>(errorCode);
     }
 
+    public static <T> CommonResult<T> failed(Throwable throwable) {
+        return new CommonResult<T>(ResultCode.FAILED.code(), throwable.getMessage(), null);
+    }
+
+    public static <T> CommonResult<T> failed(IErrorCode errorCode, Throwable throwable) {
+        return new CommonResult<T>(errorCode.code(), throwable.getMessage(), null);
+    }
+
+    public static <T> CommonResult<T> failed(IErrorCode errorCode, Throwable throwable, T data) {
+        return new CommonResult<T>(errorCode.code(), throwable.getMessage(), data);
+    }
+
     public static <T> CommonResult<T> validateFailed() {
         return new CommonResult<T>(ResultCode.VALIDATE_PARAM_FAIL);
     }
@@ -92,5 +104,4 @@ public class CommonResult<T> {
     public static <T> CommonResult<T> forbidden(T data) {
         return new CommonResult<T>(ResultCode.FORBIDDEN, data);
     }
-
 }
