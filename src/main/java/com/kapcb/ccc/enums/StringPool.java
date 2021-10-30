@@ -36,6 +36,7 @@ public enum StringPool {
     DOT(".", "点"),
     ARE_BRACKET("(", "正括号"),
     PARENTHESES(")", "反括号"),
+    EMPTY_OBJECT("{}", "空对象"),
 
     ZERO("0", "字符串0"),
     ONE("1", "字符串1"),

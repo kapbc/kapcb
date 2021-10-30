@@ -1,5 +1,6 @@
 package com.kapcb.ccc.configure;
 
+import com.kapcb.ccc.enums.StringPool;
 import com.kapcb.ccc.filter.CustomAuthenticationFilter;
 import com.kapcb.ccc.filter.JwtAuthenticationFilter;
 import com.kapcb.ccc.handler.LoginAuthenticationFailureHandler;
@@ -158,9 +159,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         log.info("-----------------begin initial cors filter-----------------");
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.addAllowedOrigin("*");
-        corsConfiguration.addAllowedHeader("*");
-        corsConfiguration.addAllowedMethod("*");
+        corsConfiguration.addAllowedOrigin(StringPool.STAR.value());
+        corsConfiguration.addAllowedHeader(StringPool.STAR.value());
+        corsConfiguration.addAllowedMethod(StringPool.STAR.value());
         corsConfiguration.setAllowCredentials(true);
         source.registerCorsConfiguration("/**", corsConfiguration);
         return new CorsFilter(source);

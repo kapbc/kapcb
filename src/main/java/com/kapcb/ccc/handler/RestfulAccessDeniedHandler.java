@@ -32,7 +32,7 @@ public class RestfulAccessDeniedHandler implements AccessDeniedHandler {
         Map<String, Object> resultMap = new HashMap<>(2);
         resultMap.put("msg", "forbidden");
         resultMap.put("code", "500");
-        httpServletResponse.getWriter().write(JsonUtil.convertObjectToString(resultMap));
+        httpServletResponse.getWriter().write(JsonUtil.toJsonString(resultMap));
         httpServletResponse.getWriter().flush();
         httpServletResponse.getWriter().close();
     }

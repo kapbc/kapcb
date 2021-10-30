@@ -38,7 +38,7 @@ public class LoginAuthenticationSuccessHandler implements AuthenticationSuccessH
         resultMap.put("data", accessToken);
         resultMap.put("msg", "login success!");
         resultMap.put("code", "200");
-        String s = JsonUtil.convertObjectToString(resultMap);
+        String s = JsonUtil.toJsonString(resultMap);
         httpServletResponse.getWriter().write(s);
         httpServletResponse.getWriter().flush();
         httpServletResponse.getWriter().close();

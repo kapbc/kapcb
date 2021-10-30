@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kapcb.ccc.enums.ResultStatus;
+import com.kapcb.ccc.enums.StringPool;
 import com.kapcb.ccc.model.base.BaseResult;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
@@ -32,7 +33,6 @@ import java.util.Objects;
 public class JsonUtil {
 
     private static final int INITIAL_CAPACITY = 6;
-    private static final String DEFAULT_JSON_VALUE = "{}";
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     static {
@@ -103,7 +103,7 @@ public class JsonUtil {
      * @param <T>    <T>
      * @return String
      */
-    public static <T> String convertObjectToString(T object) {
+    public static <T> String toJsonString(T object) {
         if (Objects.isNull(object)) {
             throw new IllegalArgumentException("object can not be null");
         }
@@ -123,7 +123,7 @@ public class JsonUtil {
         } catch (IOException e) {
             log.error("process json process error, the exception is : " + e.getMessage());
         }
-        return (T) DEFAULT_JSON_VALUE;
+        return (T) StringPool.EMPTY_OBJECT.value();
     }
 
     public static <T> String convertObjectToStringPretty(T object) {
@@ -224,7 +224,7 @@ public class JsonUtil {
             } catch (JsonProcessingException e) {
                 log.error("json process error, the exception is : " + e.getMessage(), e);
             }
-            return DEFAULT_JSON_VALUE;
+            return StringPool.EMPTY_OBJECT.value();
         }
     }
 }

@@ -1,7 +1,12 @@
 package com.kapcb.ccc.common.result;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.kapcb.ccc.common.constants.DatePatternPool;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
+import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
@@ -14,7 +19,11 @@ import java.time.LocalDateTime;
  * @date 2021/7/16 22:42
  */
 @Data
-public class CommonResult<T> {
+@Accessors(chain = true)
+@ApiModel(value = "系统请求响应结果")
+public class CommonResult<T> implements Serializable {
+
+    private static final long serialVersionUID = -7843343061520931864L;
 
     private int code;
 
@@ -22,6 +31,7 @@ public class CommonResult<T> {
 
     private T date;
 
+    @JsonFormat(pattern = DatePatternPool.NORM_DATETIME_PATTERN)
     private LocalDateTime timeStamp;
 
     protected CommonResult() {

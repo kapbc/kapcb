@@ -34,7 +34,7 @@ public class LoginAuthenticationFailureHandler implements AuthenticationFailureH
         resultMap.put("code", "-1");
         resultMap.put("data", "login fail!");
         resultMap.put("msg", "username or password error!");
-        String s = JsonUtil.convertObjectToString(resultMap);
+        String s = JsonUtil.toJsonString(resultMap);
         httpServletResponse.getWriter().write(s);
         httpServletResponse.getWriter().flush();
         httpServletResponse.getWriter().close();
