@@ -39,7 +39,7 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
             // use jackson to deserialize json
             String username = StringPool.EMPTY_STRING.value();
             String password = StringPool.EMPTY_STRING.value();
-            // 通过流解析出json, get delete请求就没有流
+            // 通过流解析出json, get delete请求没有流
             try (InputStream inputStream = request.getInputStream()) {
                 AuthenticationDTO authentication = JsonUtil.readValue(inputStream, AuthenticationDTO.class);
                 log.info("authentication params is : {}", authentication);
