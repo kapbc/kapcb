@@ -3,6 +3,8 @@ package com.kapcb.ccc.controller;
 import com.kapcb.ccc.common.result.CommonResult;
 import com.kapcb.ccc.model.vo.LocationVO;
 import com.kapcb.ccc.service.IDictionaryService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,12 +24,14 @@ import java.util.List;
  */
 @Slf4j
 @RestController
+@Api(tags = "字典相关接口")
 @RequiredArgsConstructor
 @RequestMapping("dictionary")
 public class DictionaryController {
 
     private final IDictionaryService dictionaryService;
 
+    @ApiOperation("同步国际数据到数据库")
     @GetMapping("countryCode")
     public CommonResult<Boolean> analyzeCountryCode() {
         return CommonResult.success(dictionaryService.analyzeCountryCode());
@@ -43,6 +47,7 @@ public class DictionaryController {
 //        return dictionaryService.analyzeCity() ? "success" : "fail";
 //    }
 
+    @ApiOperation("获取全球所有地址信息")
     @GetMapping("all")
     public List<LocationVO> all() {
         return dictionaryService.getAllLocation();

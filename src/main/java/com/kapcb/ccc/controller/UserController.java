@@ -6,6 +6,7 @@ import com.kapcb.ccc.model.index.UserIndex;
 import com.kapcb.ccc.model.po.UserPO;
 import com.kapcb.ccc.service.IUserSearchService;
 import com.kapcb.ccc.service.IUserService;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @Slf4j
 @RestController
+@Api(tags = "用户相关接口")
 @RequiredArgsConstructor
 @RequestMapping("user")
 public class UserController {

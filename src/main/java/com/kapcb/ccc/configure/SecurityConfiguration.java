@@ -15,6 +15,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -48,6 +49,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private final LoginAuthenticationSuccessHandler loginAuthenticationSuccessHandler;
     private final LoginAuthenticationFailureHandler loginAuthenticationFailureHandler;
 
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers("/v2/api-docs",
+                "/swagger-resources/configuration/ui",
+                "/swagger/resources",
+                "/swagger/resources/configuration/security",
+                "/swagger-ui.html");
+    }
+
     /**
      * security configure
      *
@@ -65,6 +75,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/static/**") // 允许对静态资源文件的无授权访问
                 .permitAll()
                 .antMatchers("/login", "/register") // 允许登录注册
+                .permitAll()
+                .antMatchers("/swagger-ui.html",
+                        "/webjars/**",
+                        "/v2/**",
+                        "/swagger-resources/**",
+                        "/v2/api-docs",
+                        "/swagger-resources/configuration/ui",
+                        "/swagger/resources",
+                        "/swagger/resources/configuration/security")
                 .permitAll()
                 .antMatchers(HttpMethod.OPTIONS) // 跨域请求会先进行一次options试探请求
                 .permitAll()
