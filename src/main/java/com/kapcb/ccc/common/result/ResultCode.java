@@ -9,7 +9,7 @@ package com.kapcb.ccc.common.result;
  * @version 1.0.0
  * @date 2021/7/16 22:42
  */
-public enum ResultCode implements IErrorCode {
+public enum ResultCode implements IResultCode {
 
     SUCCESS("success", 200, "request process success"),
     FAILED("fail", 501, "request process fail"),

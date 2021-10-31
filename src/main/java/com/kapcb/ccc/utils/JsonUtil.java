@@ -6,9 +6,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.kapcb.ccc.enums.ResultStatus;
 import com.kapcb.ccc.enums.StringPool;
-import com.kapcb.ccc.model.base.BaseResult;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -62,24 +60,24 @@ public class JsonUtil {
      * @param <T>        T
      * @return T
      */
-    public static <T> T convertJsonToData(String jsonString, Class<? extends T> clazz) {
-        if (StringUtils.isBlank(jsonString) || Objects.isNull(clazz)) {
-            log.info("the json string or clazz is null, please check your input args...");
-            return null;
-        }
-        try {
-            BaseResult baseResult = OBJECT_MAPPER.readValue(jsonString, BaseResult.class);
-            if (Objects.nonNull(baseResult) && Objects.equals(baseResult.getCode(), ResultStatus.SUCCESS.value())) {
-                log.info("the result data is : " + baseResult.getData());
-                if (Objects.nonNull(baseResult.getData())) {
-                    return OBJECT_MAPPER.convertValue(baseResult.getData(), clazz);
-                }
-            }
-        } catch (JsonProcessingException e) {
-            log.error("json process error, the exception message info is : " + e.getMessage());
-        }
-        return null;
-    }
+//    public static <T> T convertJsonToData(String jsonString, Class<? extends T> clazz) {
+//        if (StringUtils.isBlank(jsonString) || Objects.isNull(clazz)) {
+//            log.info("the json string or clazz is null, please check your input args...");
+//            return null;
+//        }
+//        try {
+//            BaseResult baseResult = OBJECT_MAPPER.readValue(jsonString, BaseResult.class);
+//            if (Objects.nonNull(baseResult) && Objects.equals(baseResult.getCode(), ResultStatus.SUCCESS.value())) {
+//                log.info("the result data is : " + baseResult.getData());
+//                if (Objects.nonNull(baseResult.getData())) {
+//                    return OBJECT_MAPPER.convertValue(baseResult.getData(), clazz);
+//                }
+//            }
+//        } catch (JsonProcessingException e) {
+//            log.error("json process error, the exception message info is : " + e.getMessage());
+//        }
+//        return null;
+//    }
 
     /**
      * convert value

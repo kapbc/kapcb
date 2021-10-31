@@ -1,16 +1,15 @@
 package com.kapcb.ccc.service.impl;
 
 import cn.hutool.core.util.PageUtil;
-import com.kapcb.ccc.utils.OrikaUtil;
 import com.kapcb.ccc.model.base.BasePageResult;
 import com.kapcb.ccc.model.dto.user.req.UserListRequestDTO;
 import com.kapcb.ccc.model.index.UserIndex;
 import com.kapcb.ccc.model.po.UserPO;
-import com.kapcb.ccc.service.IUserService;
 import com.kapcb.ccc.service.IUserSearchService;
+import com.kapcb.ccc.service.IUserService;
+import com.kapcb.ccc.utils.OrikaUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.collections.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
@@ -18,15 +17,11 @@ import org.elasticsearch.search.fetch.subphase.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.SortBuilders;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  * <a>Title: UserSearchServiceImpl </a>
@@ -43,13 +38,13 @@ import java.util.stream.Collectors;
 public class UserSearchServiceImpl implements IUserSearchService {
 
     private final IUserService userService;
-    private final ElasticsearchOperations elasticsearchOperations;
+//    private final ElasticsearchOperations elasticsearchOperations;
 
     @Override
     public Boolean syncUserInfoToElasticsearch(Long storeId) {
         List<UserPO> storeUserInfoList = userService.getStoreUserInfoList(storeId);
         List<UserIndex> userIndices = OrikaUtil.mapList(storeUserInfoList, UserIndex.class);
-        elasticsearchOperations.save(userIndices);
+//        elasticsearchOperations.save(userIndices);
         return true;
     }
 
@@ -86,27 +81,27 @@ public class UserSearchServiceImpl implements IUserSearchService {
         queryBuilder.withHighlightBuilder(highlightBuilder);
         NativeSearchQuery build = queryBuilder.build();
         build.setTrackTotalHits(true);
-        SearchHits<UserIndex> search = elasticsearchOperations.search(build, UserIndex.class);
-        System.out.println("search = " + search);
-        List<UserIndex> userIndexList = search.stream().map(index -> {
-            UserIndex content = index.getContent();
-            Map<String, List<String>> highlightFields = index.getHighlightFields();
-            if (MapUtils.isNotEmpty(highlightFields)) {
-                if (highlightFields.containsKey("firstName")) {
-                    content.setFirstName(highlightFields.get("firstName").get(0));
-                }
-                if (highlightFields.containsKey("lastName")) {
-                    content.setLastName(highlightFields.get("lastName").get(0));
-                }
-                if (highlightFields.containsKey("nickName")) {
-                    content.setNickName(highlightFields.get("nickName").get(0));
-                }
-            }
-            return content;
-        }).collect(Collectors.toList());
+//        SearchHits<UserIndex> search = elasticsearchOperations.search(build, UserIndex.class);
+//        System.out.println("search = " + search);
+//        List<UserIndex> userIndexList = search.stream().map(index -> {
+//            UserIndex content = index.getContent();
+//            Map<String, List<String>> highlightFields = index.getHighlightFields();
+//            if (MapUtils.isNotEmpty(highlightFields)) {
+//                if (highlightFields.containsKey("firstName")) {
+//                    content.setFirstName(highlightFields.get("firstName").get(0));
+//                }
+//                if (highlightFields.containsKey("lastName")) {
+//                    content.setLastName(highlightFields.get("lastName").get(0));
+//                }
+//                if (highlightFields.containsKey("nickName")) {
+//                    content.setNickName(highlightFields.get("nickName").get(0));
+//                }
+//            }
+//            return content;
+//        }).collect(Collectors.toList());
         BasePageResult<UserIndex> pageResult = new BasePageResult<>();
-        pageResult.setRecords(userIndexList);
-        pageResult.setTotal(search.getTotalHits());
+//        pageResult.setRecords(userIndexList);
+//        pageResult.setTotal(search.getTotalHits());
         pageResult.setPageSize(requestDTO.getPageSize());
         pageResult.setPageNum(requestDTO.getPageNum());
         pageResult.setTotalPage(PageUtil.totalPage((int) pageResult.getTotal(), (int) pageResult.getPageSize()));

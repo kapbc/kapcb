@@ -1,5 +1,6 @@
 package com.kapcb.ccc.utils;
 
+import cn.hutool.http.ContentType;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections.CollectionUtils;
@@ -41,5 +42,9 @@ public class ResultUtil {
         response.getOutputStream().write(JsonUtil.toJsonString(data).getBytes(StandardCharsets.UTF_8));
         response.getOutputStream().flush();
         response.getOutputStream().close();
+    }
+
+    public static <T> void setUpJSONResponse(HttpServletResponse response, T data) throws IOException {
+        setUpResponse(response, ContentType.JSON.getValue(), data);
     }
 }

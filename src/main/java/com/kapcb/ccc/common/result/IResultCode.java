@@ -1,15 +1,15 @@
 package com.kapcb.ccc.common.result;
 
 /**
- * <a>Title: IErrorCode </a>
+ * <a>Title: IResultCode </a>
  * <a>Author: Kapcb <a>
- * <a>Description: IErrorCode <a>
+ * <a>Description: IResultCode <a>
  *
  * @author Kapcb
  * @version 1.0.0
  * @date 2021/10/30 18:07
  */
-public interface IErrorCode {
+public interface IResultCode {
 
     /**
      * error message

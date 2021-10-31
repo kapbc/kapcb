@@ -1,6 +1,5 @@
 package com.kapcb.ccc.handler;
 
-import cn.hutool.http.ContentType;
 import com.kapcb.ccc.common.result.CommonResult;
 import com.kapcb.ccc.utils.ResultUtil;
 import lombok.extern.slf4j.Slf4j;
@@ -35,8 +34,8 @@ public class LoginAuthenticationFailureHandler implements AuthenticationFailureH
             message = "username or password error!";
         }
         if (e instanceof LockedException) {
-            message = "access account is locked! please!";
+            message = "access account is locked!";
         }
-        ResultUtil.setUpResponse(httpServletResponse, ContentType.JSON.getValue(), CommonResult.failed(message));
+        ResultUtil.setUpJSONResponse(httpServletResponse, CommonResult.failed(message));
     }
 }

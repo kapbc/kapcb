@@ -1,13 +1,12 @@
 package com.kapcb.ccc.common.result;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.kapcb.ccc.common.constants.DatePatternPool;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * <a>Title: Result </a>
@@ -31,32 +30,31 @@ public class CommonResult<T> implements Serializable {
 
     private T date;
 
-    @JsonFormat(pattern = DatePatternPool.NORM_DATETIME_PATTERN)
-    private LocalDateTime timeStamp;
+    private Date timeStamp = Calendar.getInstance().getTime();
 
     protected CommonResult() {
-        timeStamp = LocalDateTime.now();
     }
 
     protected CommonResult(int code, String msg, T data) {
         this.code = code;
         this.msg = msg;
         this.date = data;
-        this.timeStamp = LocalDateTime.now();
     }
 
-    protected CommonResult(IErrorCode errorCode) {
-        this.code = errorCode.code();
-        this.msg = errorCode.msg();
+    protected CommonResult(IResultCode resultCode) {
+        this.code = resultCode.code();
+        this.msg = resultCode.msg();
         this.date = null;
-        this.timeStamp = LocalDateTime.now();
     }
 
     protected CommonResult(ResultCode resultCode, T data) {
         this.code = resultCode.code();
         this.msg = resultCode.msg();
         this.date = data;
-        this.timeStamp = LocalDateTime.now();
+    }
+
+    public static <T> CommonResult success() {
+        return new CommonResult<T>(ResultCode.SUCCESS);
     }
 
     public static <T> CommonResult<T> success(T data) {
@@ -75,7 +73,7 @@ public class CommonResult<T> implements Serializable {
         return new CommonResult<T>(ResultCode.FAILED.code(), message, null);
     }
 
-    public static <T> CommonResult<T> failed(IErrorCode errorCode) {
+    public static <T> CommonResult<T> failed(IResultCode errorCode) {
         return new CommonResult<T>(errorCode);
     }
 
@@ -83,11 +81,11 @@ public class CommonResult<T> implements Serializable {
         return new CommonResult<T>(ResultCode.FAILED.code(), throwable.getMessage(), null);
     }
 
-    public static <T> CommonResult<T> failed(IErrorCode errorCode, Throwable throwable) {
+    public static <T> CommonResult<T> failed(IResultCode errorCode, Throwable throwable) {
         return new CommonResult<T>(errorCode.code(), throwable.getMessage(), null);
     }
 
-    public static <T> CommonResult<T> failed(IErrorCode errorCode, Throwable throwable, T data) {
+    public static <T> CommonResult<T> failed(IResultCode errorCode, Throwable throwable, T data) {
         return new CommonResult<T>(errorCode.code(), throwable.getMessage(), data);
     }
 

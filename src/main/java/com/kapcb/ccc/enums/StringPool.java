@@ -70,6 +70,10 @@ public enum StringPool {
     HTTP_REQUEST_AUTHORIZATION("Authorization", "http请求头中的Authorization"),
     AUTHORIZATION_BEARER("Bearer ", "Bearer "),
 
+    REQUEST_HEAD_X_REQUESTED_WITH("X-Requested-With", "request head中获取ajax请求标识的key"),
+    REQUEST_XML_HTTP_REQUEST("XMLHttpRequest", "request head中ajax请求的标识"),
+
+
     /**
      * End Point Log Aspect
      */
