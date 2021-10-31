@@ -62,23 +62,15 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
     @Override
     public Boolean analyzeCountryCode() {
         if (CollectionUtils.isNotEmpty(countryCodeAnalyzeDTOS)) {
-            Date currentDate = new Date();
-            List<DictionaryPO> dictionaryPOList = countryCodeAnalyzeDTOS.parallelStream().map(country -> CompletableFuture.supplyAsync(() -> DictionaryPO.builder()
-                    .dictionaryRemark(country.getRemark())
-                    .dictionaryCode(country.getCodeTwo())
-                    .dictionaryDescription(country.getDescription())
-                    .dictionaryValueEn(country.getEN())
-                    .dictionaryValueZh(country.getCN())
-                    .createDate(currentDate)
-                    .createBy(LongPool.DEFAULT_SUPER_ADMIN.value())
-                    .dictionaryNum(Integer.parseInt(country.getNumber()))
-                    .dictionaryGroup(StringPool.DICTIONARY_GROUP_COUNTRY.value()).build())).collect(Collectors.toList()).stream().map(CompletableFuture::join).collect(Collectors.toList());
+            List<DictionaryPO> dictionaryPOList = countryCodeAnalyzeDTOS.parallelStream()
+                    .map(country -> CompletableFuture.supplyAsync(() -> DictionaryConvertMapper.instance.convertCountry(country)))
+                    .collect(Collectors.toList()).stream().map(CompletableFuture::join).collect(Collectors.toList());
             log.info("country analyze result is : {}", dictionaryPOList);
-            if (CollectionUtils.isNotEmpty(dictionaryPOList)) {
-                for (DictionaryPO dictionaryPO : dictionaryPOList) {
-                    this.baseMapper.insert(dictionaryPO);
-                }
-            }
+//            if (CollectionUtils.isNotEmpty(dictionaryPOList)) {
+//                for (DictionaryPO dictionaryPO : dictionaryPOList) {
+//                    this.baseMapper.insert(dictionaryPO);
+//                }
+//            }
 
         }
         return Boolean.TRUE;
@@ -98,7 +90,7 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
                     .dictionaryDescription("province dictionary")
                     .createDate(currentDate)
                     .createBy(LongPool.DEFAULT_SUPER_ADMIN.value()).build()).collect(Collectors.toList());
-            provinceDictionary.forEach(province -> this.baseMapper.insert(province));
+//            provinceDictionary.forEach(province -> this.baseMapper.insert(province));
             return Boolean.TRUE;
         }
         return Boolean.FALSE;

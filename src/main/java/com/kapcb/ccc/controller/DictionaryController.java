@@ -1,5 +1,6 @@
 package com.kapcb.ccc.controller;
 
+import com.kapcb.ccc.common.result.CommonResult;
 import com.kapcb.ccc.model.vo.LocationVO;
 import com.kapcb.ccc.service.IDictionaryService;
 import lombok.RequiredArgsConstructor;
@@ -27,10 +28,10 @@ public class DictionaryController {
 
     private final IDictionaryService dictionaryService;
 
-//    @GetMapping("countryCode")
-//    public String analyzeCountryCode() {
-//        return dictionaryService.analyzeCountryCode() ? "success" : "fail";
-//    }
+    @GetMapping("countryCode")
+    public CommonResult<Boolean> analyzeCountryCode() {
+        return CommonResult.success(dictionaryService.analyzeCountryCode());
+    }
 //
 //    @GetMapping("province")
 //    public String analyzeProvince() {
