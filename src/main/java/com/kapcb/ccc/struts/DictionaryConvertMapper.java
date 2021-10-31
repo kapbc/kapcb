@@ -1,5 +1,6 @@
 package com.kapcb.ccc.struts;
 
+import com.kapcb.ccc.model.Test;
 import com.kapcb.ccc.model.po.DictionaryPO;
 import com.kapcb.ccc.model.vo.LocationVO;
 import org.mapstruct.Mapper;
@@ -34,4 +35,7 @@ public interface DictionaryConvertMapper {
     LocationVO convertLocation(DictionaryPO dictionaryPO);
 
     DictionaryPO convertCountry();
+
+    @Mapping(source = "content", target = "content", conditionExpression = "java(test.getCondition() == true)")
+    Test convertTest(Test test);
 }
