@@ -32,4 +32,6 @@ public interface DictionaryConvertMapper {
     @Mapping(source = "dictionaryValueEn", target = "locationEn")
     @Mapping(source = "dictionaryValueZh", target = "locationZh")
     LocationVO convertLocation(DictionaryPO dictionaryPO);
+
+    DictionaryPO convertCountry();
 }
