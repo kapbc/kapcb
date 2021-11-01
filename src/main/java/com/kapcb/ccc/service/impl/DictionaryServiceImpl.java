@@ -32,6 +32,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 import java.util.stream.Collectors;
 
 /**
@@ -48,6 +49,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, DictionaryPO> implements IDictionaryService {
 
+    private final Executor asyncExecuteService;
     private static List<String> provinceAnalyze;
     private static List<CityAnalyzeDTO> cityAnalyze;
     private static List<CountryCodeAnalyzeDTO> countryCodeAnalyzeDTOS;
@@ -63,7 +65,7 @@ public class DictionaryServiceImpl extends ServiceImpl<DictionaryMapper, Diction
     public Boolean analyzeCountryCode() {
         if (CollectionUtils.isNotEmpty(countryCodeAnalyzeDTOS)) {
             List<DictionaryPO> dictionaryPOList = countryCodeAnalyzeDTOS.parallelStream()
-                    .map(country -> CompletableFuture.supplyAsync(() -> DictionaryConvertMapper.instance.convertCountry(country)))
+                    .map(country -> CompletableFuture.supplyAsync(() -> DictionaryConvertMapper.instance.convertCountry(country), asyncExecuteService))
                     .collect(Collectors.toList()).stream().map(CompletableFuture::join).collect(Collectors.toList());
             log.info("country analyze result is : {}", dictionaryPOList);
 //            if (CollectionUtils.isNotEmpty(dictionaryPOList)) {
