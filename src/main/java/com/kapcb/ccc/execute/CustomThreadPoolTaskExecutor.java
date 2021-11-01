@@ -25,7 +25,7 @@ public class CustomThreadPoolTaskExecutor extends ThreadPoolTaskExecutor {
 
     private void showDetail(String prefix) {
         ThreadPoolExecutor executor = getThreadPoolExecutor();
-        if (Objects.nonNull(executor)) {
+        if (Objects.isNull(executor)) {
             log.info("executor is null");
             return;
         }
