@@ -39,7 +39,7 @@ import org.springframework.web.filter.CorsFilter;
 @Slf4j
 @EnableWebSecurity
 @RequiredArgsConstructor
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private final JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -51,11 +51,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/v2/api-docs",
+        web.ignoring().antMatchers(
+                "/v2/api-docs",
                 "/swagger-resources/configuration/ui",
                 "/swagger/resources",
+                "/swagger/resources/**",
+                "/webjars/**",
                 "/swagger/resources/configuration/security",
-                "/swagger-ui.html");
+                "/swagger-ui.html",
+                "/api/**");
     }
 
     /**
@@ -72,10 +76,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers(HttpMethod.GET, "/static/**") // 允许对静态资源文件的无授权访问
-                .permitAll()
-                .antMatchers("/login", "/register") // 允许登录注册
-                .permitAll()
+                .antMatchers(HttpMethod.GET, "/static/**").anonymous() // 允许对静态资源文件的无授权访问
+                .antMatchers("/login", "/register").anonymous() // 允许登录注册
+                .antMatchers(HttpMethod.OPTIONS).anonymous() // 跨域请求会先进行一次options试探请求
+//                .antMatchers("/**") // 测试时允许所有请求
+//                .permitAll()
                 .antMatchers("/swagger-ui.html",
                         "/webjars/**",
                         "/v2/**",
@@ -83,12 +88,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/v2/api-docs",
                         "/swagger-resources/configuration/ui",
                         "/swagger/resources",
-                        "/swagger/resources/configuration/security")
-                .permitAll()
-                .antMatchers(HttpMethod.OPTIONS) // 跨域请求会先进行一次options试探请求
-                .permitAll()
-//                .antMatchers("/**") // 测试时允许所有请求
-//                .permitAll()
+                        "/swagger/resources/configuration/security").anonymous()
                 .anyRequest() // 以上之外的所有请求都需要鉴权认证
                 .authenticated()
                 .and().formLogin()
@@ -149,7 +149,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.exceptionHandling()
                 .accessDeniedHandler(restfulAccessDeniedHandler)
                 .authenticationEntryPoint(restAuthenticationEntryPoint);
-
     }
 
     /**
