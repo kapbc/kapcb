@@ -24,7 +24,6 @@ public class ExecuteConfiguration {
     @Bean("asyncExecuteService")
     public Executor asyncExecuteService() {
         ThreadPoolTaskExecutor executor = new ThreadPoolTaskExecutor();
-
         executor.setCorePoolSize(5);
         executor.setMaxPoolSize(5);
         executor.setQueueCapacity(999);
