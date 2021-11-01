@@ -77,3 +77,10 @@ kapcb:
       request-uri: true
       request-url: true
       return-value: true
+  thread:
+    core-pool-size: 5
+    max-pool-size: 5
+    queue-capacity: 999
+    keep-alive-seconds: 30
+    thread-name-prefix: kapcb-async-
+
