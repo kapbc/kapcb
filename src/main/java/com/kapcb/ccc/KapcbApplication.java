@@ -26,4 +26,5 @@ public class KapcbApplication {
                 .web(WebApplicationType.SERVLET)
                 .run(args);
     }
+
 }
