@@ -20,6 +20,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper(componentModel = "spring")
 public interface DictionaryConvertMapper {
 
+    
     DictionaryConvertMapper instance = Mappers.getMapper(DictionaryConvertMapper.class);
 
     /**
