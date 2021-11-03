@@ -7,9 +7,11 @@ import com.kapcb.ccc.handler.LoginAuthenticationFailureHandler;
 import com.kapcb.ccc.handler.LoginAuthenticationSuccessHandler;
 import com.kapcb.ccc.handler.RestAuthenticationEntryPoint;
 import com.kapcb.ccc.handler.RestfulAccessDeniedHandler;
+import com.kapcb.ccc.properties.IgnoreUrlConfigureProperties;
 import com.kapcb.ccc.service.impl.UsernameUserDetailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,6 +19,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -56,7 +59,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.csrf()
+        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http.authorizeRequests();
+
+        if (CollectionUtils.isNotEmpty(ignoreUrlConfigureProperties().getUrls())) {
+            for (String url : ignoreUrlConfigureProperties().getUrls()) {
+                registry.antMatchers(url).permitAll();
+            }
+        }
+
+        registry.antMatchers(HttpMethod.OPTIONS).permitAll();
+
+        registry.and().authorizeRequests()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .csrf()
                 .disable() // 使用JWT, 不需要csrf
                 .sessionManagement() // 基于token, 所以不需要使用session
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -179,6 +196,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public IgnoreUrlConfigureProperties ignoreUrlConfigureProperties() {
+        return new IgnoreUrlConfigureProperties();
     }
 
     //    @Bean
