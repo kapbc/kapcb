@@ -48,4 +48,5 @@ public interface DictionaryConvertMapper {
 
     @Mapping(source = "content", target = "content", conditionExpression = "java(test.getCondition() == true)")
     Test convertTest(Test test);
+    
 }
