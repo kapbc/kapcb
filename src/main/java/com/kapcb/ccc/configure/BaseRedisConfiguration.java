@@ -16,7 +16,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 @Slf4j
 public class BaseRedisConfiguration {
 
-    @Bean
+//    @Bean
 //    public RedisTemplate<String, Object> redisTemplate() {
 //
 //    }
