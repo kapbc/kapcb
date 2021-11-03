@@ -73,6 +73,10 @@ public class CommonResult<T> implements Serializable {
         return new CommonResult<T>(ResultCode.FAILED.code(), message, null);
     }
 
+    public static <T> CommonResult<T> failed(String message, int code) {
+        return new CommonResult<T>(code, message, null);
+    }
+
     public static <T> CommonResult<T> failed(IResultCode errorCode) {
         return new CommonResult<T>(errorCode);
     }
