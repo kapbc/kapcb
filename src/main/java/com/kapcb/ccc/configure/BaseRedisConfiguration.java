@@ -73,5 +73,4 @@ public class BaseRedisConfiguration {
     public IRedisService iRedisService(@Qualifier("redisTemplate") RedisTemplate<String, Object> redisTemplate) {
         return new RedisServiceImpl(redisTemplate);
     }
-
 }
