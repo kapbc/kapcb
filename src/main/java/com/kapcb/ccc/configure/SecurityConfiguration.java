@@ -69,10 +69,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         registry.antMatchers(HttpMethod.OPTIONS).permitAll();
 
-        registry.and().authorizeRequests()
-                .anyRequest()
-                .authenticated()
-                .and()
+        registry.and()
                 .csrf()
                 .disable() // 使用JWT, 不需要csrf
                 .sessionManagement() // 基于token, 所以不需要使用session
