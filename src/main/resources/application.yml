@@ -83,4 +83,6 @@ kapcb:
     queue-capacity: 999
     keep-alive-seconds: 30
     thread-name-prefix: kapcb-async-
+  redis:
+    enable: false
 
