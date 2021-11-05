@@ -128,7 +128,13 @@ public class ProductPO implements Serializable {
      */
     private Integer serviceIds;
 
+    /**
+     * 商品关键字
+     */
     private String productKeywords;
 
+    /**
+     * 商品备注信息
+     */
     private String productRemark;
 }
