@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kapcb.ccc.enums.StringPool;
 import com.kapcb.ccc.mapper.UserMapper;
-import com.kapcb.ccc.model.po.UserPO;
+import com.kapcb.ccc.model.po.admin.UserPO;
 import com.kapcb.ccc.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

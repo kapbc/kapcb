@@ -3,7 +3,7 @@ package com.kapcb.ccc.controller;
 import com.kapcb.ccc.model.base.BasePageResult;
 import com.kapcb.ccc.model.dto.user.req.UserListRequestDTO;
 import com.kapcb.ccc.model.index.UserIndex;
-import com.kapcb.ccc.model.po.UserPO;
+import com.kapcb.ccc.model.po.admin.UserPO;
 import com.kapcb.ccc.service.IUserSearchService;
 import com.kapcb.ccc.service.IUserService;
 import io.swagger.annotations.Api;

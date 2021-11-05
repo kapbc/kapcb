@@ -1,6 +1,6 @@
 package com.kapcb.ccc.service.impl;
 
-import com.kapcb.ccc.model.po.UserPO;
+import com.kapcb.ccc.model.po.admin.UserPO;
 import com.kapcb.ccc.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

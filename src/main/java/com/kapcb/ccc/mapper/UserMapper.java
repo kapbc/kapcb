@@ -1,7 +1,7 @@
 package com.kapcb.ccc.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.kapcb.ccc.model.po.UserPO;
+import com.kapcb.ccc.model.po.admin.UserPO;
 
 /**
  * <a>Title: UserMapper </a>

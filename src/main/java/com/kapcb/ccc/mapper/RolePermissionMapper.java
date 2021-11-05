@@ -1,7 +1,6 @@
 package com.kapcb.ccc.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.kapcb.ccc.model.po.RolePermissionPO;
 
 /**
  * <a>Title: RolePermissionMapper </a>

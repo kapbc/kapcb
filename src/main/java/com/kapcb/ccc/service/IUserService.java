@@ -1,7 +1,7 @@
 package com.kapcb.ccc.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.kapcb.ccc.model.po.UserPO;
+import com.kapcb.ccc.model.po.admin.UserPO;
 
 import java.util.List;
 

@@ -12,7 +12,7 @@ import com.kapcb.ccc.lisenter.CountryAnalyzeListener;
 import com.kapcb.ccc.mapper.DictionaryMapper;
 import com.kapcb.ccc.model.initial.CityAnalyzeDTO;
 import com.kapcb.ccc.model.initial.CountryCodeAnalyzeDTO;
-import com.kapcb.ccc.model.po.DictionaryPO;
+import com.kapcb.ccc.model.po.common.DictionaryPO;
 import com.kapcb.ccc.model.vo.LocationVO;
 import com.kapcb.ccc.service.IDictionaryService;
 import com.kapcb.ccc.struts.DictionaryConvertMapper;

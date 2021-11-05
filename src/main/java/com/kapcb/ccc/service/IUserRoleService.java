@@ -1,7 +1,6 @@
 package com.kapcb.ccc.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.kapcb.ccc.model.po.UserRolePO;
 
 /**
  * <a>Title: IUserRoleService </a>

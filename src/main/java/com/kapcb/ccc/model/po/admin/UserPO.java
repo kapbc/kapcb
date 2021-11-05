@@ -1,4 +1,4 @@
-package com.kapcb.ccc.model.po;
+package com.kapcb.ccc.model.po.admin;
 
 
 import com.baomidou.mybatisplus.annotation.IdType;

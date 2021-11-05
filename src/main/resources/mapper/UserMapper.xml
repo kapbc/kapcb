@@ -38,7 +38,7 @@
         u.version
     </sql>
 
-    <resultMap id="userResultMap" type="com.kapcb.ccc.model.po.UserPO">
+    <resultMap id="userResultMap" type="com.kapcb.ccc.model.po.admin.UserPO">
         <id column="user_id" property="userId"/>
         <result column="store_id" property="storeId"/>
         <result column="emergency_contact_id" property="emergencyContactId"/>

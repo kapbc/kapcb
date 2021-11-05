@@ -1,4 +1,4 @@
-package com.kapcb.ccc.model.po;
+package com.kapcb.ccc.model.po.product;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,33 +9,33 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * <a>Title: ProductVideoPO </a>
+ * <a>Title: ProductPicturePO </a>
  * <a>Author: Kapcb <a>
- * <a>Description:  <a>
+ * <a>Description: ProductPicturePO <a>
  *
  * @author Kapcb
  * @version 1.0.0
- * @date 2021/8/1 23:25
+ * @date 2021/11/5 22:55
  */
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder(toBuilder = true)
-public class ProductVideoPO implements Serializable {
+public class ProductPicturePO implements Serializable {
 
-    private static final long serialVersionUID = 4212861531478914803L;
+    private static final long serialVersionUID = -546313197832829335L;
 
-    private Long productVideoId;
+    private Long pictureId;
 
     private Long productId;
 
-    private String productVideoUrl;
+    private String fileUrl;
 
-    private String videoSize;
+    private String fileName;
 
-    private Integer version;
+    private Integer fileSize;
 
-    private Boolean deleteFlag;
+    private Integer fileType;
 
     private Long createBy;
 

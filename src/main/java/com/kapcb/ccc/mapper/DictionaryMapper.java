@@ -1,7 +1,7 @@
 package com.kapcb.ccc.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.kapcb.ccc.model.po.DictionaryPO;
+import com.kapcb.ccc.model.po.common.DictionaryPO;
 
 /**
  * <a>Title: DictionaryMapper </a>

@@ -2,7 +2,6 @@ package com.kapcb.ccc.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kapcb.ccc.mapper.PermissionMapper;
-import com.kapcb.ccc.model.po.PermissionPO;
 import com.kapcb.ccc.service.IPermissionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

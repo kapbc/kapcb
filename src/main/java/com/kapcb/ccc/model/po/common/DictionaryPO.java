@@ -1,4 +1,4 @@
-package com.kapcb.ccc.model.po;
+package com.kapcb.ccc.model.po.common;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

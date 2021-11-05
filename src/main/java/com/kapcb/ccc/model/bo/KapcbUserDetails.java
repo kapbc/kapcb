@@ -1,7 +1,6 @@
 package com.kapcb.ccc.model.bo;
 
-import com.kapcb.ccc.model.po.RolePO;
-import com.kapcb.ccc.model.po.UserPO;
+import com.kapcb.ccc.model.po.admin.UserPO;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

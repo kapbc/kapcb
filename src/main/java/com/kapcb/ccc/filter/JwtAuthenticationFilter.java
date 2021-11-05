@@ -1,7 +1,7 @@
 package com.kapcb.ccc.filter;
 
 import com.kapcb.ccc.enums.StringPool;
-import com.kapcb.ccc.model.po.UserPO;
+import com.kapcb.ccc.model.po.admin.UserPO;
 import com.kapcb.ccc.service.IUserService;
 import com.kapcb.ccc.utils.AccessAddressUtil;
 import com.kapcb.ccc.utils.JwtTokenUtil;

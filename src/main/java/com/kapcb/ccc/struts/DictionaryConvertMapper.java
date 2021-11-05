@@ -2,7 +2,7 @@ package com.kapcb.ccc.struts;
 
 import com.kapcb.ccc.model.Test;
 import com.kapcb.ccc.model.initial.CountryCodeAnalyzeDTO;
-import com.kapcb.ccc.model.po.DictionaryPO;
+import com.kapcb.ccc.model.po.common.DictionaryPO;
 import com.kapcb.ccc.model.vo.LocationVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

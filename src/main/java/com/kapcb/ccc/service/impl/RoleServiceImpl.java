@@ -2,7 +2,6 @@ package com.kapcb.ccc.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kapcb.ccc.mapper.RoleMapper;
-import com.kapcb.ccc.model.po.RolePO;
 import com.kapcb.ccc.service.IRoleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
