@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * <a>Title: ProductPO </a>
@@ -137,4 +138,12 @@ public class ProductPO implements Serializable {
      * 商品备注信息
      */
     private String productRemark;
+
+    private Long createBy;
+
+    private Date createDate;
+
+    private Long lastUpdateBy;
+
+    private Date lastUpdateDate;
 }
