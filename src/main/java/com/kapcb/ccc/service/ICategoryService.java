@@ -2,7 +2,7 @@ package com.kapcb.ccc.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.kapcb.ccc.model.bo.ProductCategoryBO;
-import com.kapcb.ccc.model.po.ProductCategoryPO;
+import com.kapcb.ccc.model.po.product.ProductCategoryPO;
 
 import java.util.List;
 

@@ -8,7 +8,7 @@ import com.kapcb.ccc.enums.LongPool;
 import com.kapcb.ccc.mapper.ProductCategoryMapper;
 import com.kapcb.ccc.model.bo.ProductCategoryBO;
 import com.kapcb.ccc.model.initial.CategoryAnalyzeDTO;
-import com.kapcb.ccc.model.po.ProductCategoryPO;
+import com.kapcb.ccc.model.po.product.ProductCategoryPO;
 import com.kapcb.ccc.service.ICategoryService;
 import com.kapcb.ccc.utils.InitialDataAnalyzeUtil;
 import lombok.RequiredArgsConstructor;

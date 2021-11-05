@@ -2,7 +2,7 @@ package com.kapcb.ccc.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.kapcb.ccc.model.bo.ProductCategoryBO;
-import com.kapcb.ccc.model.po.ProductCategoryPO;
+import com.kapcb.ccc.model.po.product.ProductCategoryPO;
 
 import java.util.List;
 
