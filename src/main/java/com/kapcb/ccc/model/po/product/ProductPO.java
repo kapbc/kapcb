@@ -37,6 +37,11 @@ public class ProductPO implements Serializable {
     private Long brandId;
 
     /**
+     * 品牌名称
+     */
+    private String brandName;
+
+    /**
      * 商品名称
      */
     private String productName;
@@ -109,15 +114,22 @@ public class ProductPO implements Serializable {
     /**
      * 商品库存预警值
      */
-    private Integer lowStockAlert;
+    private Integer lowStockWarning;
 
+    /**
+     * 单位
+     */
     private String unit;
 
+    /**
+     * 单位code
+     */
     private String unitCode;
 
+    /**
+     * 重量
+     */
     private BigDecimal weight;
-
-    private BigDecimal weightCode;
 
     /**
      * 是否为预告商品: 0->非预告商品; 1->预告商品;
@@ -139,11 +151,88 @@ public class ProductPO implements Serializable {
      */
     private String productRemark;
 
+    /**
+     * 购买商品成长积分
+     */
+    private Integer presentGrowth;
+
+    /**
+     * 购买商品赠送积分
+     */
+    private Integer presentPoint;
+
+    /**
+     * 购买商品限制使用积分数量
+     */
+    private Integer usePointLimit;
+
+    /**
+     * 乐观锁
+     */
+    private Integer version;
+
+    /**
+     * 创建用户
+     */
     private Long createBy;
 
+    /**
+     * 创建时间
+     */
     private Date createDate;
 
+    /**
+     * 最后更新用户
+     */
     private Long lastUpdateBy;
 
+    /**
+     * 最后更新时间
+     */
     private Date lastUpdateDate;
+
+    /**
+     * 商品详情标题
+     */
+    private String detailTitle;
+
+    /**
+     * 是否含有图片等附件: 0->没有附件; 1->有附件;
+     */
+    private Integer attachmentStatus;
+
+    /**
+     * 促销开始时间
+     */
+    private Date promotionStartTime;
+
+    /**
+     * 促销结束时间
+     */
+    private Date promotionEndTime;
+
+    /**
+     * 促销限购数量
+     */
+    private Integer promotionPurchaseNumber;
+
+    /**
+     * 促销类型: 0->没有促销; 1->使用促销价格; 2->使用会员价; 3->阶梯价格; 4->使用满减价格; 5->限时购买; 6->折扣价;
+     */
+    private Integer promotionType;
+
+    /**
+     * 商品l3类目
+     */
+    private Integer categoryL3;
+
+    /**
+     * 商品详细描述
+     */
+    private String detailDescription;
+
+    /**
+     * 商品详情页面布局类型
+     */
+    private Integer layoutType;
 }
