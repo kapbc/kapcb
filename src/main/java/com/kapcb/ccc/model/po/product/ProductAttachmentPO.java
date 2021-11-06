@@ -21,7 +21,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductPicturePO implements Serializable {
+public class ProductAttachmentPO implements Serializable {
 
     private static final long serialVersionUID = -546313197832829335L;
 

@@ -24,11 +24,23 @@ public class ProductAttributeValuePO implements Serializable {
 
     private static final long serialVersionUID = 205132857083990304L;
 
+    /**
+     * 自增主键id
+     */
     private Long attributeValueId;
 
+    /**
+     * 产品id
+     */
     private Long productId;
 
+    /**
+     * 属性id
+     */
     private Long attributeId;
 
+    /**
+     * 属性值
+     */
     private String value;
 }

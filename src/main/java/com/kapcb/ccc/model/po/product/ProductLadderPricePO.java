@@ -22,14 +22,14 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductStepPricePO implements Serializable {
+public class ProductLadderPricePO implements Serializable {
 
     private static final long serialVersionUID = -8605636339459980283L;
 
     /**
      * 自增主键id
      */
-    private Long stepPriceId;
+    private Long ladderId;
 
     /**
      * 商品id
