@@ -39,7 +39,7 @@ public class ProductStepPricePO implements Serializable {
     /**
      * 数量
      */
-    private Integer count;
+    private Integer quantity;
 
     /**
      * 则扣

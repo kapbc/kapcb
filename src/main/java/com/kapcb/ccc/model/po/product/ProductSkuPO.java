@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * <a>Title: ProductSkuPO </a>
@@ -24,15 +25,53 @@ public class ProductSkuPO implements Serializable {
 
     private static final long serialVersionUID = -3996014207290594222L;
 
+    /**
+     * sku id
+     */
     private Long skuId;
 
+    /**
+     * 产品id
+     */
     private Long productId;
 
-    private String skuSerialNumber;
+    /**
+     * sku编码
+     */
+    private String skuCode;
 
+    /**
+     * 商品库存
+     */
     private Integer stock;
 
+    /**
+     * 库存预警值
+     */
     private Integer lowStockWarning;
 
-//    private String
+    /**
+     * 商品展示图片
+     */
+    private String thumbImg;
+
+    /**
+     * 商品销量
+     */
+    private Integer sale;
+
+    /**
+     * 商品促销价格
+     */
+    private BigDecimal promotionPrice;
+
+    /**
+     * 锁定库存
+     */
+    private Integer lockStock;
+
+    /**
+     * 商品销售属性, json
+     */
+    private String spuData;
 }

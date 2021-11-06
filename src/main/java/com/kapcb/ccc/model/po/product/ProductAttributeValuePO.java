@@ -28,7 +28,7 @@ public class ProductAttributeValuePO implements Serializable {
 
     private Long productId;
 
-    private Long productAttributeId;
+    private Long attributeId;
 
     private String value;
 }

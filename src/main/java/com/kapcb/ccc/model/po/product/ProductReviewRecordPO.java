@@ -25,7 +25,10 @@ public class ProductReviewRecordPO implements Serializable {
 
     private static final long serialVersionUID = -2394191507583785771L;
 
-    private Long reviewRecordId;
+    /**
+     * 审核主键id
+     */
+    private Long recordId;
 
     /**
      * 商品id
@@ -43,7 +46,7 @@ public class ProductReviewRecordPO implements Serializable {
     private Date createDate;
 
     /**
-     * 审核状态: 0->待审核; 1->审核通过;
+     * 审核状态: 0->待审核; 1->审核通过; 2->审核不通过;
      */
     private Integer reviewStatus;
 
