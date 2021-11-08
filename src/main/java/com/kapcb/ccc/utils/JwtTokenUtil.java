@@ -32,11 +32,6 @@ public class JwtTokenUtil {
     private static final String CLAIM_KEY_USERNAME = "sub";
     private static final String CLAIM_KEY_CREATED = "created";
     private static final Calendar calendar = Calendar.getInstance();
-//    private static final JwtConfigureProperties jwtConfigureProperties;
-//
-//    static {
-//        jwtConfigureProperties = ApplicationContextProvider.getBean("jwtConfigureProperties", JwtConfigureProperties.class);
-//    }
 
     public static String generateToke(String username) {
         Map<String, Object> claims = new HashMap<>(2);
