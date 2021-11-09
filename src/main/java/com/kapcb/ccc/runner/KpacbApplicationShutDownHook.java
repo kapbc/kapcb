@@ -1,10 +1,9 @@
 package com.kapcb.ccc.runner;
 
 import com.kapcb.ccc.utils.KapcbUtil;
+import kapcb.framework.web.runner.BaseApplicationShutDownHook;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEvent;
-import org.springframework.context.event.ContextClosedEvent;
-import org.springframework.context.event.EventListener;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
@@ -20,9 +19,9 @@ import org.springframework.stereotype.Component;
  */
 @Slf4j
 @Component
-public class KpacbApplicationShutDownHook {
+public class KpacbApplicationShutDownHook extends BaseApplicationShutDownHook {
 
-    @EventListener(classes = {ContextClosedEvent.class})
+    @Override
     public void applicationShutDownHook(@NonNull ApplicationEvent applicationEvent) {
         KapcbUtil.serverShutDownHookBanner();
     }

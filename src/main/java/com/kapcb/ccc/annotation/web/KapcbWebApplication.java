@@ -9,6 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.elasticsearch.ElasticsearchDataAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -37,5 +38,6 @@ import java.lang.annotation.Target;
         EndPointAutoConfigureProperties.class
 })
 @MapperScan(basePackages = {"com.kapcb.ccc.mapper"})
+@ComponentScan(value = {"com.kapcb.ccc.*"})
 public @interface KapcbWebApplication {
 }

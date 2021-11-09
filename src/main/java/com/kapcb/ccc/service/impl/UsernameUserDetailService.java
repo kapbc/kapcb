@@ -1,7 +1,6 @@
 package com.kapcb.ccc.service.impl;
 
 import com.kapcb.ccc.model.po.admin.UserPO;
-import com.kapcb.ccc.service.IUserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.GrantedAuthority;
@@ -30,11 +29,14 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class UsernameUserDetailService implements UserDetailsService {
 
-    private final IUserService userService;
+//    private final IUserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        UserPO userByUsername = userService.getUserByUsername(username);
+//        UserPO userByUsername = userService.getUserByUsername(username);
+        UserPO userByUsername = new UserPO();
+        userByUsername.setUsername("Mike");
+        userByUsername.setPassword("13456");
         log.info("user by username is : {}", userByUsername);
         if (Objects.isNull(userByUsername)) {
             throw new UsernameNotFoundException("username or password error!");

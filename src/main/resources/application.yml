@@ -46,20 +46,20 @@ spring:
 #        max-wait: 10000
 #      shutdown-timeout: 5000
 
-mybatis-plus:
-  configuration:
-    map-underscore-to-camel-case: true
-    use-generated-keys: true
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    # true : 当查询数据为空时字段返回为 null, false : 不加这个查询数据为空时字段将被隐藏
-    call-setters-on-nulls: true
-  mapper-locations: classpath:mapper/*.xml
-  type-aliases-package: com.kapcb.ccc.model.po
-  global-config:
-    db-config:
-      logic-delete-value: true
-      logic-not-delete-value: false
-      logic-delete-field: deleteFlag
+#mybatis-plus:
+#  configuration:
+#    map-underscore-to-camel-case: true
+#    use-generated-keys: true
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#    # true : 当查询数据为空时字段返回为 null, false : 不加这个查询数据为空时字段将被隐藏
+#    call-setters-on-nulls: true
+#  mapper-locations: classpath:mapper/*.xml
+#  type-aliases-package: com.kapcb.ccc.model.po
+#  global-config:
+#    db-config:
+#      logic-delete-value: true
+#      logic-not-delete-value: false
+#      logic-delete-field: deleteFlag
 logging:
   config: classpath:logback.xml
   level:
