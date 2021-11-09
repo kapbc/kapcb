@@ -1,14 +1,13 @@
 package com.kapcb.ccc.model.bo;
 
+import com.kapcb.ccc.model.po.admin.RolePO;
 import com.kapcb.ccc.model.po.admin.UserPO;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * <a>Title: KapcbUserDetails </a>
@@ -30,7 +29,7 @@ public class KapcbUserDetails implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (CollectionUtils.isNotEmpty(permissionList)) {
-            return permissionList.parallelStream().map(role -> new SimpleGrantedAuthority(role.getRoleIdentify())).collect(Collectors.toList());
+//            return permissionList.parallelStream().map(role -> new SimpleGrantedAuthority(role.getRoleIdentify())).collect(Collectors.toList());
         }
         return null;
     }

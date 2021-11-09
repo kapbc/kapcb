@@ -1,11 +1,10 @@
 package com.kapcb.ccc.model.po.admin;
 
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.Version;
+import cn.org.atool.fluent.mybatis.annotation.FluentMybatis;
+import cn.org.atool.fluent.mybatis.annotation.TableField;
+import cn.org.atool.fluent.mybatis.annotation.TableId;
+import cn.org.atool.fluent.mybatis.annotation.Version;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,7 +26,8 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@TableName(value = "user_grp.user")
+//@TableName(value = "user_grp.user")
+@FluentMybatis(schema = "user_grp", table = "user")
 public class UserPO implements Serializable {
 
     private static final long serialVersionUID = -3821173666664111882L;
@@ -35,7 +35,7 @@ public class UserPO implements Serializable {
     /**
      * 用户id
      */
-    @TableId(value = "user_id", type = IdType.AUTO)
+    @TableId(value = "user_id")
     private Long userId;
 
     /**

@@ -1,11 +1,10 @@
 package com.kapcb.ccc.model.po.product;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.Version;
+import cn.org.atool.fluent.mybatis.annotation.FluentMybatis;
+import cn.org.atool.fluent.mybatis.annotation.LogicDelete;
+import cn.org.atool.fluent.mybatis.annotation.TableField;
+import cn.org.atool.fluent.mybatis.annotation.TableId;
+import cn.org.atool.fluent.mybatis.annotation.Version;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,12 +26,12 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-@TableName("product_grp.product_category")
+@FluentMybatis(schema = "product_grp", table = "product_category")
 public class ProductCategoryPO implements Serializable {
 
     private static final long serialVersionUID = -3823181862793064458L;
 
-    @TableId(value = "category_id", type = IdType.AUTO)
+    @TableId(value = "category_id")
     private Integer categoryId;
 
     @TableField("parent_id")
@@ -44,7 +43,7 @@ public class ProductCategoryPO implements Serializable {
     @TableField("category_name")
     private String categoryName;
 
-    @TableLogic
+    @LogicDelete
     @TableField("delete_flag")
     private Boolean deleteFlag;
 

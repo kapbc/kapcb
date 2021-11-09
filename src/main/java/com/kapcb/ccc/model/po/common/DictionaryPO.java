@@ -1,11 +1,10 @@
 package com.kapcb.ccc.model.po.common;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
-import com.baomidou.mybatisplus.annotation.TableName;
-import com.baomidou.mybatisplus.annotation.Version;
+import cn.org.atool.fluent.mybatis.annotation.FluentMybatis;
+import cn.org.atool.fluent.mybatis.annotation.LogicDelete;
+import cn.org.atool.fluent.mybatis.annotation.TableField;
+import cn.org.atool.fluent.mybatis.annotation.TableId;
+import cn.org.atool.fluent.mybatis.annotation.Version;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -27,13 +26,12 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder(toBuilder = true)
-@TableName(value = "common_grp.dictionary")
+@FluentMybatis(schema = "common_grp", table = "dictionary")
 public class DictionaryPO implements Serializable {
 
     private static final long serialVersionUID = -3216105866722192952L;
 
-    @TableId(type = IdType.AUTO)
-    @TableField(value = "dictionary_id")
+    @TableId(value = "dictionary_id")
     private Integer dictionaryId;
 
     @TableField(value = "dictionary_code")
@@ -69,7 +67,7 @@ public class DictionaryPO implements Serializable {
     @TableField(value = "last_update_by")
     private Long lastUpdateBy;
 
-    @TableLogic
+    @LogicDelete
     @TableField(value = "delete_flag")
     private Boolean deleteFlag;
 
