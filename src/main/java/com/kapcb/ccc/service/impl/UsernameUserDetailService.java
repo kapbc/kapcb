@@ -36,7 +36,7 @@ public class UsernameUserDetailService implements UserDetailsService {
 //        UserPO userByUsername = userService.getUserByUsername(username);
         UserPO userByUsername = new UserPO();
         userByUsername.setUsername("Mike");
-        userByUsername.setPassword("13456");
+        userByUsername.setPassword("123456");
         log.info("user by username is : {}", userByUsername);
         if (Objects.isNull(userByUsername)) {
             throw new UsernameNotFoundException("username or password error!");
