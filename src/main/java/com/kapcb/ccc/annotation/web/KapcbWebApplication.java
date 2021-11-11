@@ -38,6 +38,6 @@ import java.lang.annotation.Target;
         EndPointAutoConfigureProperties.class
 })
 @MapperScan(basePackages = {"com.kapcb.ccc.mapper"})
-@ComponentScan(value = {"com.kapcb.ccc.*", "com.ejlchina.searcher.support.boot"})
+@ComponentScan(value = {"com.kapcb.ccc.*", "com.ejlchina.searcher.support.boot", "com.kapcb.framework.security"})
 public @interface KapcbWebApplication {
 }

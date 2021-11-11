@@ -87,5 +87,15 @@ kapcb:
     thread-name-prefix: kapcb-async-
   redis:
     enable: false
-
-
+  security:
+    ignore:
+      url:
+        - /swagger-ui.html
+        - /swagger-resources/**
+        - /swagger/**
+        - /**/v2/api-docs
+        - /webjars/springfox-swagger-ui/**
+        - /captcha/create
+    validate:
+      code:
+        charType: 1
