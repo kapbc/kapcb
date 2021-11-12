@@ -1,8 +1,6 @@
 package com.kapcb.ccc.annotation.web;
 
 import com.kapcb.ccc.configure.IndexConfiguration;
-import com.kapcb.ccc.properties.EndPointAutoConfigureProperties;
-import com.kapcb.ccc.properties.ShiroRedisProperties;
 import com.kapcb.ccc.properties.ThreadPoolProperties;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
