@@ -96,6 +96,7 @@ kapcb:
         - /**/v2/api-docs
         - /webjars/springfox-swagger-ui/**
         - /captcha/create
+        - /captcha/verify
     validate:
       code:
-        charType: 1
+        charType: 2

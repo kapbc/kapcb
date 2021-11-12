@@ -1,7 +1,7 @@
 package com.kapcb.ccc.handler;
 
-import com.kapcb.ccc.common.result.CommonResult;
 import com.kapcb.ccc.utils.ResultUtil;
+import com.kapcb.framework.common.result.CommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.logout.LogoutSuccessHandler;
