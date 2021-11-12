@@ -3,12 +3,13 @@ package com.kapcb.ccc.controller;
 import com.kapcb.framework.security.validation.IValidateCodeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * <a>Title: CaptchaController </a>
@@ -20,21 +21,16 @@ import javax.servlet.http.HttpServletResponse;
  * @date 2021/11/11 21:46
  */
 @Slf4j
-@RestController
+//@RestController
+@Controller
 @RequiredArgsConstructor
 @RequestMapping("captcha")
 public class CaptchaController {
 
-    private final HttpServletRequest request;
-    private final HttpServletResponse response;
     private final IValidateCodeService validateCodeService;
 
     @GetMapping("create")
-    public void create() {
-        try {
-            validateCodeService.create(request, response);
-        } catch (Exception e) {
-            log.error("111");
-        }
+    public void create(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        validateCodeService.create(request, response);
     }
 }
