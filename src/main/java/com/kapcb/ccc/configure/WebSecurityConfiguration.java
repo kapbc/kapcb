@@ -1,6 +1,6 @@
 package com.kapcb.ccc.configure;
 
-import com.kapcb.framework.security.config.CustomSecurityConfiguration;
+import com.kapcb.framework.security.configuration.CustomSecurityConfiguration;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
@@ -30,5 +30,4 @@ public class WebSecurityConfiguration extends CustomSecurityConfiguration {
     public UserDetailsService userDetailsService() {
         return usernameUserDetailService;
     }
-
 }
