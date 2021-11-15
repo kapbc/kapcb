@@ -31,9 +31,7 @@ import java.lang.annotation.Target;
         ElasticsearchDataAutoConfiguration.class})
 @EnableConfigurationProperties(value = {
         IndexConfiguration.class,
-        ShiroRedisProperties.class,
-        ThreadPoolProperties.class,
-        EndPointAutoConfigureProperties.class
+        ThreadPoolProperties.class
 })
 @MapperScan(basePackages = {"com.kapcb.ccc.mapper"})
 @ComponentScan(value = {"com.kapcb.ccc.*", "com.ejlchina.searcher.support.boot", "com.kapcb.framework.security"})

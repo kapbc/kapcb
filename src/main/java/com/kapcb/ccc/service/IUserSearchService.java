@@ -1,10 +1,9 @@
 package com.kapcb.ccc.service;
 
-import com.kapcb.ccc.model.base.BasePageResult;
+
 import com.kapcb.ccc.model.dto.user.req.UserListRequestDTO;
 import com.kapcb.ccc.model.index.UserIndex;
 
-import java.util.List;
 
 /**
  * <a>Title: UserSearchService </a>
@@ -19,5 +18,5 @@ public interface IUserSearchService {
 
     Boolean syncUserInfoToElasticsearch(Long storeId);
 
-    BasePageResult<UserIndex> getUserList(UserListRequestDTO requestDTO);
+//    BasePageResult<UserIndex> getUserList(UserListRequestDTO requestDTO);
 }

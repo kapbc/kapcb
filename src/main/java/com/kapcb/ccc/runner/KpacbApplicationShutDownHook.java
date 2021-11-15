@@ -1,6 +1,6 @@
 package com.kapcb.ccc.runner;
 
-import com.kapcb.ccc.utils.KapcbUtil;
+import com.kapcb.framework.common.util.KapcbUtil;
 import kapcb.framework.web.runner.BaseApplicationShutDownHook;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationEvent;
