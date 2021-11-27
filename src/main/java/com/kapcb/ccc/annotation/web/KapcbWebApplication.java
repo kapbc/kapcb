@@ -27,13 +27,21 @@ import java.lang.annotation.Target;
 @Documented
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@SpringBootApplication(exclude = {RedisAutoConfiguration.class,
-        ElasticsearchDataAutoConfiguration.class})
+@SpringBootApplication(exclude = {
+        RedisAutoConfiguration.class,
+        ElasticsearchDataAutoConfiguration.class
+})
 @EnableConfigurationProperties(value = {
         IndexConfiguration.class,
         ThreadPoolProperties.class
 })
 @MapperScan(basePackages = {"com.kapcb.ccc.mapper"})
-@ComponentScan(value = {"com.kapcb.ccc.*", "com.ejlchina.searcher.support.boot", "com.kapcb.framework.security", "com.kapcb.framework.logging", "kapcb.framework.web"})
+@ComponentScan(value = {
+        "com.kapcb.ccc.*",
+        "com.kapcb.framework.web",
+        "com.kapcb.framework.logging",
+        "com.kapcb.framework.security",
+        "com.ejlchina.searcher.support.boot",
+})
 public @interface KapcbWebApplication {
 }

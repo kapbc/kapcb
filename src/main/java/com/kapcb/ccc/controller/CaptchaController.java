@@ -35,11 +35,11 @@ public class CaptchaController {
     @GetMapping("create")
     @Logging(stackTraceOnError = true)
     public void create(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        int i = 1 / 0;
         validateCodeService.create(request, response);
     }
 
     @GetMapping("verify")
+    @Logging(stackTraceOnError = true, tags = "#key")
     public CommonResult<String> verify(@RequestParam("key") String key, @RequestParam("code") String code) {
         try {
             validateCodeService.verify(key, code);

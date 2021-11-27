@@ -1,6 +1,5 @@
 package com.kapcb.ccc.configure;
 
-import com.alibaba.fastjson.JSON;
 import com.kapcb.framework.logging.collector.ILogCollector;
 import com.kapcb.framework.logging.processor.ILog;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +20,7 @@ import org.springframework.stereotype.Component;
 public class CustomerLogCollector implements ILogCollector {
 
     @Override
-    public void collect(ILog data) {
-        log.info(JSON.toJSONString(data));
+    public void collect(ILog logInfo) {
+        System.out.println("logInfo = " + logInfo);
     }
 }
