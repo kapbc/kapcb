@@ -1,6 +1,7 @@
 package com.kapcb.ccc.controller;
 
 import com.kapcb.framework.common.result.CommonResult;
+import com.kapcb.framework.logging.annotation.Logging;
 import com.kapcb.framework.security.exception.ValidateCodeException;
 import com.kapcb.framework.security.validation.IValidateCodeService;
 import lombok.RequiredArgsConstructor;
@@ -32,11 +33,13 @@ public class CaptchaController {
     private final IValidateCodeService validateCodeService;
 
     @GetMapping("create")
+    @Logging(stackTraceOnError = true)
     public void create(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int i = 1 / 0;
         validateCodeService.create(request, response);
     }
 
-        @GetMapping("verify")
+    @GetMapping("verify")
     public CommonResult<String> verify(@RequestParam("key") String key, @RequestParam("code") String code) {
         try {
             validateCodeService.verify(key, code);

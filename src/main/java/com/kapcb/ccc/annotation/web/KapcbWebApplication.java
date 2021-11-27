@@ -34,6 +34,6 @@ import java.lang.annotation.Target;
         ThreadPoolProperties.class
 })
 @MapperScan(basePackages = {"com.kapcb.ccc.mapper"})
-@ComponentScan(value = {"com.kapcb.ccc.*", "com.ejlchina.searcher.support.boot", "com.kapcb.framework.security"})
+@ComponentScan(value = {"com.kapcb.ccc.*", "com.ejlchina.searcher.support.boot", "com.kapcb.framework.security", "com.kapcb.framework.logging", "kapcb.framework.web"})
 public @interface KapcbWebApplication {
 }

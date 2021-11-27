@@ -100,3 +100,5 @@ kapcb:
     validate:
       code:
         charType: 2
+  async:
+    enable: true
