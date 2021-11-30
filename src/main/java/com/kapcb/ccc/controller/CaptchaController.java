@@ -39,7 +39,7 @@ public class CaptchaController {
     }
 
     @GetMapping("verify")
-//    @Logging(stackTraceOnError = true, tags = "#key")
+    @Logging(stackTraceOnError = true, tags = "#key+#code")
     public CommonResult<String> verify(@RequestParam("key") String key, @RequestParam("code") String code) {
         try {
             validateCodeService.verify(key, code);
