@@ -49,4 +49,5 @@ public class CaptchaController {
         }
         return CommonResult.success(null, "validate success");
     }
+
 }
