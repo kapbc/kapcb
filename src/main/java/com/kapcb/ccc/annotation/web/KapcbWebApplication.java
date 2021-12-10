@@ -44,5 +44,4 @@ import java.lang.annotation.Target;
         "com.ejlchina.searcher.support.boot",
 })
 public @interface KapcbWebApplication {
-
 }
